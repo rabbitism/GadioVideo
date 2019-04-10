@@ -1,5 +1,5 @@
 config = {
-    'fps':5,
+    'fps':3,
     'width':1280,
     'height':720,
     'picture_width':400,

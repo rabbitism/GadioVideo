@@ -75,27 +75,11 @@ def crawler2():
 
 
 if __name__ == "__main__":
-    #crawler()
-
-    from PIL import Image, ImageDraw, ImageFont
-    import cv2
-    import numpy as np
+    import pip
+    from pip._internal.utils.misc import get_installed_distributions
+    from subprocess import call
  
-    # cv2读取图片
-    img = cv2.imread('.\\test\\3508.png') # 名称不能有汉字
-    cv2img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) # cv2和PIL中颜色的hex码的储存顺序不同
-    pilimg = Image.fromarray(cv2img)
- 
-    # PIL图片上打印汉字
-    draw = ImageDraw.Draw(pilimg) # 图片上打印
-    font = ImageFont.truetype("simhei.ttf", 20, encoding="utf-8") # 参数1：字体文件路径，参数2：字体大小
-    draw.text((0, 0), "Hi,我是兔基", (255, 0, 0), font=font) # 参数1：打印坐标，参数2：文本，参数3：字体颜色，参数4：字体
- 
-    # PIL图片转cv2 图片
-    cv2charimg = cv2.cvtColor(np.array(pilimg), cv2.COLOR_RGB2BGR)
-    # cv2.imshow("图片", cv2charimg) # 汉字窗口标题显示乱码
-    cv2.imshow("photo", cv2charimg)
- 
-    cv2.waitKey (0)
-    cv2.destroyAllWindows()
-
+    for dist in get_installed_distributions():
+    # 执行后，pip默认为Python3版本
+    # 双版本下需要更新Python2版本的包，使用py2运行，并将pip修改成pip2
+        call("pip install --upgrade " + dist.project_name+" -i https://pypi.mirrors.ustc.edu.cn/simple", shell=True)

@@ -74,7 +74,7 @@ def processImage(path):
     except EOFError:
         pass
  
-def create_frame(image_name, title, content, size, wrapper, title_font, content_font):
+def create_frame(image_name, title, content, size, title_wrapper, content_wrapper, title_font, content_font):
     margin = config['margin']
     picture_width = config['picture_width']
     img = cv2.imread(image_name) # 名称不能有汉字
@@ -92,28 +92,36 @@ def create_frame(image_name, title, content, size, wrapper, title_font, content_
     frame.paste(pilimg, (margin, margin))
  
     draw = ImageDraw.Draw(frame) # 图片上打印
-    content = wrapper.wrap_string(content, config['width']-picture_width-config['margin']*3)
+    title = title_wrapper.wrap_string(title, config['width']-picture_width-config['margin']*3)
+    content = content_wrapper.wrap_string(content, config['width']-picture_width-config['margin']*3)
     print(content)
 
-    font = ImageFont.truetype("msyh.ttc", config['title_font_size'], encoding="utf-8") 
-    font2 = ImageFont.truetype("msyh.ttc", config['content_font_size'], encoding="utf-8") 
+    y_offset = 100
+    if('\n' in title):
+        y_offset+=title_font.getsize(title)[1]
 
-    draw.text((picture_width+margin*2, margin), title, (0, 0, 0), font=title_font) 
-    draw.text((picture_width+margin*2, margin+100), content, (0, 0, 0), font=content_font) 
+    draw.text((picture_width+margin*2, margin), title, (0, 0, 0), font=title_font)
+    y_offset = margin+ (180 if '\n' in title else 100)
+    draw.text((picture_width+margin*2, y_offset), content, (0, 0, 0), font=content_font) 
     cv2charimg = cv2.cvtColor(np.array(frame), cv2.COLOR_RGB2BGR)
     return cv2charimg
 
-def create_blank_frame(title, content, size, wrapper, title_font, content_font):
+def create_blank_frame(title, content, size, title_wrapper, content_wrapper, title_font, content_font):
     margin = config['margin']
     picture_width = config['picture_width']
 
     frame = Image.new('RGB', size, color=(255,255,255))
  
     draw = ImageDraw.Draw(frame)
-    content = wrapper.wrap_string(content, config['width']-picture_width-config['margin']*3)
+    title = title_wrapper.wrap_string(title, config['width']-picture_width-config['margin']*3)
+    content = content_wrapper.wrap_string(content, config['width']-picture_width-config['margin']*3)
 
     font = ImageFont.truetype("msyh.ttc", config['title_font_size'], encoding="utf-8") 
     font2 = ImageFont.truetype("msyh.ttc", config['content_font_size'], encoding="utf-8") 
+
+    y_offset = 100
+    if('\n' in title):
+        y_offset+=title_font.getsize(title)
 
     draw.text((picture_width+margin*2, margin), title, (0, 0, 0), font=title_font) 
     draw.text((picture_width+margin*2, margin+100), content, (0, 0, 0), font=content_font) 

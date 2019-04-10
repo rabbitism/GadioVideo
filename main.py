@@ -26,18 +26,19 @@ def main(title:str):
     video = VideoWriter(os.sep.join(['.', 'resource', str(title)+'.mp4']), fourcc, float(config['fps']), (config['width'], config['height']))
     font = ImageFont.truetype(config['font'], config['title_font_size'], encoding="utf-8")
     font2 = ImageFont.truetype(config['font'], config['content_font_size'], encoding="utf-8") 
-    wrapper = text_processing.Wrapper(font2)
+    title_wrapper = text_processing.Wrapper(font)
+    content_wrapper = text_processing.Wrapper(font2)
     keys = list(result.keys())
     keys.append(0)
     keys.sort()
     keys.append(keys[len(keys)-1]+10)
     print(keys)
-    frame = image_processing.create_blank_frame("", "", (width, height), wrapper, font, font2)
+    frame = image_processing.create_blank_frame("", "", (width, height), title_wrapper, content_wrapper, font, font2)
     total_length = keys[len(keys)-1]*fps
     index = 0
     for i in range(total_length):
         if(index+1>len(keys)-1):
-            frame = image_processing.create_blank_frame("", "", (width, height), wrapper, font, font2)
+            frame = image_processing.create_blank_frame("", "", (width, height), title_wrapper, content_wrapper, font, font2)
         elif (i/fps) > keys[index+1]:
             index+=1
             print(index, "out of", len(keys))
@@ -47,9 +48,9 @@ def main(title:str):
             content = result[key]['content']
             print("标题：",header)
             if(text_processing.find_image_suffix(result[key]['image_url']) in ['.gif', '.GIF']):
-                frame = image_processing.create_blank_frame(header, content, (width, height), wrapper, font, font2)
+                frame = image_processing.create_blank_frame(header, content, (width, height), title_wrapper, content_wrapper, font, font2)
             else:
-                frame = image_processing.create_frame(image, header, content, (width, height), wrapper, font, font2)
+                frame = image_processing.create_frame(image, header, content, (width, height), title_wrapper, content_wrapper, font, font2)
                 os.remove(image)
         else:
             ""

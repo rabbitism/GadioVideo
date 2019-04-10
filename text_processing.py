@@ -7,30 +7,6 @@ def find_image_suffix(image_name:str):
     file_suffix = re.match(".*(\..*)", image_name).group(1)
     return file_suffix
 
-def is_chinese(uchar):
-    if uchar >= u'/u4e00' and uchar<=u'/u9fa5':
-        return True
-    else:
-        return False
-
-def is_number(uchar):
-    if uchar >= u'/u0030' and uchar<=u'/u0039':
-        return True
-    else:
-        return False
-
-def is_alphabet(uchar):
-    if (uchar >= u'/u0041' and uchar<=u'/u005a') or (uchar >= u'/u0061' and uchar<=u'/u007a'):
-         return True
-    else:
-        return False
-
-def is_other(uchar):
-    if not (is_chinese(uchar) or is_number(uchar) or is_alphabet(uchar)):
-        return True
-    else:
-        return False
-
 def is_alpha(word):
     try:
         return word.encode('ascii').isalpha()
@@ -50,7 +26,8 @@ class Wrapper(object):
         for word in self.tokens:
             actual_word = word if len(word)==1 else (word+" ")
             actual_length = self.font.getsize(actual_word)[0]
-            if((length+actual_length)>width and (actual_word not in ["，。？！）》"])):
+            #if((length+actual_length)>width and (actual_word not in ["，。？！）》"])):
+            if((length+actual_length)>width):
                 result+=temp_string
                 result+="\n"
                 temp_string = actual_word
@@ -59,7 +36,13 @@ class Wrapper(object):
                 temp_string+=actual_word
                 length+=actual_length
         #print(result)
-        return result+temp_string
+        result+=temp_string
+        for char in "，。？！；：》>]}】）)":
+             result = result.replace("\n"+char, char+"\n", 20)
+        for char in "《<[{【（(":
+             result = result.replace(char+"\n", "\n"+char, 20)
+        
+        return result
 
     def tokenize_string(self, string:str):
         self.tokens.clear()
