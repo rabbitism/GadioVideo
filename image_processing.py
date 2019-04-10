@@ -48,7 +48,6 @@ def processImage(path):
     try:
         while True:
             print("saving %s (%s) frame %d, %s %s" % (path, mode, i, im.size, im.tile))
-            
             '''
             If the GIF uses local colour tables, each frame will have its own palette.
             If not, we need to apply the global palette to the new frame.
@@ -57,7 +56,6 @@ def processImage(path):
                 im.putpalette(p)
             
             new_frame = Image.new('RGBA', im.size)
-            
             '''
             Is this file a "partial"-mode GIF where frames update a region of a different size to the entire image?
             If so, we need to construct the new frame by pasting it on top of the preceding frames.
@@ -67,7 +65,6 @@ def processImage(path):
             
             new_frame.paste(im, (0,0), im.convert('RGBA'))
             new_frame.save('%s-%d.png' % (''.join(os.path.basename(path).split('.')[:-1]), i), 'PNG')
- 
             i += 1
             last_frame = new_frame
             im.seek(im.tell() + 1)
