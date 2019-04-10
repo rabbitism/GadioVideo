@@ -33,11 +33,13 @@ class Wrapper(object):
                 temp_string = actual_word
                 length = actual_length
             else:
+                if(len(actual_word)==1):
+                    temp_string =temp_string.rstrip()
                 temp_string+=actual_word
                 length+=actual_length
         #print(result)
         result+=temp_string
-        for char in "，。？！；：》>]}】）)":
+        for char in "，。？！；：》>]}】）)、":
              result = result.replace("\n"+char, char+"\n", 20)
         for char in "《<[{【（(":
              result = result.replace(char+"\n", "\n"+char, 20)
@@ -56,7 +58,7 @@ class Wrapper(object):
                 else:
                     result.append("".join(temp))
                     temp.clear()
-                    result.append(" "+str(char)+" ")
+                    result.append(" "+str(char))
             temp.append(" ")
             result.append("".join(temp))
             temp.clear()

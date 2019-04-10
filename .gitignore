@@ -1,3 +1,4 @@
 resource/*
 __pycache__/*
+output/*
 

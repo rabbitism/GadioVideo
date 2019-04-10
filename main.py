@@ -23,7 +23,11 @@ def main(title:str):
         image_dir = os.sep.join([".", "resource", title])
         crawler.save_image(image_url, image_dir, image_name)
     fourcc = VideoWriter_fourcc(*'mp4v')
-    video = VideoWriter(os.sep.join(['.', 'resource', str(title)+'.mp4']), fourcc, float(config['fps']), (config['width'], config['height']))
+    output_dir = os.sep.join(['.','output'])
+    if not os.path.exists(output_dir):
+        print("Folder", output_dir, 'does not exist. Creating...')
+        os.makedirs(output_dir)
+    video = VideoWriter(os.sep.join([output_dir, str(title)+'.mp4']), fourcc, float(config['fps']), (config['width'], config['height']))
     font = ImageFont.truetype(config['font'], config['title_font_size'], encoding="utf-8")
     font2 = ImageFont.truetype(config['font'], config['content_font_size'], encoding="utf-8") 
     title_wrapper = text_processing.Wrapper(font)
@@ -55,6 +59,7 @@ def main(title:str):
         else:
             ""
         video.write(frame)
+    print(title, "finished!")
     
 
         

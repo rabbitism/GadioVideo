@@ -14,14 +14,12 @@ def crawler(number):
         #print(image_div)
         if(image_div is not None):
             image_line = image_div.find('img')
-
         header = line.find('div', {'class':'col-xs-7'})
         if(header is not None):
             header_line = header.find('h1').contents[0].strip()
             content_line = header.find('p').contents[0].strip()
             time = int(header.find('h1').contents[1]['data-at'])
-
-        result[time] = {'header':header_line, 'content':content_line, 'image_url':image_line['src']}
+            result[time] = {'header':header_line, 'content':content_line, 'image_url':image_line['src']}
     #print(result)
     return result
 
