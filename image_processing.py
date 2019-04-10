@@ -5,6 +5,8 @@ import numpy as np
 from cv2 import VideoWriter, VideoWriter_fourcc
 
 import crawler
+from config import config
+import text_processing
 
 def analyseImage(path):
     '''
@@ -72,36 +74,49 @@ def processImage(path):
     except EOFError:
         pass
  
-def create_frame(image_name, title, content, size):
-    print("Hello")
-    #https://blog.csdn.net/wyx100/article/details/75579581
-
-    # cv2读取图片
+def create_frame(image_name, title, content, size, wrapper, title_font, content_font):
+    margin = config['margin']
+    picture_width = config['picture_width']
     img = cv2.imread(image_name) # 名称不能有汉字
-    img = cv2.resize(img, (300,300))
+    height = int(img.shape[0]/img.shape[1]*picture_width)
+    if(height> config['height']-2*margin):
+        height = config['height']-2*margin
+        picture_width = int(img.shape[1]/img.shape[0]*height)
+    print(img.shape)
+    img = cv2.resize(img, (picture_width, height))
+    print(img.shape)
     cv2img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) # cv2和PIL中颜色的hex码的储存顺序不同
     pilimg = Image.fromarray(cv2img)
 
     frame = Image.new('RGB', size, color=(255,255,255))
-    frame.paste(pilimg, (80, 80))
+    frame.paste(pilimg, (margin, margin))
  
-    # PIL图片上打印汉字
     draw = ImageDraw.Draw(frame) # 图片上打印
+    content = wrapper.wrap_string(content, config['width']-picture_width-config['margin']*3)
 
-    font = ImageFont.truetype("msyh.ttc", 64, encoding="utf-8") 
-    font2 = ImageFont.truetype("msyh.ttc", 30, encoding="utf-8") 
-    # 参数1：字体文件路径，参数2：字体大小
+    font = ImageFont.truetype("msyh.ttc", config['title_font_size'], encoding="utf-8") 
+    font2 = ImageFont.truetype("msyh.ttc", config['content_font_size'], encoding="utf-8") 
 
-    draw.text((450, 80), title, (0, 0, 0), font=font) 
-    # 参数1：打印坐标，参数2：文本，参数3：字体颜色，参数4：字体
-    draw.text((450, 180), content, (0, 0, 0), font=font2) 
-    # PIL图片转cv2 图片
+    draw.text((picture_width+margin*2, margin), title, (0, 0, 0), font=title_font) 
+    draw.text((picture_width+margin*2, margin+100), content, (0, 0, 0), font=content_font) 
     cv2charimg = cv2.cvtColor(np.array(frame), cv2.COLOR_RGB2BGR)
-    # cv2.imshow("图片", cv2charimg) # 汉字窗口标题显示乱码
-    #cv2.imshow("photo", cv2charimg)
+    return cv2charimg
+
+def create_blank_frame(title, content, size, wrapper, title_font, content_font):
+    margin = config['margin']
+    picture_width = config['picture_width']
+
+    frame = Image.new('RGB', size, color=(255,255,255))
  
-    #cv2.waitKey (0)
-    #cv2.destroyAllWindows()
+    draw = ImageDraw.Draw(frame)
+    content = wrapper.wrap_string(content, config['width']-picture_width-config['margin']*3)
+
+    font = ImageFont.truetype("msyh.ttc", config['title_font_size'], encoding="utf-8") 
+    font2 = ImageFont.truetype("msyh.ttc", config['content_font_size'], encoding="utf-8") 
+
+    draw.text((picture_width+margin*2, margin), title, (0, 0, 0), font=title_font) 
+    draw.text((picture_width+margin*2, margin+100), content, (0, 0, 0), font=content_font) 
+    cv2charimg = cv2.cvtColor(np.array(frame), cv2.COLOR_RGB2BGR)
     return cv2charimg
 
  
@@ -123,8 +138,8 @@ def main():
     seconds = 10
     radius = 150
 
-    fourcc = VideoWriter_fourcc(*'MP42')
-    video = VideoWriter('./circle_noise.avi', fourcc, float(FPS), (width, height))
+    fourcc = VideoWriter_fourcc(*'mp4v')
+    video = VideoWriter('./circle_noise.mp4', fourcc, float(FPS), (width, height))
 
     for i in range(10):
         print(i)

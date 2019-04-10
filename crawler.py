@@ -19,7 +19,7 @@ def crawler(number):
         if(header is not None):
             header_line = header.find('h1').contents[0].strip()
             content_line = header.find('p').contents[0].strip()
-            time = header.find('h1').contents[1]['data-at']
+            time = int(header.find('h1').contents[1]['data-at'])
 
         result[time] = {'header':header_line, 'content':content_line, 'image_url':image_line['src']}
     #print(result)
