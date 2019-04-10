@@ -82,9 +82,9 @@ def create_frame(image_name, title, content, size, wrapper, title_font, content_
     if(height> config['height']-2*margin):
         height = config['height']-2*margin
         picture_width = int(img.shape[1]/img.shape[0]*height)
-    print(img.shape)
+    #print(img.shape)
     img = cv2.resize(img, (picture_width, height))
-    print(img.shape)
+    #print(img.shape)
     cv2img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) # cv2和PIL中颜色的hex码的储存顺序不同
     pilimg = Image.fromarray(cv2img)
 
@@ -93,6 +93,7 @@ def create_frame(image_name, title, content, size, wrapper, title_font, content_
  
     draw = ImageDraw.Draw(frame) # 图片上打印
     content = wrapper.wrap_string(content, config['width']-picture_width-config['margin']*3)
+    print(content)
 
     font = ImageFont.truetype("msyh.ttc", config['title_font_size'], encoding="utf-8") 
     font2 = ImageFont.truetype("msyh.ttc", config['content_font_size'], encoding="utf-8") 
