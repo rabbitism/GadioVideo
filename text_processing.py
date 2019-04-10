@@ -70,17 +70,7 @@ if __name__ == "__main__":
     print(find_image_suffix("Hello.jpg"))
     line = input()
     font = ImageFont.truetype("msyh.ttc", 30, encoding="utf-8") 
-    #print(font.getsize("Hello"))
-    #print(font.getsize("您好"))
-    #print(font.getsize("Google"))
-    #print(font.getsize("Hello 您好"))
     wrapper=Wrapper(font)
-    #tokens = wrapper.tokenize_string(line)
-    #for word in tokens:
-        #print(len(word), end=' ')
-    #print(is_alpha("是"))
-    #for char in "是不是 sbs":
-    #    print(is_alpha(char))
     strin  = wrapper.wrap_string(line, width= 600, height=200, width2 = 1000)
     print(strin)
     

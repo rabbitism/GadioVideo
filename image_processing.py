@@ -77,21 +77,19 @@ def processImage(path):
 def create_frame(image_name, title, content, size, title_wrapper, content_wrapper, title_font, content_font):
     margin = config['margin']
     picture_width = config['picture_width']
-    img = cv2.imread(image_name) # 名称不能有汉字
+    img = cv2.imread(image_name)
     height = int(img.shape[0]/img.shape[1]*picture_width)
     if(height> config['height']-2*margin):
         height = config['height']-2*margin
         picture_width = int(img.shape[1]/img.shape[0]*height)
-    #print(img.shape)
     img = cv2.resize(img, (picture_width, height))
-    #print(img.shape)
-    cv2img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) # cv2和PIL中颜色的hex码的储存顺序不同
+    cv2img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) 
     pilimg = Image.fromarray(cv2img)
 
     frame = Image.new('RGB', size, color=(255,255,255))
     frame.paste(pilimg, (margin, margin))
  
-    draw = ImageDraw.Draw(frame) # 图片上打印
+    draw = ImageDraw.Draw(frame)
     title = title_wrapper.wrap_string(title, config['width']-picture_width-config['margin']*3)
     content = content_wrapper.wrap_string(content, config['width']-picture_width-config['margin']*3)
     print(content)
@@ -130,47 +128,7 @@ def create_blank_frame(title, content, size, title_wrapper, content_wrapper, tit
 
  
 def main():
-    #processImage('673.gif')
-    image_name = '.\\test\\3508.png'
-    image_name2 = '.\\test\\3434.jpg'
-    title = '中文标题'
-    title2 = '中文标题2'
-    content = '中文内容中文内容中文内容中文内容中文内容中文内容\n中文内容中文内容中文内容中文内容中文内容中文内容\n中文内容中文内容中文内容中文内容'
-    content2 = '中文内容中文内容中文内容中文内容中文内容中文内容2\n中文内容中文内容中文内容中文内容中文内容中文内容\n中文内容中文内容中文内容中文内容'
-    size = (1280, 720)
-    frame = create_frame(image_name, title, content, size)
-    frame2 = create_frame(image_name2, title2, content2, size)
-
-    width = 1280
-    height = 720
-    FPS = 20
-    seconds = 10
-    radius = 150
-
-    fourcc = VideoWriter_fourcc(*'mp4v')
-    video = VideoWriter('./circle_noise.mp4', fourcc, float(FPS), (width, height))
-
-    for i in range(10):
-        print(i)
-        video.write(frame)
-    for i in range(20):
-        print(i)
-        video.write(frame2)
-    for i in range(20):
-        print(i)
-        video.write(frame)
-    for i in range(20):
-        print(i)
-        video.write(frame2)
-    for i in range(20):
-        print(i)
-        video.write(frame)
-    for i in range(20):
-        print(i)
-        video.write(frame2)
-
-    video.release()
-
+    print("Hello")
     
  
 if __name__ == "__main__":

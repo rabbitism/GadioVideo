@@ -5,6 +5,6 @@ config = {
     'picture_width':400,
     'title_font_size': 48,
     'content_font_size': 28,
-    'margin':30,
+    'margin':60,
     'font':'msyh.ttc'
 }
