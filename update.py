@@ -20,13 +20,14 @@ def update(title:str):
     result, audio_url = crawler.crawler(title)
     width = config['width']
     height = config['height']
+    test = config['test']
     for key in result.keys():
         image_name = str(key)
         image_url = result[key]['image_url']
         image_dir = os.sep.join([".", "resource", title])
-        #crawler.save_image(image_url, image_dir, image_name)
+        crawler.save_image(image_url, image_dir, image_name)
     
-    #crawler.save_audio(audio_url, os.sep.join([".", "resource", title, "audio"]), title)
+    crawler.save_audio(audio_url, os.sep.join([".", "resource", title, "audio"]), title)
     audio_clip = AudioFileClip(os.sep.join([".", "resource", title, "audio", title + ".mp3"]))
     print(audio_clip.duration)
 
@@ -49,14 +50,15 @@ def update(title:str):
     print(keys)
     frame = image_processing.create_blank_frame("", "", (width, height), title_wrapper, content_wrapper, font, font2)
     video_clips = []
+
+    key_length = 10 if test else len(keys)-1
     
-    #for i in range(10):
-    for i in range(len(keys)-1):
+    for i in range(key_length):
         key = keys[i]
         #print(result[key]['image_suffix'])
         if (key == 0):
             if(key not in result.keys()):
-                frame = image_processing.create_blank_frame("", "", (width, height), title_wrapper, content_wrapper, font, font2)
+                frame = image_processing.generate_blank_frame("", "", (width, height), title_wrapper, content_wrapper, font, font2)
                 videoclip = video_processing.create_video_with_frame(frame, 0, keys[1])
                 video_clips.append(videoclip)
             else:
@@ -91,10 +93,14 @@ def update(title:str):
     merged_clips = concatenate_videoclips(video_clips)
     merged_clips.audio = audio_clip
     logo_clip = video_processing.load_logo(os.sep.join([".", "util", config['logo_name']]), duration = merged_clips.duration)
-    final_clip = video_processing.add_logo(merged_clips, logo_clip)
-    #final_clip = video_processing.add_logo(merged_clips, logo_clip).subclip(0, min(200, final_clip.duration))
+    if config['enable_logo']:
+        final_clip = video_processing.add_logo(merged_clips, logo_clip)
+    else:
+        final_clip = merged_clips
+    if test:
+        final_clip = video_processing.add_logo(merged_clips, logo_clip).subclip(0, min(200, final_clip.duration))
 
-    final_clip.write_videofile(os.sep.join([".", "output", title+".mp4"]), fps=3)
+    final_clip.write_videofile(os.sep.join([".", "output", title+".mp4"]), fps=config['animation_fps'], threads=4)
     print(title, "finished!")
     
 

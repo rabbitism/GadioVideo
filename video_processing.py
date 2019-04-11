@@ -8,7 +8,7 @@ def get_audio_duration(audio_dir):
     return audio.duration
 
 def create_video_with_frame(frame, start, end):
-    print("Creating video clip...", start, end)
+    print("Analyzing video clip...", start, end)
     image_clip = ImageClip(frame, duration= end - start)
     image_clip = (image_clip.fx(vfx.fadein, duration=config['fade_duration']/2).fx(vfx.fadeout, duration=config['fade_duration']/2))
     #image_clip = image_clip.fx(vfx.fadein, duration=config['fade_duration'] / 2)
@@ -18,7 +18,7 @@ def create_video_with_frame(frame, start, end):
 
 def create_video_with_gif_clip(frame, clip, start, end):
     margin = config['margin']
-    print("Creating video clip with gif...", start, end)
+    print("Analyzing video clip with gif...", start, end)
     image_clip = ImageClip(frame, duration=end - start)
     gif_clip = clip.fx(vfx.loop, duration=end - start)
     potential_width = config['picture_width']
@@ -39,13 +39,13 @@ def load_gif_clip(image_dir):
     return video_clip
 
 def load_logo(image_dir:str, duration:int):
-    print("Creating logo image clip...")
+    print("Analyzing logo image clip...")
     image_clip = ImageClip(image_dir, transparent=True, duration=duration)
     image_clip = image_clip.fx(vfx.resize, height=int(config['margin']*0.8))
     return image_clip
 
 def add_logo(final_clip, logo_clip):
-    return CompositeVideoClip([final_clip, logo_clip.set_pos((int(config['margin']*0.1),int(config['margin']*0.1)))])
+    return CompositeVideoClip([final_clip, logo_clip.set_pos((int(config['margin']*0.1),int(config['height']-config['margin'])))])
 
 def main():
     clip = load_logo("./util/logo.png", 0, 10)
