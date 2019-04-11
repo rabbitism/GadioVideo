@@ -24,9 +24,9 @@ def update(title:str):
         image_name = str(key)
         image_url = result[key]['image_url']
         image_dir = os.sep.join([".", "resource", title])
-        crawler.save_image(image_url, image_dir, image_name)
+        #crawler.save_image(image_url, image_dir, image_name)
     
-    crawler.save_audio(audio_url, os.sep.join([".", "resource", title, "audio"]), title)
+    #crawler.save_audio(audio_url, os.sep.join([".", "resource", title, "audio"]), title)
     audio_clip = AudioFileClip(os.sep.join([".", "resource", title, "audio", title + ".mp3"]))
     print(audio_clip.duration)
 
@@ -66,7 +66,8 @@ def update(title:str):
             video_clips.append(videoclip)
     merged_clips = concatenate_videoclips(video_clips)
     merged_clips.audio = audio_clip
-    merged_clips.write_videofile(os.sep.join([".", "output", title+".mp4"]), fps=30)
+    merged_clips = merged_clips.subclip(0,300)
+    merged_clips.write_videofile(os.sep.join([".", "output", title+".mp4"]), fps=20)
     print(title, "finished!")
     
 

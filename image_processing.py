@@ -166,11 +166,15 @@ def generate_frame(image_url, title, content, size, title_wrapper, content_wrapp
     draw.text((picture_width+margin*2, margin), title, config['title_color'], font=title_font)
     draw.text((picture_width+margin*2, y_offset), content, config['content_color'], font=content_font)
 
+    #cv2charimg = cv2.cvtColor(np.array(frame), cv2.COLOR_RGB2BGR)
     cv2charimg = cv2.cvtColor(np.array(frame), cv2.COLOR_RGB2BGR)
-    return cv2charimg
+    cv2charimg = cv2.cvtColor(cv2charimg, cv2.COLOR_BGR2RGB)
+
     #cv2.imshow("Image", cv2charimg)
     #cv2.waitKey(0)
     #print("Hello")
+    return cv2charimg
+
  
 def main():
     print("Hello")
