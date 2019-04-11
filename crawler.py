@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import os
 import re
+import urllib.request
 
 import text_processing
 
@@ -23,8 +24,10 @@ def crawler(number):
             time = int(header.find('h1').contents[1]['data-at'])
             image_suffix = text_processing.find_image_suffix(image_line['src'])
             result[time] = {'header':header_line, 'content':content_line, 'image_url':image_line['src'], 'image_suffix':image_suffix}
-    print(result)
-    return result
+    #print(result)
+    audio_line = soup.find("p", {'class': 'story_actions'}).contents[1]["href"]
+    #print(audio_line)
+    return result, audio_line
 
 def save_image(image_url, image_dir, image_name):
     try:
@@ -39,11 +42,25 @@ def save_image(image_url, image_dir, image_name):
     except Exception as e:
         print("Error", e)
 
+def save_audio(audio_url, audio_dir, audio_name):
+    print("Saving Audio...")
+    try:
+        if not os.path.exists(audio_dir):
+            print("Folder", audio_dir, "does not exist. Creating...")
+            os.makedirs(audio_dir)
+        print("Saving audio to", audio_name + ".mp3")
+        r = urllib.request.urlretrieve(audio_url, audio_dir + os.sep + audio_name + ".mp3")
+        ##with open(audio_dir + os.sep + audio_name + ".mp3") as code:
+        #   code.write(r.content)
+    except Exception as e:
+        print("Error", e)
+
 if __name__ == "__main__":
     title = str(108272)
-    result = crawler(title)
-    for key in result.keys():
-        image_name = key
-        image_url = result[key]['image_url']
-        image_dir = os.sep.join([".", "resource", title])
-        #save_image(image_url, image_dir, image_name)
+    result, audio_url = crawler(title)
+    save_audio(audio_url, ".\\test", "test")
+    #for key in result.keys():
+    #    image_name = key
+    #    image_url = result[key]['image_url']
+    #    image_dir = os.sep.join([".", "resource", title])
+    #    #save_image(image_url, image_dir, image_name)
