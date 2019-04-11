@@ -35,6 +35,10 @@ python main.py 107884
 |margin|边界宽度|60|
 |font|字体|msyh.ttc|
 
+尺寸实例见下图
+
+![sample](doc\Sample.jpg)
+
 ## TODO
 
 * 支持 gif
