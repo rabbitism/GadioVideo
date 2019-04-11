@@ -83,7 +83,7 @@ def create_frame(image_name, title, content, size, title_wrapper, content_wrappe
     cv2img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) 
     pilimg = Image.fromarray(cv2img)
 
-    frame = Image.new('RGB', size, color=(255,255,255))
+    frame = Image.new('RGB', size, color=config['background_color'])
     frame.paste(pilimg, (margin, margin))
  
     draw = ImageDraw.Draw(frame)
@@ -91,13 +91,12 @@ def create_frame(image_name, title, content, size, title_wrapper, content_wrappe
     content = content_wrapper.wrap_string(content, config['width']-picture_width-config['margin']*3)
     print(content)
 
-    y_offset = 100
+    y_offset = margin+title_font.getsize("Gg")[1]+content_font.getsize("Gg")[1]
     if('\n' in title):
         y_offset+=title_font.getsize(title)[1]
 
-    draw.text((picture_width+margin*2, margin), title, (0, 0, 0), font=title_font)
-    y_offset = margin+ (180 if '\n' in title else 100)
-    draw.text((picture_width+margin*2, y_offset), content, (0, 0, 0), font=content_font) 
+    draw.text((picture_width+margin*2, margin), title, config['title_color'], font=title_font)
+    draw.text((picture_width+margin*2, y_offset), content, config['content_color'], font=content_font) 
     cv2charimg = cv2.cvtColor(np.array(frame), cv2.COLOR_RGB2BGR)
     return cv2charimg
 
@@ -105,7 +104,7 @@ def create_blank_frame(title, content, size, title_wrapper, content_wrapper, tit
     margin = config['margin']
     picture_width = config['picture_width']
 
-    frame = Image.new('RGB', size, color=(255,255,255))
+    frame = Image.new('RGB', size, color=config['background_color'])
  
     draw = ImageDraw.Draw(frame)
     title = title_wrapper.wrap_string(title, config['width']-picture_width-config['margin']*3)
@@ -114,12 +113,12 @@ def create_blank_frame(title, content, size, title_wrapper, content_wrapper, tit
     font = ImageFont.truetype("msyh.ttc", config['title_font_size'], encoding="utf-8") 
     font2 = ImageFont.truetype("msyh.ttc", config['content_font_size'], encoding="utf-8") 
 
-    y_offset = 100
+    y_offset = margin+title_font.getsize("Gg")[1]+content_font.getsize("Gg")[1]
     if('\n' in title):
-        y_offset+=title_font.getsize(title)
+        y_offset+=title_font.getsize(title)[1]
 
-    draw.text((picture_width+margin*2, margin), title, (0, 0, 0), font=title_font) 
-    draw.text((picture_width+margin*2, margin+100), content, (0, 0, 0), font=content_font) 
+    draw.text((picture_width+margin*2, margin), title, config['title_color'], font=title_font) 
+    draw.text((picture_width+margin*2, y_offset), content, config['content_color'], font=content_font) 
     cv2charimg = cv2.cvtColor(np.array(frame), cv2.COLOR_RGB2BGR)
     return cv2charimg
 

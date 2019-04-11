@@ -22,6 +22,7 @@ python main.py 107884
 视频文件是`.\output\107884.mp4`
 
 ### 更改配置
+
 修改`config.py`中的参数可以修改如下配置
 
 |参数|含义|示例|
@@ -29,10 +30,13 @@ python main.py 107884
 |fps|帧率|3|
 |width|视频宽度|1280|
 |height|视频高度|720|
-|picture_width|图片宽度（图片过高时会以高度为准）|400|
-|title_font_size|标题字体大小| 48|
-|content_font_size|正文字体大小| 28|
 |margin|边界宽度|60|
+|picture_width|图片宽度（图片过高时会以高度为准）|400|
+|title_font_size|标题字体大小|48|
+|content_font_size|正文字体大小|28|
+|title_color|标题字体颜色|#424242|
+|content_color|正文字体颜色|#424242|
+|background_color|背景颜色|#FFFFFF|
 |font|字体|msyh.ttc|
 
 尺寸实例见下图
