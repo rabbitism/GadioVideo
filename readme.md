@@ -37,7 +37,7 @@ python main.py 107884
 
 尺寸实例见下图
 
-![sample](doc\Sample.jpg)
+![sample](doc/Sample.jpg)
 
 ## TODO
 
