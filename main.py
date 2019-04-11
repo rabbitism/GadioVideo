@@ -54,7 +54,7 @@ def main(title:str):
             if(text_processing.find_image_suffix(result[key]['image_url']) in ['.gif', '.GIF']):
                 frame = image_processing.create_blank_frame(header, content, (width, height), title_wrapper, content_wrapper, font, font2)
             else:
-                frame = image_processing.create_frame(image, header, content, (width, height), title_wrapper, content_wrapper, font, font2)
+                frame = image_processing.generate_frame(image, header, content, (width, height), title_wrapper, content_wrapper, font, font2)
                 os.remove(image)
         else:
             ""

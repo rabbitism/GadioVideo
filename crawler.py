@@ -3,6 +3,8 @@ from bs4 import BeautifulSoup
 import os
 import re
 
+import text_processing
+
 def crawler(number):
     url = "https://www.gcores.com/radios/"+str(number)
     content = requests.get(url).content
@@ -19,8 +21,9 @@ def crawler(number):
             header_line = header.find('h1').contents[0].strip()
             content_line = header.find('p').contents[0].strip()
             time = int(header.find('h1').contents[1]['data-at'])
-            result[time] = {'header':header_line, 'content':content_line, 'image_url':image_line['src']}
-    #print(result)
+            image_suffix = text_processing.find_image_suffix(image_line['src'])
+            result[time] = {'header':header_line, 'content':content_line, 'image_url':image_line['src'], 'image_suffix':image_suffix}
+    print(result)
     return result
 
 def save_image(image_url, image_dir, image_name):
@@ -43,4 +46,4 @@ if __name__ == "__main__":
         image_name = key
         image_url = result[key]['image_url']
         image_dir = os.sep.join([".", "resource", title])
-        save_image(image_url, image_dir, image_name)
+        #save_image(image_url, image_dir, image_name)
