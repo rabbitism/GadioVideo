@@ -42,21 +42,30 @@ def update(title:str):
     title_wrapper = text_processing.Wrapper(font)
     content_wrapper = text_processing.Wrapper(font2)
     keys = list(result.keys())
-    keys.append(0)
+    if 0 not in keys:
+        keys.append(0)
     keys.append(math.ceil(audio_clip.duration))
     keys.sort()
     print(keys)
     frame = image_processing.create_blank_frame("", "", (width, height), title_wrapper, content_wrapper, font, font2)
     video_clips = []
     
-
-    for i in range(len(keys)-80):
+    #for i in range(10):
+    for i in range(len(keys)-1):
         key = keys[i]
         #print(result[key]['image_suffix'])
-        if (key==0 and key not in result.keys()):
-            frame = image_processing.create_blank_frame("", "", (width, height), title_wrapper, content_wrapper, font, font2)
-            videoclip = video_processing.create_video_with_frame(frame, 0, keys[1])
-            video_clips.append(videoclip)
+        if (key == 0):
+            if(key not in result.keys()):
+                frame = image_processing.create_blank_frame("", "", (width, height), title_wrapper, content_wrapper, font, font2)
+                videoclip = video_processing.create_video_with_frame(frame, 0, keys[1])
+                video_clips.append(videoclip)
+            else:
+                image = os.sep.join(['.', 'resource', title, str(key)+result[key]['image_suffix']])
+                header = result[key]['header']
+                content = result[key]['content']
+                frame = image_processing.generate_frame(image, header, content, (width, height), title_wrapper, content_wrapper, font, font2)
+                videoclip = video_processing.create_video_with_frame(frame, keys[i], keys[i + 1])
+                video_clips.append(videoclip)
         elif (result[key]['image_suffix'].lower() not in [".gif"]):
             image = os.sep.join(['.', 'resource', title, str(key)+result[key]['image_suffix']])
             header = result[key]['header']
@@ -64,10 +73,28 @@ def update(title:str):
             frame = image_processing.generate_frame(image, header, content, (width, height), title_wrapper, content_wrapper, font, font2)
             videoclip = video_processing.create_video_with_frame(frame, keys[i], keys[i + 1])
             video_clips.append(videoclip)
+        elif(result[key]['image_suffix'].lower() in [".gif"]):
+            image = os.sep.join(['.', 'resource', title, str(key)+result[key]['image_suffix']])
+            header = result[key]['header']
+            content = result[key]['content']
+            gif_clip = video_processing.load_gif_clip(image)
+            background_frame = image_processing.generate_blank_frame(header, content, (width, height), title_wrapper, content_wrapper, font, font2)
+            videoclip = video_processing.create_video_with_gif_clip(background_frame, gif_clip, keys[i], keys[i + 1])
+            video_clips.append(videoclip)
+        else:
+            background_frame = image_processing.generate_blank_frame("", "", (width, height), title_wrapper, content_wrapper, font, font2)
+            videoclip = video_processing.create_video_with_frame(frame, keys[i], keys[i + 1])
+            video_clips.append(videoclip)
+
+
+
     merged_clips = concatenate_videoclips(video_clips)
     merged_clips.audio = audio_clip
-    merged_clips = merged_clips.subclip(0,300)
-    merged_clips.write_videofile(os.sep.join([".", "output", title+".mp4"]), fps=20)
+    logo_clip = video_processing.load_logo(os.sep.join([".", "util", config['logo_name']]), duration = merged_clips.duration)
+    final_clip = video_processing.add_logo(merged_clips, logo_clip)
+    #final_clip = video_processing.add_logo(merged_clips, logo_clip).subclip(0, min(200, final_clip.duration))
+
+    final_clip.write_videofile(os.sep.join([".", "output", title+".mp4"]), fps=3)
     print(title, "finished!")
     
 

@@ -119,6 +119,25 @@ def create_blank_frame(title, content, size, title_wrapper, content_wrapper, tit
     cv2charimg = cv2.cvtColor(np.array(frame), cv2.COLOR_RGB2BGR)
     return cv2charimg
 
+def generate_blank_frame(title, content, size, title_wrapper, content_wrapper, title_font, content_font):
+    margin = config['margin']
+    picture_width = config['picture_width']
+
+    frame = Image.new('RGB', size, color=config['background_color'])
+ 
+    draw = ImageDraw.Draw(frame)
+    title = title_wrapper.wrap_string(title, config['width']-picture_width-config['margin']*3)
+    content = content_wrapper.wrap_string(content, config['width']-picture_width-config['margin']*3)
+
+    y_offset = margin+title_font.getsize("Gg")[1]+content_font.getsize("Gg")[1]
+    if('\n' in title):
+        y_offset+=title_font.getsize(title)[1]
+
+    draw.text((picture_width+margin*2, margin), title, config['title_color'], font=title_font) 
+    draw.text((picture_width+margin*2, y_offset), content, config['content_color'], font=content_font) 
+    cv2charimg = np.array(frame)
+    return cv2charimg
+
 def generate_frame(image_url, title, content, size, title_wrapper, content_wrapper, title_font, content_font):
     margin = config["margin"]
     picture_width = config['picture_width']
@@ -166,9 +185,7 @@ def generate_frame(image_url, title, content, size, title_wrapper, content_wrapp
     draw.text((picture_width+margin*2, margin), title, config['title_color'], font=title_font)
     draw.text((picture_width+margin*2, y_offset), content, config['content_color'], font=content_font)
 
-    #cv2charimg = cv2.cvtColor(np.array(frame), cv2.COLOR_RGB2BGR)
-    cv2charimg = cv2.cvtColor(np.array(frame), cv2.COLOR_RGB2BGR)
-    cv2charimg = cv2.cvtColor(cv2charimg, cv2.COLOR_BGR2RGB)
+    cv2charimg = np.array(frame)
 
     #cv2.imshow("Image", cv2charimg)
     #cv2.waitKey(0)
