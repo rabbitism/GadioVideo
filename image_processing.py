@@ -96,6 +96,8 @@ def generate_frame(image_url, title, content, size, title_wrapper, content_wrapp
     ratio = max(image.shape[1] / picture_width, image.shape[0] / potential_height)
     content_image = cv2.resize(image, (int(image.shape[1] / ratio), int(image.shape[0] / ratio)), interpolation=cv2.INTER_CUBIC)
 
+    actual_width = int(image.shape[1] / ratio)
+
     # cut background image to fit frame size
     background_image = background_image[top:bottom, left:right]
 
@@ -106,21 +108,21 @@ def generate_frame(image_url, title, content, size, title_wrapper, content_wrapp
     frame.paste(content_frame, (margin, margin))
 
     # add background for text area
-    board = Image.new('RGBA', (size[0] - picture_width - int(margin * 1.5), config['height']), color=(255, 255, 255, 120))
+    board = Image.new('RGBA', (size[0] - actual_width - int(margin * 1.5), config['height']), color=(255, 255, 255, 120))
 
-    frame.paste(board, (picture_width+int(margin*1.5), 0), mask=board)
+    frame.paste(board, (actual_width+int(margin*1.5), 0), mask=board)
  
     draw = ImageDraw.Draw(frame)
-    title = title_wrapper.wrap_string(title, config['width']-picture_width-config['margin']*3)
-    content = content_wrapper.wrap_string(content, config['width']-picture_width-config['margin']*3)
+    title = title_wrapper.wrap_string(title, config['width']-actual_width-config['margin']*3)
+    content = content_wrapper.wrap_string(content, config['width']-actual_width-config['margin']*3)
     #print(content)
 
     y_offset = margin+title_font.getsize("Gg")[1]+content_font.getsize("Gg")[1]
     if('\n' in title):
         y_offset+=title_font.getsize(title)[1]
 
-    draw.text((picture_width+margin*2, margin), title, config['title_color'], font=title_font)
-    draw.text((picture_width+margin*2, y_offset), content, config['content_color'], font=content_font)
+    draw.text((actual_width+margin*2, margin), title, config['title_color'], font=title_font)
+    draw.text((actual_width+margin*2, y_offset), content, config['content_color'], font=content_font)
 
     cv2charimg = np.array(frame)
 

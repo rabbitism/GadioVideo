@@ -23,9 +23,9 @@ def create_video_with_gif_clip(frame, clip, start, end):
     gif_clip = clip.fx(vfx.loop, duration=end - start)
     potential_width = config['picture_width']
     potential_height = config['height'] - margin * 2
-    ratio = max(potential_height / gif_clip.h, potential_width / gif_clip.w)
-    width = int(gif_clip.w / ratio)
-    height = int(gif_clip.h / ratio)
+    ratio = min(potential_height / gif_clip.h, potential_width / gif_clip.w)
+    width = int(gif_clip.w * ratio)
+    height = int(gif_clip.h * ratio)
     gif_clip = gif_clip.fx(vfx.resize, width=width, height=height)
     
     final_clip = CompositeVideoClip([image_clip, gif_clip.set_pos((margin, margin))])
