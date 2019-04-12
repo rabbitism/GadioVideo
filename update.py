@@ -109,6 +109,7 @@ def update(title:str):
 if __name__ == "__main__":
     if(len(sys.argv)==1):
         print("Must specify gadio number... ")
+        #update(str(108272))
     else:
         title=str(sys.argv[1])
         update(title)
