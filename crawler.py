@@ -7,16 +7,27 @@ import urllib.request
 import text_processing
 
 def crawler(number):
+    """
+    Get timeline and corresponding contents from Gcores webiste.
+    returns:
+    result: a dictionary if this format: {10:{'header':'标题', 'content':'内容', 'image_url':'https://......123.jpg','image_suffix':'.jpg'}}
+    audio_line: url to audio file: 'https://......123.mp3'
+    """
+    
+    # Get source code
     url = "https://www.gcores.com/radios/"+str(number)
     content = requests.get(url).content
     soup = BeautifulSoup(content, 'html.parser')
     b = soup.findAll("div", {'class':['row']})
     result = dict()
     for line in b:
+        # Get lines with image information
         image_div = line.find('div', {'class':'col-xs-5'})
-        #print(image_div)
+
         if(image_div is not None):
             image_line = image_div.find('img')
+
+        # Get lines with text information
         header = line.find('div', {'class':'col-xs-7'})
         if(header is not None):
             header_line = header.find('h1').contents[0].strip()
@@ -24,9 +35,9 @@ def crawler(number):
             time = int(header.find('h1').contents[1]['data-at'])
             image_suffix = text_processing.find_image_suffix(image_line['src'])
             result[time] = {'header':header_line, 'content':content_line, 'image_url':image_line['src'], 'image_suffix':image_suffix}
-    #print(result)
+
     audio_line = soup.find("p", {'class': 'story_actions'}).contents[1]["href"]
-    #print(audio_line)
+
     return result, audio_line
 
 def save_image(image_url, image_dir, image_name):

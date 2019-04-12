@@ -60,7 +60,7 @@ def generate_blank_frame(title, content, size, title_wrapper, content_wrapper, t
     margin = config['margin']
     picture_width = config['picture_width']
 
-    frame = Image.new('RGB', size, color=config['background_color'])
+    frame = Image.new('RGBA', size, color=config['background_color'])
  
     draw = ImageDraw.Draw(frame)
     title = title_wrapper.wrap_string(title, config['width']-picture_width-config['margin']*3)
@@ -115,7 +115,7 @@ def generate_frame(image_url, title, content, size, title_wrapper, content_wrapp
     draw = ImageDraw.Draw(frame)
     title = title_wrapper.wrap_string(title, config['width']-actual_width-config['margin']*3)
     content = content_wrapper.wrap_string(content, config['width']-actual_width-config['margin']*3)
-    #print(content)
+    print(content)
 
     y_offset = margin+title_font.getsize("Gg")[1]+content_font.getsize("Gg")[1]
     if('\n' in title):

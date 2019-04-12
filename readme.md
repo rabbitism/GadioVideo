@@ -49,9 +49,11 @@ python main.py 107884
 * 支持 gif
 * 合并音频
 
-## 预览版
+---
 
-您可以切换至`fancy`分支使用预览版。预览版使用`moviepy`库来合成视频，已经支持了gif、合并音频、图片间转场等功能。
+## **预览版**
+
+您可以切换至`fancy`分支使用预览版。预览版使用`moviepy`库来合成视频，已经支持了gif、合并音频、图片间转场等功能。每一页的背景改为模糊的图片。
 
 ## 预览版使用说明
 
@@ -77,9 +79,9 @@ python update.py 107884
 |picture_width|图片宽度（图片过高时会以高度为准）|400|
 |title_font_size|标题字体大小|48|
 |content_font_size|正文字体大小|28|
-|title_color|标题字体颜色|"#050505"|
-|content_color|正文字体颜色|"#050505"|
-|background_color|背景颜色|"#FFFFFF"|
+|title_color|标题字体颜色|#050505|
+|content_color|正文字体颜色|#050505|
+|background_color|背景颜色|#FFFFFF|
 |font|字体|msyh.ttc||
 |logo_name|logo图片名（位于`.\util`文件夹下）|logo.png||
 |fade_duration|转场动画持续时间|1|
@@ -90,3 +92,7 @@ python update.py 107884
 
 ![sample](doc/Fancy_Sample1.jpg)
 ![sample](doc/Fancy_Sample2.jpg)
+
+视频示例请参考
+
+[哔哩哔哩](https://www.bilibili.com/video/av49033861)

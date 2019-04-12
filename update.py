@@ -48,7 +48,7 @@ def update(title:str):
     keys.append(math.ceil(audio_clip.duration))
     keys.sort()
     print(keys)
-    frame = image_processing.create_blank_frame("", "", (width, height), title_wrapper, content_wrapper, font, font2)
+    frame = image_processing.generate_blank_frame("", "", (width, height), title_wrapper, content_wrapper, font, font2)
     video_clips = []
 
     key_length = 10 if test else len(keys)-1
@@ -68,6 +68,7 @@ def update(title:str):
                 frame = image_processing.generate_frame(image, header, content, (width, height), title_wrapper, content_wrapper, font, font2)
                 videoclip = video_processing.create_video_with_frame(frame, keys[i], keys[i + 1])
                 video_clips.append(videoclip)
+                os.remove(image)
         elif (result[key]['image_suffix'].lower() not in [".gif"]):
             image = os.sep.join(['.', 'resource', title, str(key)+result[key]['image_suffix']])
             header = result[key]['header']
@@ -75,6 +76,7 @@ def update(title:str):
             frame = image_processing.generate_frame(image, header, content, (width, height), title_wrapper, content_wrapper, font, font2)
             videoclip = video_processing.create_video_with_frame(frame, keys[i], keys[i + 1])
             video_clips.append(videoclip)
+            os.remove(image)
         elif(result[key]['image_suffix'].lower() in [".gif"]):
             image = os.sep.join(['.', 'resource', title, str(key)+result[key]['image_suffix']])
             header = result[key]['header']
@@ -83,6 +85,7 @@ def update(title:str):
             background_frame = image_processing.generate_blank_frame(header, content, (width, height), title_wrapper, content_wrapper, font, font2)
             videoclip = video_processing.create_video_with_gif_clip(background_frame, gif_clip, keys[i], keys[i + 1])
             video_clips.append(videoclip)
+            #os.remove(image)
         else:
             background_frame = image_processing.generate_blank_frame("", "", (width, height), title_wrapper, content_wrapper, font, font2)
             videoclip = video_processing.create_video_with_frame(frame, keys[i], keys[i + 1])
