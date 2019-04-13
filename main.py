@@ -14,7 +14,7 @@ from config import config
 def main(title:str):
     title = str(title)
     fps = config['fps']
-    result = crawler.crawler(title)
+    result, audio_url = crawler.crawler(title)
     width = config['width']
     height = config['height']
     for key in result.keys():
@@ -51,7 +51,7 @@ def main(title:str):
             header = result[key]['header']
             content = result[key]['content']
             print("标题：",header)
-            if(text_processing.find_image_suffix(result[key]['image_url']) in ['.gif', '.GIF']):
+            if(result[key]['image_suffix'] in ['.gif', '.GIF']):
                 frame = image_processing.create_blank_frame(header, content, (width, height), title_wrapper, content_wrapper, font, font2)
             else:
                 frame = image_processing.create_frame(image, header, content, (width, height), title_wrapper, content_wrapper, font, font2)

@@ -1,4 +1,6 @@
 resource/*
 __pycache__/*
 output/*
+test/*
+*.mp3
 
