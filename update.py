@@ -80,13 +80,14 @@ def update(title:str):
             os.remove(image)
         elif(result[key]['image_suffix'].lower() in [".gif"]):
             image = os.sep.join(['.', 'resource', title, str(key)+result[key]['image_suffix']])
+            print(image)
             header = result[key]['header']
             content = result[key]['content']
-            gif_clip = video_processing.load_gif_clip(image)
             if config['skip_gif']:
                 background_frame = image_processing.generate_blank_frame(header, content, (width, height), title_wrapper, content_wrapper, font, font2)
                 video_clip = video_processing.create_video_with_frame(background_frame, keys[i], keys[i+1])
             else:
+                gif_clip = video_processing.load_gif_clip(image)
                 background_frame = image_processing.generate_blank_frame(header, content, (width, height), title_wrapper, content_wrapper, font, font2)
                 videoclip = video_processing.create_video_with_gif_clip(background_frame, gif_clip, keys[i], keys[i + 1])
             video_clips.append(videoclip)

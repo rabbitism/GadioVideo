@@ -80,7 +80,10 @@ def generate_frame(image_url, title, content, size, title_wrapper, content_wrapp
     picture_width = config['picture_width']
 
     # Read image from file
-    image = cv2.imread(image_url)
+    try:
+        image = cv2.imread(image_url)
+    except:
+        return generate_blank_frame(title, content, size, title_wrapper, content_wrapper, title_font, content_font)
 
     # expand image for background
     ratio = max(size[0] / image.shape[1], size[1] / image.shape[0])+0.01
