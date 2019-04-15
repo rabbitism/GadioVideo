@@ -1,6 +1,6 @@
 config = {
     'fps':1,
-    'animation_fps':24,
+    'animation_fps':20,
     'width':1280,
     'height':720,
     'margin':60,
@@ -11,8 +11,9 @@ config = {
     'content_color':"#050505",
     'background_color':"#FFFFFF",
     'font': 'msyh.ttc',
-    'logo_name': '.util/logo.png',
+    'logo_name': 'logo.png',
     'fade_duration':1,
     'test':False,
-    'enable_logo':True
+    'enable_logo':True,
+    'skip_gif':True
 }

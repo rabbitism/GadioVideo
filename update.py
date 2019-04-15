@@ -62,6 +62,7 @@ def update(title:str):
                 videoclip = video_processing.create_video_with_frame(frame, 0, keys[1])
                 video_clips.append(videoclip)
             else:
+                print("start from zero")
                 image = os.sep.join(['.', 'resource', title, str(key)+result[key]['image_suffix']])
                 header = result[key]['header']
                 content = result[key]['content']
@@ -82,8 +83,12 @@ def update(title:str):
             header = result[key]['header']
             content = result[key]['content']
             gif_clip = video_processing.load_gif_clip(image)
-            background_frame = image_processing.generate_blank_frame(header, content, (width, height), title_wrapper, content_wrapper, font, font2)
-            videoclip = video_processing.create_video_with_gif_clip(background_frame, gif_clip, keys[i], keys[i + 1])
+            if config['skip_gif']:
+                background_frame = image_processing.generate_blank_frame(header, content, (width, height), title_wrapper, content_wrapper, font, font2)
+                video_clip = video_processing.create_video_with_frame(background_frame, keys[i], keys[i+1])
+            else:
+                background_frame = image_processing.generate_blank_frame(header, content, (width, height), title_wrapper, content_wrapper, font, font2)
+                videoclip = video_processing.create_video_with_gif_clip(background_frame, gif_clip, keys[i], keys[i + 1])
             video_clips.append(videoclip)
             #os.remove(image)
         else:
