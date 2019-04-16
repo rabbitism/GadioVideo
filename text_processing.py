@@ -1,4 +1,7 @@
 import re
+import os
+import json
+
 from cv2 import VideoWriter, VideoWriter_fourcc
 from PIL import Image, ImageDraw, ImageFont
 
@@ -65,13 +68,23 @@ class Wrapper(object):
         self.tokens = "".join(result).split()
         return self.tokens
 
+def load_data(title:str):
+    title = str(title)
+    file_dir = os.sep.join([".", "resource", title, "data.json"])
+    result = {}
+    try:
+        with open(file_dir, "r", encoding='utf-8') as f:
+            result = json.loads(f.read())
+            return result
+    except Exception as e:
+        print("Error: ", e)
+        return result
 
 if __name__ == "__main__":
-    print(find_image_suffix("Hello.jpg"))
-    line = input()
-    font = ImageFont.truetype("msyh.ttc", 30, encoding="utf-8") 
-    wrapper=Wrapper(font)
-    strin  = wrapper.wrap_string(line, width= 600, height=200, width2 = 1000)
-    print(strin)
-    
-    
+    #print(find_image_suffix("Hello.jpg"))
+    #line = input()
+    #font = ImageFont.truetype("msyh.ttc", 30, encoding="utf-8") 
+    #wrapper=Wrapper(font)
+    #strin  = wrapper.wrap_string(line, width= 600, height=200, width2 = 1000)
+    #print(strin)
+    print(load_data(108639))
