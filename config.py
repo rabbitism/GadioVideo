@@ -13,7 +13,7 @@ config = {
     'font': './util/SourceHanSans-Regular.ttc',
     'logo_name': 'logo.png',
     'fade_duration':1,
-    'test':False,
+    'test':True,
     'enable_logo':True,
     'skip_gif':True
 }

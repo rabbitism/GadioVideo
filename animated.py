@@ -54,38 +54,42 @@ def main(title:str, skip_crawling:bool):
 
     key_length = 10 if test else len(keys)-1
 
-    files = os.listdir(os.sep.join(['.','resource']))
+    files = os.listdir(os.sep.join(['.','resource', title]))
+    print(files)
     
-    for i in range(key_length):
+    for i in range(1, key_length):
         key = str(keys[i])
         start = keys[i]
         end = keys[i+1]
-        image_dir = os.sep.join(['.', 'resource', key+result[key]['image_suffix']])
-        if(key+result[key]['image_suffix'] not in files):
+        #image_dir = os.sep.join(['.', 'resource', key+result[key]['image_suffix']])
+        if((key not in result.keys()) or (key+result[key]['image_suffix'] not in files)):
+            print("Case1")
             frame = image_processing.generate_blank_frame("", "", (width, height), title_wrapper, content_wrapper, title_font, content_font)
-            videoclip = video_processing.create_video_with_frame(frame, 0, keys[1])
+            videoclip = video_processing.create_video_with_frame(frame, start, end)
             video_clips.append(videoclip)
         else:
             if (result[key]['image_suffix'].lower() not in [".gif"]):
+                print("Case2")
                 image = os.sep.join(['.', 'resource', title, str(key)+result[key]['image_suffix']])
                 header = result[key]['header']
                 content = result[key]['content']
                 frame = image_processing.generate_frame(image, header, content, (width, height), title_wrapper, content_wrapper, title_font, content_font)
-                videoclip = video_processing.create_video_with_frame(frame, keys[i], keys[i + 1])
+                videoclip = video_processing.create_video_with_frame(frame, start, end)
                 video_clips.append(videoclip)
-                os.remove(image)
+                #os.remove(image)
             elif(result[key]['image_suffix'].lower() in [".gif"]):
+                print("Case3")
                 image = os.sep.join(['.', 'resource', title, str(key)+result[key]['image_suffix']])
                 print(image)
                 header = result[key]['header']
                 content = result[key]['content']
                 if config['skip_gif']:
                     background_frame = image_processing.generate_blank_frame(header, content, (width, height), title_wrapper, content_wrapper, title_font, content_font)
-                    videoclip = video_processing.create_video_with_frame(background_frame, keys[i], keys[i+1])
+                    videoclip = video_processing.create_video_with_frame(background_frame, start, end)
                 else:
                     gif_clip = video_processing.load_gif_clip(image)
                     background_frame = image_processing.generate_blank_frame(header, content, (width, height), title_wrapper, content_wrapper, title_font, content_font)
-                    videoclip = video_processing.create_video_with_gif_clip(background_frame, gif_clip, keys[i], keys[i + 1])
+                    videoclip = video_processing.create_video_with_gif_clip(background_frame, gif_clip, start, end)
                 video_clips.append(videoclip)
 
 
