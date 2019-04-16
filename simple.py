@@ -39,22 +39,53 @@ def main(title:str, skip_crawling:bool):
     
     # Video Properties
     fourcc = VideoWriter_fourcc(*'mp4v')
-    video = VideoWriter(os.sep.join([output_dir, title+'.mp4']), fourcc, float(fps), (width, height))
+    video = VideoWriter(os.sep.join([output_dir, title+'_simple.mp4']), fourcc, float(fps), (width, height))
 
     # Create Video
     keys = list(map(int, result.keys()))
     if 0 not in keys:
         keys.append(0)
-    print(keys)
+        frame = image_processing.create_blank_frame("", "", (width, height), title_wrapper, content_wrapper, title_font, content_font)
+    else:
+        key = "0"
+        image = os.sep.join([resource_dir, str(key)+result[key]['image_suffix']])
+        header = result[key]['header']
+        content = result[key]['content']
+        print("标题：{}".format(header))
+        if(result[key]['image_suffix'] in ['.gif', '.GIF']):
+            frame = image_processing.create_blank_frame(header, content, (width, height), title_wrapper, content_wrapper, title_font, content_font)
+        else:
+            frame = image_processing.create_frame(image, header, content, (width, height), title_wrapper, content_wrapper, title_font, content_font)
+            #os.remove(image)
 
+    keys.sort()
+    # Set last picture to be 20 seconds long
+    keys.append(keys[len(keys)-1]+20)
+    #print(keys)
+    # Number of frames in this video
+    total_length = keys[len(keys)-1]*fps
 
-    
-    
-
-
-    
-
-
+    index = 0
+    for i in range(total_length):
+        if(index+1>len(keys)-1):
+            frame = image_processing.create_blank_frame("","", (width, height), title_wrapper, content_wrapper, title_font, content_font)
+        elif (i/fps)>keys[index+1]:
+            index+=1
+            print("Processing {} frames out of {}".format(index, len(keys)-1))
+            key = str(keys[index])
+            image = os.sep.join([resource_dir, str(key)+result[key]['image_suffix']])
+            header = result[key]['header']
+            content = result[key]['content']
+            print("标题：{}".format(header))
+            if(result[key]['image_suffix'] in ['.gif', '.GIF']):
+                frame = image_processing.create_blank_frame(header, content, (width, height), title_wrapper, content_wrapper, title_font, content_font)
+            else:
+                frame = image_processing.create_frame(image, header, content, (width, height), title_wrapper, content_wrapper, title_font, content_font)
+                #os.remove(image)
+        else:
+            pass
+        video.write(frame)
+    print("{} finished!".format(title))
 
 
 if __name__ == "__main__":

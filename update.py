@@ -32,7 +32,7 @@ def update(title:str):
     audio_clip = AudioFileClip(os.sep.join([".", "resource", title, "audio", title + ".mp3"]))
     print(audio_clip.duration)
 
-    fourcc = VideoWriter_fourcc(*'mp4v')
+    fourcc = VideoWriter_fourcc(*'moov')
     output_dir = os.sep.join(['.', 'output'])
     
     if not os.path.exists(output_dir):

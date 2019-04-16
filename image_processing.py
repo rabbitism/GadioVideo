@@ -75,6 +75,14 @@ def generate_blank_frame(title, content, size, title_wrapper, content_wrapper, t
     cv2charimg = np.array(frame)
     return cv2charimg
 
+def generate_cv2_blank_frame(title, content, size, title_wrapper, content_wrapper, title_font, content_font):
+    frame = generate_blank_frame(title, content, size, title_wrapper, content_wrapper, title_font, content_font)
+    return cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+
+def generate_cv2_frame(image_url, title, content, size, title_wrapper, content_wrapper, title_font, content_font):
+    frame = generate_frame(image_url, title, content, size, title_wrapper, content_wrapper, title_font, content_font)
+    return cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+
 def generate_frame(image_url, title, content, size, title_wrapper, content_wrapper, title_font, content_font):
     margin = config["margin"]
     picture_width = config['picture_width']
