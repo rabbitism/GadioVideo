@@ -1,6 +1,7 @@
 import re
 import os
 import json
+import argparse
 
 from cv2 import VideoWriter, VideoWriter_fourcc
 from PIL import Image, ImageDraw, ImageFont

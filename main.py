@@ -11,7 +11,6 @@ import image_processing
 import text_processing
 from config import config
 
-
 def main(title:str):
     title = str(title)
     fps = config['fps']

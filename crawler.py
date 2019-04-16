@@ -97,6 +97,7 @@ def main(title:str):
         count+=save_image(image_url, image_dir, image_name)
 
     save_audio(audio_url, os.sep.join([".", "resource", title, "audio"]), title)
+    print(result)
     with open(os.sep.join([".", 'resource', title, 'data.json']), 'w', encoding='utf-8') as outfile:
         json.dump(result, outfile, ensure_ascii=False, indent=4)
     print("{} time tags extracted...".format(len(result.keys())))
