@@ -34,9 +34,12 @@ def create_video_with_gif_clip(frame, clip, start, end):
     return final_clip
 
 def load_gif_clip(image_dir):
-    video_clip = VideoFileClip(image_dir)
-    #video_clip = video_clip.fx(vfx.loop, duration = duration)
-    return video_clip
+    try:
+        video_clip = VideoFileClip(image_dir)
+        #video_clip = video_clip.fx(vfx.loop, duration = duration)
+        return video_clip
+    except Exception as e:
+        print("Error", e)
 
 def load_logo(image_dir:str, duration:int):
     print("Analyzing logo image clip...")
