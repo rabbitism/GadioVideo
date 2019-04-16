@@ -85,7 +85,7 @@ def update(title:str):
             content = result[key]['content']
             if config['skip_gif']:
                 background_frame = image_processing.generate_blank_frame(header, content, (width, height), title_wrapper, content_wrapper, font, font2)
-                video_clip = video_processing.create_video_with_frame(background_frame, keys[i], keys[i+1])
+                videoclip = video_processing.create_video_with_frame(background_frame, keys[i], keys[i+1])
             else:
                 gif_clip = video_processing.load_gif_clip(image)
                 background_frame = image_processing.generate_blank_frame(header, content, (width, height), title_wrapper, content_wrapper, font, font2)

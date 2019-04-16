@@ -10,7 +10,7 @@ config = {
     'title_color':"#050505",
     'content_color':"#050505",
     'background_color':"#FFFFFF",
-    'font': 'msyh.ttc',
+    'font': './util/SourceHanSans-Regular.ttc',
     'logo_name': 'logo.png',
     'fade_duration':1,
     'test':False,
