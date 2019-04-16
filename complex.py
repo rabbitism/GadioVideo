@@ -1,16 +1,18 @@
+import math
 import os
 import sys
 
 import cv2
 import numpy as np
 from cv2 import VideoWriter, VideoWriter_fourcc
-from PIL import Image, ImageDraw, ImageFont
 from moviepy.editor import *
+from PIL import Image, ImageDraw, ImageFont
 
 import config
 import crawler
 import image_processing
 import text_processing
+import video_processing
 from config import config
 
 
@@ -36,6 +38,8 @@ def main(title:str, skip_crawling:bool):
     content_font = ImageFont.truetype(config['font'], config['content_font_size'], encoding="utf-8") 
     title_wrapper = text_processing.Wrapper(title_font)
     content_wrapper = text_processing.Wrapper(content_font)
+    audio_clip = AudioFileClip(os.sep.join([resource_dir, "audio", title+".mp3"]))
+
 
     # Video Properties
     fourcc = VideoWriter_fourcc(*'mp4v')
@@ -60,7 +64,7 @@ def main(title:str, skip_crawling:bool):
 
     keys.sort()
     # Set last picture to be 20 seconds long
-    keys.append(keys[len(keys)-1]+20)
+    keys.append(math.ceil(audio_clip.duration))
     #print(keys)
     # Number of frames in this video
     total_length = (200 if config['test'] else keys[len(keys)-1])*fps
@@ -86,13 +90,15 @@ def main(title:str, skip_crawling:bool):
             pass
         video.write(frame)
     video.release()
-    audio_clip = AudioFileClip(os.sep.join([resource_dir, "audio", title+".mp3"]))
     video_clip = VideoFileClip(os.sep.join([output_dir, title+"_complex_temp.mp4"]))
     print(video_clip.duration)
     video_clip.audio = audio_clip
+    if config['enable_logo']:
+        logo_clip = video_processing.load_logo(os.sep.join([".", "util", config['logo_name']]), duration = video_clip.duration)
+        video_clip = video_processing.add_logo(video_clip, logo_clip)
     if config['test']:
         video_clip = video_clip.subclip(0, min(200, video_clip.duration))
-    video_clip.write_videofile(os.sep.join([output_dir, title+"_complex.mp4"]), fps=fps, audio_fps=44100)
+    video_clip.write_videofile(os.sep.join([output_dir, title+"_complex.mp4"]), fps=fps)
     print("{} finished!".format(title))
     os.remove(os.sep.join([output_dir, title+"_complex_temp.mp4"]))
 
@@ -101,7 +107,7 @@ if __name__ == "__main__":
     if(len(sys.argv)==1):
         print("----------")
         print("Please speciy gadio number. Try to run this script like: ")
-        print("&>python simple.py 100000")
+        print("&>python complex.py 100000")
         print("----------")
     else:
         title=str(sys.argv[1])

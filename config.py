@@ -1,6 +1,6 @@
 config = {
     'fps':5,
-    'animation_fps':20,
+    'animation_fps':10,
     'width':1280,
     'height':720,
     'margin':60,

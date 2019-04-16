@@ -5,9 +5,15 @@
 |Windows|[![Build status](https://rabbitism.visualstudio.com/GadioVideo/_apis/build/status/GadioVideo-Python%20Windows%20Test)](https://rabbitism.visualstudio.com/GadioVideo/_build/latest?definitionId=2)|
 |macOS|[![Build status](https://rabbitism.visualstudio.com/GadioVideo/_apis/build/status/GadioVideo-Python%20macOS)](https://rabbitism.visualstudio.com/GadioVideo/_build/latest?definitionId=1)|
 
-本代码库的作用是利用gcores网站的图文电台时间轴信息自动生成视频。
+本脚本的作用是利用gcores网站的图文电台时间轴信息自动生成视频。
 
 ## 使用说明
+
+本脚本可以生成三种不同规格的视频
+
+||Simple|Complex|Animated|
+|:---|:---:|:---:|:---:|
+|亚克力背景|:x:|:heavy_check_mark:|:heavy_check_mark:|
 
 ### 安装依赖包
 
@@ -48,11 +54,6 @@ python main.py 107884
 尺寸实例见下图
 
 ![sample](doc/Sample.jpg)
-
-## TODO
-
-* 支持 gif
-* 合并音频
 
 ---
 
