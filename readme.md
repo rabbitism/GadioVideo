@@ -13,7 +13,17 @@
 
 ||Simple|Complex|Animated|
 |:---|:---:|:---:|:---:|
+|时间校对|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|文本|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
 |亚克力背景|:x:|:heavy_check_mark:|:heavy_check_mark:|
+|logo/水印|:x:|:heavy_check_mark:|:heavy_check_mark:|
+|声音|:x:|:heavy_check_mark:|:heavy_check_mark:|
+|转场动画|:x:|:x:|:heavy_check_mark:|
+|GIF动画|:x:|:x:|:heavy_check_mark:|
+|建议帧数|0-5 fps|0-5 fps|20-39 fps|
+|常规用时|3 min|15 min|150 min|
+
+具体使用方法请参考各自章节
 
 ### 安装依赖包
 
