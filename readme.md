@@ -25,7 +25,7 @@
 
 具体使用方法请参考各自章节
 
-### 安装依赖包
+### 安装依赖
 
 ```bash
 pip3 install -r requirements.txt
@@ -83,7 +83,7 @@ python animated.py 107884 -s
 |width|视频宽度|1280|
 |height|视频高度|720|
 |margin|边界宽度|60|
-|picture_width|图片宽度（图片过高时会以高度为准）|400|
+|picture_width|图片宽度|400|图片过高时会以高度为准|
 |title_font_size|标题字体大小|48|
 |content_font_size|正文字体大小|28|
 |title_color|标题字体颜色|#424242|
