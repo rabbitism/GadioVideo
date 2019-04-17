@@ -1,14 +1,14 @@
-import crawler
-import image_processing
-import text_processing
-
 import os
-from PIL import Image, ImageDraw, ImageFont
+import sys
+
 import cv2
 import numpy as np
 from cv2 import VideoWriter, VideoWriter_fourcc
-import sys
+from PIL import Image, ImageDraw, ImageFont
 
+import crawler
+import image_processing
+import text_processing
 from config import config
 
 def main(title:str):

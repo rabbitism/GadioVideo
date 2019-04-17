@@ -1,18 +1,19 @@
+import math
+import os
+import sys
+
+import cv2
+import numpy as np
+from cv2 import VideoWriter, VideoWriter_fourcc
+from moviepy.editor import *
+from PIL import Image, ImageDraw, ImageFont
+
 import crawler
 import image_processing
 import text_processing
 import video_processing
-
-import os
-from PIL import Image, ImageDraw, ImageFont
-import cv2
-import numpy as np
-from cv2 import VideoWriter, VideoWriter_fourcc
-import sys
-from moviepy.editor import *
-import math
-
 from config import config
+
 
 def update(title:str):
     title = str(title)
@@ -31,7 +32,7 @@ def update(title:str):
     audio_clip = AudioFileClip(os.sep.join([".", "resource", title, "audio", title + ".mp3"]))
     print(audio_clip.duration)
 
-    fourcc = VideoWriter_fourcc(*'mp4v')
+    fourcc = VideoWriter_fourcc(*'moov')
     output_dir = os.sep.join(['.', 'output'])
     
     if not os.path.exists(output_dir):
