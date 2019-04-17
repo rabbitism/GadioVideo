@@ -1,6 +1,6 @@
 config = {
     'fps':5,
-    'animation_fps':10,
+    'animation_fps':5,
     'width':1280,
     'height':720,
     'margin':60,
@@ -13,7 +13,7 @@ config = {
     'font': './util/SourceHanSans-Regular.ttc',
     'logo_name': 'logo.png',
     'fade_duration':1,
-    'test':True,
+    'test':False,
     'enable_logo':True,
-    'skip_gif':True
+    'skip_gif':False
 }

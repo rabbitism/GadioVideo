@@ -33,23 +33,53 @@ pip3 install -r requirements.txt
 
 ### 运行示例
 
-如果需要生成 `https://www.gcores.com/radios/107884` 中的电台的视频，在控制台中运行：
+以 `https://www.gcores.com/radios/107884` 中的电台为例：
+
+1. 如果想要生成Simple样式版本的视频可运行
 
 ```bash
-python main.py 107884
+python simple.py 107884
 ```
 
-图片暂存于`.\resource\107884\`中，视频合成后会自动清除。图片的名称为图片在视频中最初出现的秒数。由于暂不支持gif图片，因此gif图片在视频合成后不会清除，请根据图片名添加到视频相应位置。
+2. 如果想要生成Complex样式版本的视频可运行
 
-视频文件是`.\output\107884.mp4`
+```bash
+python complex.py 107884
+```
+
+3. 如果想要生成Animated样式版本的视频可运行
+
+```bash
+python animated.py 107884
+```
+
+此外
+如果想单独爬去文本和图片不生成视频，可运行
+
+```bash
+python crawler.py 107884
+```
+
+图片暂存于`.\resource\107884\`中。图片的名称为图片在视频中最初出现的秒数。
+
+想跳过爬虫直接用已经爬好的图片和文字生成视频，可在上面生成视频的命令后加-s:
+
+```bash
+python simple.py 107884 -s
+python complex.py 107884 -s
+python animated.py 107884 -s
+```
+
+生成的视频文件位于 `output` 文件夹内
 
 ### 更改配置
 
 修改`config.py`中的参数可以修改如下配置
 
-|参数|含义|示例|
-|:---:|:---|:---:|
+|参数|含义|示例|注释|
+|:---:|:---|:---:|:---|
 |fps|帧率|3|
+|animation_fps|动画帧率|24|animated版本视频帧率|
 |width|视频宽度|1280|
 |height|视频高度|720|
 |margin|边界宽度|60|
@@ -59,53 +89,16 @@ python main.py 107884
 |title_color|标题字体颜色|#424242|
 |content_color|正文字体颜色|#424242|
 |background_color|背景颜色|#FFFFFF|
-|font|字体|msyh.ttc|
+|font|字体|./util/SourceHanSans-Regular.ttc|
+|logo_name|logo图片文件名|logo.png|logo文件应放在util文件夹下|
+|fade_duration|渐变时间|1|两张图片间转场的时间长度，单位为秒|
+|test|测试模式|False|在测试模式下之生成前10段视频，最长不超过200秒|
+|enable_logo|是否增加logo|True|是否在视频左下角增加logo|
+|skip_gif|是否跳过gif|False|是否在animated版本中跳过插入gif图片|
 
-尺寸实例见下图
+尺寸和实例见下图
 
 ![sample](doc/Sample.jpg)
-
----
-
-## **预览版**
-
-您可以切换至`fancy`分支使用预览版。预览版使用`moviepy`库来合成视频，已经支持了gif、合并音频、图片间转场等功能。每一页的背景改为模糊的图片。
-
-## 预览版使用说明
-
-### 预览版运行示例
-
-如果需要生成 `https://www.gcores.com/radios/107884` 中的电台的视频，在控制台中运行：
-
-```bash
-python update.py 107884
-```
-
-由于此版本包含转场动画和gif，因此帧数要求比较高，合成视频比较慢。
-
-### 预览版配置说明
-
-|参数|含义|示例|
-|:---:|:---|:---:|
-|fps|帧数|1|
-|animation_fps|包含动画及转场的视频帧数|30|
-|width|视频宽度|1280|
-|height|视频高度|720|
-|margin|边界宽度|60|
-|picture_width|图片宽度（图片过高时会以高度为准）|400|
-|title_font_size|标题字体大小|48|
-|content_font_size|正文字体大小|28|
-|title_color|标题字体颜色|#050505|
-|content_color|正文字体颜色|#050505|
-|background_color|背景颜色|#FFFFFF|
-|font|字体|msyh.ttc||
-|logo_name|logo图片名（位于`.\util`文件夹下）|logo.png||
-|fade_duration|转场动画持续时间|1|
-|test|是否是测试模式。测试模式时只渲染前10段视频，不超过200秒|False|
-|enable_logo|是否添加logo|True|
-
-实例见下图
-
 ![sample](doc/Fancy_Sample1.jpg)
 ![sample](doc/Fancy_Sample2.jpg)
 
