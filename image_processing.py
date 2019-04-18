@@ -11,26 +11,43 @@ import text_processing
 def create_frame(image_name, title, content, size, title_wrapper, content_wrapper, title_font, content_font):
     margin = config['margin']
     picture_width = config['picture_width']
-    img = cv2.imread(image_name)
-    height = int(img.shape[0]/img.shape[1]*picture_width)
+    raw_content = content
+    image = cv2.imread(image_name)
+    height = int(image.shape[0]/image.shape[1]*picture_width)
     if(height> config['height']-2*margin):
         height = config['height']-2*margin
-        picture_width = int(img.shape[1]/img.shape[0]*height)
-    img = cv2.resize(img, (picture_width, height))
-    cv2img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) 
+        picture_width = int(image.shape[1]/image.shape[0]*height)
+    frame = Image.new('RGB', size, color=config['background_color'])
+
+    # shrink image to fit in image area
+    potential_height = config['height'] - margin * 2
+    ratio = max(image.shape[1] / picture_width, image.shape[0] / potential_height)
+    content_image = cv2.resize(image, (int(image.shape[1] / ratio), int(image.shape[0] / ratio)), interpolation=cv2.INTER_CUBIC)
+
+    actual_width = int(image.shape[1] / ratio)
+
+    cv2img = cv2.cvtColor(content_image, cv2.COLOR_BGR2RGB) 
     pilimg = Image.fromarray(cv2img)
 
-    frame = Image.new('RGB', size, color=config['background_color'])
     frame.paste(pilimg, (margin, margin))
+
  
     draw = ImageDraw.Draw(frame)
     title = title_wrapper.wrap_string(title, config['width']-picture_width-config['margin']*3)
     content = content_wrapper.wrap_string(content, config['width']-picture_width-config['margin']*3)
     print(content)
 
-    y_offset = margin+title_font.getsize("Gg")[1]+content_font.getsize("Gg")[1]
-    if('\n' in title):
-        y_offset+=title_font.getsize(title)[1]
+    potential_height = config['height'] - margin * 2
+    y_offset = margin*1.5+title_font.getsize_multiline(title)[1]
+    content_height = potential_height-y_offset+margin
+    actual_content_height = content_font.getsize_multiline(content)[1]
+    while(actual_content_height>content_height):
+        content_font = shrink_font(content_font, config['content_font'])
+        content_wrapper = text_processing.Wrapper(content_font)
+        content = content_wrapper.wrap_string(raw_content, config['width'] -config['picture_width']-config['margin']*3)
+        print(content)
+        actual_content_height = content_font.getsize_multiline(content)[1]
+        print(actual_content_height)
 
     draw.text((picture_width+margin*2, margin), title, config['title_color'], font=title_font)
     draw.text((picture_width+margin*2, y_offset), content, config['content_color'], font=content_font) 
@@ -40,16 +57,24 @@ def create_frame(image_name, title, content, size, title_wrapper, content_wrappe
 def create_blank_frame(title, content, size, title_wrapper, content_wrapper, title_font, content_font):
     margin = config['margin']
     picture_width = config['picture_width']
-
+    raw_content = content
     frame = Image.new('RGB', size, color=config['background_color'])
  
     draw = ImageDraw.Draw(frame)
     title = title_wrapper.wrap_string(title, config['width']-picture_width-config['margin']*3)
     content = content_wrapper.wrap_string(content, config['width']-picture_width-config['margin']*3)
 
-    y_offset = margin+title_font.getsize("Gg")[1]+content_font.getsize("Gg")[1]
-    if('\n' in title):
-        y_offset+=title_font.getsize(title)[1]
+    potential_height = config['height'] - margin * 2
+    y_offset = margin*1.5+title_font.getsize_multiline(title)[1]
+    content_height = potential_height-y_offset+margin
+    actual_content_height = content_font.getsize_multiline(content)[1]
+    while(actual_content_height>content_height):
+        content_font = shrink_font(content_font, config['content_font'])
+        content_wrapper = text_processing.Wrapper(content_font)
+        content = content_wrapper.wrap_string(raw_content, config['width'] -config['picture_width']-config['margin']*3)
+        print(content)
+        actual_content_height = content_font.getsize_multiline(content)[1]
+        print(actual_content_height)
 
     draw.text((picture_width+margin*2, margin), title, config['title_color'], font=title_font) 
     draw.text((picture_width+margin*2, y_offset), content, config['content_color'], font=content_font) 
@@ -59,16 +84,26 @@ def create_blank_frame(title, content, size, title_wrapper, content_wrapper, tit
 def generate_blank_frame(title, content, size, title_wrapper, content_wrapper, title_font, content_font):
     margin = config['margin']
     picture_width = config['picture_width']
-
+    raw_content = content
     frame = Image.new('RGBA', size, color=config['background_color'])
  
     draw = ImageDraw.Draw(frame)
     title = title_wrapper.wrap_string(title, config['width']-picture_width-config['margin']*3)
     content = content_wrapper.wrap_string(content, config['width']-picture_width-config['margin']*3)
 
-    y_offset = margin+title_font.getsize("Gg")[1]+content_font.getsize("Gg")[1]
-    if('\n' in title):
-        y_offset+=title_font.getsize(title)[1]
+    potential_height = config['height'] - margin * 2
+    y_offset = margin*1.5+title_font.getsize_multiline(title)[1]
+    content_height = potential_height-y_offset+margin
+    actual_content_height = content_font.getsize_multiline(content)[1]
+
+    while(actual_content_height>content_height):
+        print("Too much information to display, Shrinking font size...")
+        content_font = shrink_font(content_font, config['content_font'])
+        content_wrapper = text_processing.Wrapper(content_font)
+        content = content_wrapper.wrap_string(raw_content, config['width'] -content['picture_width']-config['margin']*3)
+        print(content)
+        actual_content_height = content_font.getsize_multiline(content)[1]
+        #print(actual_content_height)
 
     draw.text((picture_width+margin*2, margin), title, config['title_color'], font=title_font) 
     draw.text((picture_width+margin*2, y_offset), content, config['content_color'], font=content_font) 
@@ -86,7 +121,7 @@ def generate_cv2_frame(image_url, title, content, size, title_wrapper, content_w
 def generate_frame(image_url, title, content, size, title_wrapper, content_wrapper, title_font, content_font):
     margin = config["margin"]
     picture_width = config['picture_width']
-
+    raw_content = content
     # Read image from file
     try:
         image = cv2.imread(image_url)
@@ -128,10 +163,18 @@ def generate_frame(image_url, title, content, size, title_wrapper, content_wrapp
     content = content_wrapper.wrap_string(content, config['width']-actual_width-config['margin']*3)
     print(content)
 
-    y_offset = margin+title_font.getsize("Gg")[1]+content_font.getsize("Gg")[1]
-    if('\n' in title):
-        y_offset+=title_font.getsize(title)[1]
+    y_offset = margin*1.5+title_font.getsize_multiline(title)[1]
+    content_height = potential_height-y_offset+margin
+    actual_content_height = content_font.getsize_multiline(content)[1]
+    while(actual_content_height>content_height):
+        content_font = shrink_font(content_font, config['content_font'])
+        content_wrapper = text_processing.Wrapper(content_font)
+        content = content_wrapper.wrap_string(raw_content, config['width'] -actual_width-config['margin']*3)
+        print(content)
+        actual_content_height = content_font.getsize_multiline(content)[1]
+        print(actual_content_height)
 
+    print("Out")
     draw.text((actual_width+margin*2, margin), title, config['title_color'], font=title_font)
     draw.text((actual_width+margin*2, y_offset), content, config['content_color'], font=content_font)
 
@@ -141,6 +184,12 @@ def generate_frame(image_url, title, content, size, title_wrapper, content_wrapp
     #cv2.waitKey(0)
     #print("Hello")
     return cv2charimg
+
+def shrink_font(font, font_family):
+    result_font = ImageFont.truetype(font_family, font.size-2, encoding="utf-8")
+    print(result_font.size)
+    return result_font
+
 
  
 def main():
@@ -155,3 +204,5 @@ def main():
  
 if __name__ == "__main__":
     main()
+    font = ImageFont.truetype("msyh.ttc", 40, encoding="utf-8") 
+    font.getsize_multiline
