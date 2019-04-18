@@ -1,8 +1,0 @@
-a  =('all')
-print(a)
-print(type(a))
-b = ('all',)
-print(b)
-print(type(b))
-print(b[0])
-print(type(b[0]))

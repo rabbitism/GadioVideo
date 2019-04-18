@@ -1,6 +1,27 @@
 import unittest
 
 import text_processing
+import simple
+import complex
+import animated
+
+class TestDependency(unittest.TestCase):
+    def test_dependency(self):
+        import math
+        import os
+        import sys
+
+        import cv2
+        import numpy as np
+        from cv2 import VideoWriter, VideoWriter_fourcc
+        import moviepy.editor
+        from PIL import Image, ImageDraw, ImageFont
+
+        import crawler
+        import image_processing
+        import text_processing
+        import video_processing
+        from config import config
 
 class TestText(unittest.TestCase):
     def test_find_suffix(self):
