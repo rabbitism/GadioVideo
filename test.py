@@ -32,6 +32,12 @@ class TestText(unittest.TestCase):
         self.assertTrue(text_processing.is_alpha("Hello"))
         self.assertFalse(text_processing.is_alpha("12Hello"))
         self.assertFalse(text_processing.is_alpha("是的"))
+    
+    def test_is_alnum(self):
+        self.assertTrue(text_processing.is_alnum('A'))
+        self.assertFalse(text_processing.is_alnum('.'))
+        self.assertTrue(text_processing.is_alnum('1'))
+        self.assertFalse(text_processing.is_alnum('是'))
 
 if __name__ == "__main__":
     unittest.main()
