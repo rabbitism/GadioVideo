@@ -31,8 +31,8 @@ def main(title:str, skip_crawling:bool):
 
     # Assets
     result = text_processing.load_data(title)
-    title_font = ImageFont.truetype(config['font'], config['title_font_size'], encoding="utf-8")
-    content_font = ImageFont.truetype(config['font'], config['content_font_size'], encoding="utf-8") 
+    title_font = ImageFont.truetype(config['title_font'], config['title_font_size'], encoding="utf-8")
+    content_font = ImageFont.truetype(config['content_font'], config['content_font_size'], encoding="utf-8") 
     title_wrapper = text_processing.Wrapper(title_font)
     content_wrapper = text_processing.Wrapper(content_font)
 
