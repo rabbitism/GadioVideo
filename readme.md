@@ -5,7 +5,7 @@
 |Windows|[![Build status](https://rabbitism.visualstudio.com/GadioVideo/_apis/build/status/GadioVideo-Python%20Windows%20Test)](https://rabbitism.visualstudio.com/GadioVideo/_build/latest?definitionId=2)|
 |macOS|[![Build status](https://rabbitism.visualstudio.com/GadioVideo/_apis/build/status/GadioVideo-Python%20macOS)](https://rabbitism.visualstudio.com/GadioVideo/_build/latest?definitionId=1)|
 
-本脚本的作用是利用gcores网站的图文电台时间轴信息自动生成视频。
+本脚本的作用是利用[机核网](https://www.gcores.com)的图文电台时间轴信息自动生成视频。
 
 ## 运行环境
 
@@ -19,6 +19,7 @@ python 3.5, 3.6, 3.7
 |:---|:---:|:---:|:---:|
 |时间校对|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
 |文本|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
+|图片|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
 |亚克力背景|:x:|:heavy_check_mark:|:heavy_check_mark:|
 |logo/水印|:x:|:heavy_check_mark:|:heavy_check_mark:|
 |声音|:x:|:heavy_check_mark:|:heavy_check_mark:|
@@ -93,7 +94,7 @@ python animated.py 107884 -s
 |title_color|标题字体颜色|#424242|
 |content_color|正文字体颜色|#424242|
 |background_color|背景颜色|#FFFFFF|
-|font|字体|./util/SourceHanSans-Regular.ttc|
+|font|字体|./util/SourceHanSans-Regular.ttc|如果使用系统自带字体，直接写字体文件名|
 |logo_name|logo图片文件名|logo.png|logo文件应放在util文件夹下|
 |fade_duration|渐变时间|1|两张图片间转场的时间长度，单位为秒|
 |test|测试模式|False|在测试模式下之生成前10段视频，最长不超过200秒|
@@ -108,4 +109,4 @@ python animated.py 107884 -s
 
 视频示例请参考
 
-[哔哩哔哩](https://www.bilibili.com/video/av49033861)
+[哔哩哔哩](https://www.bilibili.com/video/av49696893)
