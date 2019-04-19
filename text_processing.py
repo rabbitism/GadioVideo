@@ -27,39 +27,12 @@ def is_character(string:str):
     return ((not is_alnum(string)) and (not is_non_start(string)) and (not is_non_end(string)))
 
 def is_alnum(string:str):
-    return string in "abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+    return string in "1234567890abcdefghijklmnopqrstuvwxyzßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþąćĉčďęěĝğĥıĵłńňœřśŝşšťŭůźżžABCDEFGHIJKLMNOPQRSTUVWXYZSSÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞĄĆĈČĎĘĚĜĞĤIĴŁŃŇŒŘŚŜŞŠŤŬŮŹŻŽ"
 
 class Wrapper(object):
     def __init__(self, font:ImageFont):
         self.font = font
         self.tokens = list()
-
-    def wrap_string2(self, string:str, width):
-        self.tokenize_string(string)
-        result = str()
-        temp_string = str()
-        length = 0
-        for word in self.tokens:
-            actual_word = word if len(word)==1 else (word+" ")
-            actual_length = self.font.getsize(actual_word)[0]
-            #if((length+actual_length)>width and (actual_word not in ["，。？！）》"])):
-            if((length+actual_length)>width):
-                result+=temp_string
-                result+="\n"
-                temp_string = actual_word
-                length = actual_length
-            else:
-                if(len(actual_word)==1):
-                    temp_string =temp_string.rstrip()
-                temp_string+=actual_word
-                length+=actual_length
-        #print(result)
-        result+=temp_string
-        for char in "，。？！；：》>]}】）)、":
-             result = result.replace("\n"+char, char+"\n", 20)
-        for char in "《<[{【（(":
-             result = result.replace(char+"\n", "\n"+char, 20)
-        return result
 
     def wrap_string(self, string:str, width):
         self.tokenize_string(string)
@@ -79,30 +52,11 @@ class Wrapper(object):
         result+=temp_string
         #result = result.replace("\\n ", "\\n", 100)
         return result
-
-    def tokenize_string2(self, string:str):
-        self.tokens.clear()
-        words = string.split()
-        result = list()
-        temp = list()
-        for word in words:
-            for char in word:
-                if(is_alpha(char) or char.isdigit()):
-                    temp.append(char)
-                else:
-                    result.append("".join(temp))
-                    temp.clear()
-                    result.append(" "+str(char))
-            temp.append(" ")
-            result.append("".join(temp))
-            temp.clear()
-        self.tokens = "".join(result).split()
-        return self.tokens
     
     def tokenize_string(self, string:str):
         self.tokens.clear()
         s = str()
-        string = string.replace("\\n","",100)
+        string = string.replace("\n","",100)
         for character in string:
             if(len(s)==0):
                 s=character

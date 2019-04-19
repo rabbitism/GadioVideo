@@ -8,7 +8,7 @@ def is_character(string:str):
     return ((not is_alnum(string)) and (not is_non_start(string)) and (not is_non_end(string)))
 
 def is_alnum(string:str):
-    return string in "abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+    return string in "1234567890abcdefghijklmnopqrstuvwxyzßàáâãäåæçèéêëìíîïðñòóôõöøùúûüýþąćĉčďęěĝğĥıĵłńňœřśŝşšťŭůźżžABCDEFGHIJKLMNOPQRSTUVWXYZSSÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞĄĆĈČĎĘĚĜĞĤIĴŁŃŇŒŘŚŜŞŠŤŬŮŹŻŽ"
 
 
 def tokenize_string(string:str):
@@ -44,8 +44,8 @@ def tokenize_string(string:str):
 
 
 if __name__ == "__main__":
-    strin = input()
-    tokens = tokenize_string(strin)
-    for character in tokens:
-        print(character)
-    #print("是".isalnum())
+    #strin = input()
+    strin = """abc\ndef"""
+    print(strin)
+    tokens = strin.split("\n")
+    print(tokens)
