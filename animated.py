@@ -57,7 +57,7 @@ def main(title:str, skip_crawling:bool):
     files = os.listdir(os.sep.join(['.','resource', title]))
     print(files)
     
-    for i in range(1, key_length):
+    for i in range(0, key_length):
         key = str(keys[i])
         start = keys[i]
         end = keys[i+1]
