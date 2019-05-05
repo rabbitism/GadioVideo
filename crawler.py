@@ -40,8 +40,15 @@ def crawler(number):
             header_line = header.find('h1').contents[0].strip()
             content_line = header.find('p').contents[0].strip()
             time = int(header.find('h1').contents[1]['data-at'])
+            try:
+                contents = header.find_all('p')
+                link = contents[1].find('a')['href']
+            except Exception as e:
+                #print(e)
+                link = ""
+            print(link)
             image_suffix = text_processing.find_image_suffix(image_line['src'])
-            result[time] = {'header':header_line, 'content':content_line, 'image_url':image_line['src'], 'image_suffix':image_suffix}
+            result[time] = {'header':header_line, 'content':content_line, 'image_url':image_line['src'], 'image_suffix':image_suffix, 'link':link}
     try:
         audio_line = soup.find("p", {'class': 'story_actions'}).contents[1]["href"]
     except:
@@ -96,12 +103,26 @@ def main(title:str):
         image_dir = os.sep.join([".", "resource", title])
         count+=save_image(image_url, image_dir, image_name)
 
+    """Extract reference links and write to file""" 
+    with open(os.sep.join(['.', "output", title+ ".txt"]), 'w+', encoding='utf-8') as links:
+        length = 0
+        for key in result.keys():
+            if(len(result[key]['link'])>0):
+                time_string = text_processing.seconds_to_time(key)
+                line = time_string+" "+result[key]['link']+"\n"
+                length+=len(line)
+                if(length>900):
+                    links.write("\n")
+                    length=0
+                links.writelines(time_string+" "+result[key]['link']+"\n")
+       
     save_audio(audio_url, os.sep.join([".", "resource", title, "audio"]), title)
     #print(result)
     with open(os.sep.join([".", 'resource', title, 'data.json']), 'w', encoding='utf-8') as outfile:
         json.dump(result, outfile, ensure_ascii=False, indent=4)
     print("{} time tags extracted...".format(len(result.keys())))
     print("{} pictures saved...".format(count))
+    
     
 if __name__ == "__main__":
     if(len(sys.argv)==1):
