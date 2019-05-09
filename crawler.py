@@ -104,17 +104,7 @@ def main(title:str):
         count+=save_image(image_url, image_dir, image_name)
 
     """Extract reference links and write to file""" 
-    with open(os.sep.join(['.', "output", title+ ".txt"]), 'w+', encoding='utf-8') as links:
-        length = 0
-        for key in result.keys():
-            if(len(result[key]['link'])>0):
-                time_string = text_processing.seconds_to_time(key)
-                line = time_string+" "+result[key]['link']+"\n"
-                length+=len(line)
-                if(length>900):
-                    links.write("\n")
-                    length=0
-                links.writelines(time_string+" "+result[key]['link']+"\n")
+    text_processing.extract_links(result, title)
        
     save_audio(audio_url, os.sep.join([".", "resource", title, "audio"]), title)
     #print(result)
