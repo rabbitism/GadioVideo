@@ -6,6 +6,7 @@ import urllib
 
 from cv2 import VideoWriter, VideoWriter_fourcc
 from PIL import Image, ImageDraw, ImageFont
+from config import config
 
 
 def find_image_suffix(image_name:str):
@@ -141,9 +142,7 @@ def extract_links(result:dict, title:str):
         for key in result.keys():
             if(len(result[key]['link'])>0):
                 header = result[key]['header']
-                if(key==0):
-                    key+=1
-                time_string = seconds_to_time(key+config['open_offset'])
+                time_string = seconds_to_time((1 if key==0 else key)+config['open_offset'])
                 url = result[key]['link']
                 url = convert_to_string(url)
                 if("bilibili" in url):
