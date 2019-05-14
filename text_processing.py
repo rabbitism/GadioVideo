@@ -141,7 +141,9 @@ def extract_links(result:dict, title:str):
         for key in result.keys():
             if(len(result[key]['link'])>0):
                 header = result[key]['header']
-                time_string = seconds_to_time(key)
+                if(key==0):
+                    key+=1
+                time_string = seconds_to_time(key+config['open_offset'])
                 url = result[key]['link']
                 url = convert_to_string(url)
                 if("bilibili" in url):
@@ -152,7 +154,7 @@ def extract_links(result:dict, title:str):
                     last = url
                 line = time_string+" "+header+" "+url+"\n"
                 length+=len(line)
-                if(length>900): # Bilibili comment length 1000
+                if(length>950): # Bilibili comment length 1000
                     links.write("\n\n")
                     length=0
                 links.writelines(line)

@@ -16,5 +16,6 @@ config = {
     'fade_duration':1,
     'test':False,
     'enable_logo':True,
-    'skip_gif':False
+    'skip_gif':False,
+    'open_offset':0
 }
