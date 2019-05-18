@@ -49,7 +49,7 @@ def main(title:str, skip_crawling:bool):
     keys = list(map(int, result.keys()))
     if 0 not in keys:
         keys.append(0)
-        frame = image_processing.generate_cv2_blank_frame("", "", (width, height), title_wrapper, content_wrapper, title_font, content_font)
+        frame = image_processing.generate_cv2_title_image(os.sep.join(['.','resource',title, 'title.jpg']), (width, height))
     else:
         key = "0"
         image = os.sep.join([resource_dir, str(key)+result[key]['image_suffix']])

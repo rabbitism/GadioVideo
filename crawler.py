@@ -53,7 +53,15 @@ def crawler(number):
         audio_line = soup.find("p", {'class': 'story_actions'}).contents[1]["href"]
     except:
         audio_line = ""
-    return result, audio_line
+    try:
+        area = soup.find("div", {'class':'swiper-wrapper'})
+        first_part = area.find_all('div')[0]
+        title_url = first_part.find('img')['src'].split('?')[0]
+        #print(title_url)
+    except:
+        print('Title image not found, use blank image or image at 00:00 for title scene...')
+        title_url=""
+    return result, audio_line, title_url
 
 def save_image(image_url, image_dir, image_name):
     """Save image from image_url to image_dir with name as image_name
@@ -94,7 +102,7 @@ def main(title:str):
     When excuting individually, this function will crawl all materials including pictures, audios, text, for specific gadio title. 
     """
     title = str(title)
-    result, audio_url = crawler(title)
+    result, audio_url, title_url = crawler(title)
     test = config['test']
     count = 0
     for key in result.keys():
@@ -107,6 +115,8 @@ def main(title:str):
     text_processing.extract_links(result, title)
        
     save_audio(audio_url, os.sep.join([".", "resource", title, "audio"]), title)
+    if len(title_url)>0:
+        save_image(title_url, os.sep.join([".", "resource", title]), 'title')
     #print(result)
     with open(os.sep.join([".", 'resource', title, 'data.json']), 'w', encoding='utf-8') as outfile:
         json.dump(result, outfile, ensure_ascii=False, indent=4)
