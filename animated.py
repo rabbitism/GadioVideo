@@ -64,7 +64,11 @@ def main(title:str, skip_crawling:bool):
         #image_dir = os.sep.join(['.', 'resource', key+result[key]['image_suffix']])
         if((key not in result.keys()) or (key+result[key]['image_suffix'] not in files)):
             print("Case1")
-            frame = image_processing.generate_blank_frame("", "", (width, height), title_wrapper, content_wrapper, title_font, content_font)
+            if key=='0':
+                print("Creating title...")
+                frame = image_processing.generate_title_image(os.sep.join(['.', 'resource', title ,'title.jpg']), (width, height))
+            else:
+                frame = image_processing.generate_blank_frame("", "", (width, height), title_wrapper, content_wrapper, title_font, content_font)
             videoclip = video_processing.create_video_with_frame(frame, start, end)
             video_clips.append(videoclip)
         else:
@@ -101,7 +105,7 @@ def main(title:str, skip_crawling:bool):
     else:
         final_clip = merged_clips
     if test:
-        final_clip = video_processing.add_logo(merged_clips, logo_clip).subclip(0, min(200, final_clip.duration))
+        final_clip = video_processing.add_logo(merged_clips, logo_clip).subclip(0, min(50, final_clip.duration))
     final_clip.write_videofile(os.sep.join([".", "output", title+"_animated.mp4"]), fps=fps, threads=4)
     print(title, "finished!")
     

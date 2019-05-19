@@ -176,6 +176,12 @@ def generate_blank_frame(title, content, size, title_wrapper, content_wrapper, t
     draw.text((picture_width+margin*2, y_offset), content, config['content_color'], font=content_font) 
     cv2charimg = np.array(frame)
     return cv2charimg
+    
+def generate_title_image(image_dir, size):
+    image = generate_cv2_title_image(image_dir, size)
+    #print(image)
+    frame = Image.fromarray(image).convert('RGBA')
+    return np.array(frame)
 
 #generate_cv2_frame is used for complex verison video.
 def generate_cv2_frame(image_url, title, content, size, title_wrapper, content_wrapper, title_font, content_font):
