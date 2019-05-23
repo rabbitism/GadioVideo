@@ -157,6 +157,23 @@ def extract_links(result:dict, title:str):
                     links.write("\n\n")
                     length=0
                 links.writelines(line)
+                length=len(line)
+    links.close()
+
+def extract_headers(result:dict, title:str):
+    with open(os.sep.join(['.', "output", title+ "_headers.txt"]), 'w+', encoding='utf-8') as links:
+        length = 0
+        last = ""
+        for key in result.keys():
+            if(len(result[key]['header'])>0):
+                header = result[key]['header']
+                time_string = seconds_to_time((1 if key==0 else key)+config['open_offset'])
+                line = time_string+" "+header+" "+"★"
+                length+=len(line)
+                if(length>950): # Bilibili comment length 1000
+                    links.write("\n\n")
+                    length=len(line)
+                links.writelines(line)
     links.close()
 
 

@@ -113,6 +113,7 @@ def main(title:str):
 
     """Extract reference links and write to file""" 
     text_processing.extract_links(result, title)
+    text_processing.extract_headers(result, title)
        
     save_audio(audio_url, os.sep.join([".", "resource", title, "audio"]), title)
     if len(title_url)>0:
