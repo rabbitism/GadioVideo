@@ -167,7 +167,7 @@ def generate_blank_frame(title, content, size, title_wrapper, content_wrapper, t
         print("Too much information to display, Shrinking font size...")
         content_font = shrink_font(content_font, config['content_font'])
         content_wrapper = text_processing.Wrapper(content_font)
-        content = content_wrapper.wrap_string(raw_content, config['width'] -content['picture_width']-config['margin']*3)
+        content = content_wrapper.wrap_string(raw_content, config['width'] -config['picture_width']-config['margin']*3)
         print(content)
         actual_content_height = content_font.getsize_multiline(content)[1]
         #print(actual_content_height)

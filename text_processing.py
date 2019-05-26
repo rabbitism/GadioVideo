@@ -168,7 +168,7 @@ def extract_headers(result:dict, title:str):
             if(len(result[key]['header'])>0):
                 header = result[key]['header']
                 time_string = seconds_to_time((1 if key==0 else key)+config['open_offset'])
-                line = time_string+" "+header+" "+"★"
+                line = time_string+" "+header+"⭐"
                 length+=len(line)
                 if(length>950): # Bilibili comment length 1000
                     links.write("\n\n")
