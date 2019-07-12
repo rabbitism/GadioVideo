@@ -3,4 +3,5 @@ __pycache__/*
 output/*
 test/*
 *.mp3
+cache/*
 
