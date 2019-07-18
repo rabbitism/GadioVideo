@@ -1,2 +1,2 @@
-from .Configs import *
-from .Crawlers import *
+from gadio.crawlers import *
+from gadio.configs import *

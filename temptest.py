@@ -1,3 +1,3 @@
-from src.Crawlers.crawler import *
+from gadio.crawlers.crawler import *
 
 print_config()
