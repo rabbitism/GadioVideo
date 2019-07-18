@@ -4,3 +4,4 @@ output/*
 *.mp3
 cache/*
 
+test.json

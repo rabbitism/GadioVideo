@@ -12,4 +12,22 @@ from gadio.configs.config import config
 api = "https://www.gcores.com/gapi/v1/radios/112068?include=category,user,media,djs,media.timelines"
 
 def print_config():
+    
     print(config)
+
+class Crawler():
+    
+    @staticmethod
+    def crawl(gadio_id: int):
+        """Get timeline and corresponding contents from Gcores website
+        
+        Arguments:
+            gadio_id {int} -- gadio id in gcores websites. 
+        """
+        url = "https://www.gcores.com/gapi/v1/radios/" + str(gadio_id) + "?include=category,user,media,djs,media.timelines"
+        content = requests.get(url).content
+        parsed = json.loads(content)
+        print(parsed)
+        with open("test.json", 'w', encoding='utf-8') as outfile:
+            json.dump(parsed, outfile, ensure_ascii=False, indent=4)
+        

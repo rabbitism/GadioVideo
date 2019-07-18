@@ -1,3 +1,3 @@
 from gadio.crawlers.crawler import *
 
-print_config()
+Crawler.crawl(112620)
