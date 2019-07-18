@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup
 
 import text_processing
 from config import config
+import json
 
 
 def crawler(number):
@@ -21,47 +22,30 @@ def crawler(number):
         dict, str -- a dictionary in this format: {10:{'header':'标题', 'content':'内容', 'image_url':'https://......123.jpg','image_suffix':'.jpg'}}
     """
 
-    # Get source code
-    url = "https://www.gcores.com/radios/"+str(number)
+    # Get timelines
+    url = "https://www.gcores.com/gapi/v1/radios/"+str(number)+"?include=media,media.timelines"
     content = requests.get(url).content
-    soup = BeautifulSoup(content, 'html.parser')
-    b = soup.findAll("div", {'class':['row']})
+    parsed = json.loads(content)
+    radio = parsed.get('data')
+    included = parsed.get('included')
+    media = radio.get('relationships').get('media').get('data')
+    media = next(e for e in included if e.get('type') == media.get('type') and e.get('id') == media.get('id'))
+    timelines = media.get('relationships').get('timelines').get('data')
+
     result = dict()
-    for line in b:
-        # Get lines with image information
-        image_div = line.find('div', {'class':'col-xs-5'})
-
-        if(image_div is not None):
-            image_line = image_div.find('img')
-
-        # Get lines with text information
-        header = line.find('div', {'class':'col-xs-7'})
-        if(header is not None):
-            header_line = header.find('h1').contents[0].strip()
-            content_line = header.find('p').contents[0].strip()
-            time = int(header.find('h1').contents[1]['data-at'])
-            try:
-                contents = header.find_all('p')
-                link = contents[1].find('a')['href']
-            except Exception as e:
-                #print(e)
-                link = ""
-            print(link)
-            image_suffix = text_processing.find_image_suffix(image_line['src'])
-            result[time] = {'header':header_line, 'content':content_line, 'image_url':image_line['src'], 'image_suffix':image_suffix, 'link':link}
-    try:
-        audio_line = soup.find("p", {'class': 'story_actions'}).contents[1]["href"]
-    except:
-        audio_line = ""
-    try:
-        area = soup.find("div", {'class':'swiper-wrapper'})
-        first_part = area.find_all('div')[0]
-        title_url = first_part.find('img')['src'].split('?')[0]
-        #print(title_url)
-    except:
-        print('Title image not found, use blank image or image at 00:00 for title scene...')
-        title_url=""
-    return result, audio_line, title_url
+    for item in timelines:
+        line = next(e for e in included if e.get('type') == item.get('type') and e.get('id') == item.get('id'))
+        title = line.get('attributes').get('title')
+        content = line.get('attributes').get('content')
+        at = line.get('attributes').get('at')
+        asset = 'https://image.gcores.com/'+str(line.get('attributes').get('asset'))
+        asset_suffix = text_processing.find_image_suffix(asset)
+        link = line.get('quote-href', '')
+        result[at] = { 'header': title, 'content': content, 'image_url': asset, 'image_suffix': asset_suffix, 'link': link }
+    
+    audio = 'https://alioss.gcores.com/uploads/audio/'+str(media.get('attributes').get('audio'))
+    cover = 'https://image.gcores.com/'+str(radio.get('attributes').get('thumb'))
+    return result, audio, cover
 
 def save_image(image_url, image_dir, image_name):
     """Save image from image_url to image_dir with name as image_name
