@@ -55,7 +55,7 @@ class Radio():
         list.sort(radio.timestamps)
         print("Gadio", radio.radio_id, "successfully initialized.")
         print("Title:", radio.title)
-        print("Pages:", len(radio.timeline))
         print("Duration:", radio.duration)
         print("DJs:", len(radio.users), [user.nickname for user in radio.users])
-        print(radio.timestamps)
+        print("Pages:", len(radio.timeline), radio.timestamps)
+        return radio

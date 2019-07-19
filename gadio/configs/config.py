@@ -1,3 +1,5 @@
+import os
+
 config = {
     'fps':2,
     'animation_fps':25,
