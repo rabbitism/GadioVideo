@@ -43,9 +43,26 @@ class Frame():
         return image
 
     @staticmethod
-    def create_page(page: Page, radio=Radio):
+    def create_page(page: Page, radio:Radio):
+        """Create a gadio page frame.
+        Pipeline: 
+        1. Load image with opencv, use opencv to resize and blur.
+        2. Convert opencv image to Pillow image
+        3. Draw text on Pillow image
+        4. Convert back to opencv image for opencv VideoWriter
+
+        Beware that Pillow image and opencv channel orders are different. 
+        Arguments:
+            page {Page} -- Gadio page
+        
+        Keyword Arguments:
+            radio {Radio} -- radio
+        
+        Returns:
+            np.array -- An numpy array representing cv2 image.
+        """
         image_suffix = page.image.suffix
-        if (image_suffix.lower() == '.gif'):
+        if (image_suffix=="" or image_suffix.lower() == '.gif'):
             image_dir = os.sep.join(['cache', str(radio.radio_id), radio.cover.local_name])
         else:
             image_dir = os.sep.join(['cache', str(radio.radio_id), page.image.local_name])
@@ -70,7 +87,7 @@ class Frame():
         
         content_frame = Image.fromarray(content_rgb)
         content_image_mask = Image.new('RGBA', (content_image.shape[1], content_image.shape[0]), color=(0, 0, 0, 26))
-        if (image_suffix.lower() == '.gif'):
+        if (image_suffix=="" or image_suffix.lower() == '.gif'):
             print("GIF will not be rendered in this page...")
         else:
             frame.paste(content_frame, (left_offset, top_offset))

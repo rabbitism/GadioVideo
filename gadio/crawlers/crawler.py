@@ -36,7 +36,12 @@ class Crawler():
             else:
                 dictionary[i['type']] = 1
         print(dictionary)
-        with open("test.json", 'w', encoding='utf-8') as outfile:
+        cache_dir = os.sep.join([os.curdir, 'cache', str(gadio_id)])
+        if not os.path.exists(cache_dir):
+            print("Folder", cache_dir, 'does not exist. Creating...')
+            os.makedirs(cache_dir)
+        with open(cache_dir+os.sep+'data.json', 'w', encoding='utf-8') as outfile:
+            print(cache_dir)
             json.dump(parsed, outfile, ensure_ascii=False, indent=4)
         return parsed
         
@@ -79,3 +84,11 @@ class Crawler():
         for page in radio.timeline.values():
             Crawler.download_image(page.image, file_dir)
 
+    @staticmethod
+    def get_latest():
+        url = api['radio_list_api_template']
+        print("Getting the latest gadio id...")
+        content = requests.get(url).content
+        parsed = json.loads(content)
+        id = parsed['data'][0]['id']
+        return int(id)
