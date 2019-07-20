@@ -1,8 +1,8 @@
 resource/*
 __pycache__/*
 output/*
-test/*
 *.mp3
+cache/*
 .DS_Store
 .vscode
-
+test.json

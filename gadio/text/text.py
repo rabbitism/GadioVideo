@@ -1,17 +1,20 @@
-import argparse
 import json
 import os
 import re
 import urllib
 
-from cv2 import VideoWriter, VideoWriter_fourcc
 from PIL import Image, ImageDraw, ImageFont
-from config import config
+from gadio.configs.config import config
 
 
-def find_image_suffix(image_name:str):
-    file_suffix = re.match(".*(\..*)", image_name).group(1)
-    return file_suffix
+def find_image_suffix(image_name: str):
+    #print(image_name)
+    try:
+        file_suffix = re.match(".*(\..*)", image_name).group(1)
+        return file_suffix
+    except:
+        print("Invalid picture id")
+        return ""
 
 def is_alpha(word):
     try:
@@ -62,66 +65,6 @@ def extract_bilibili_video_id(link:str):
     else:
         print("Not a valid bilibili url", link)
         return link
-        
-
-class Wrapper(object):
-    def __init__(self, font:ImageFont):
-        self.font = font
-        self.tokens = list()
-
-    def wrap_string(self, string:str, width):
-        self.tokenize_string(string)
-        result = str()
-        temp_string = str()
-        length = 0
-        for word in self.tokens:
-            word_length = self.font.getsize(word)[0]
-            if(length+word_length>width):
-                result+=temp_string
-                result+="\n"
-                temp_string = word
-                length = word_length
-            else:
-                temp_string+=word
-                length+=word_length
-        result+=temp_string
-        #result = result.replace("\\n ", "\\n", 100)
-        return result
-    
-    def tokenize_string(self, string:str):
-        self.tokens.clear()
-        s = str()
-        string = string.replace("\n","",100)
-        for character in string:
-            if(len(s)==0):
-                s=character
-            else:
-                last_character = s[len(s)-1]
-                #print(last_character)
-                if(is_alnum(character)):
-                    if(is_alnum(last_character)):
-                        s+=character
-                    elif(is_non_end(last_character)):
-                        s+=character
-                    else:
-                        self.tokens.append(s)
-                        s=character
-                elif(is_character(character)):
-                    if(is_non_end(last_character)):
-                        s+=character
-                    else:
-                        self.tokens.append(s)
-                        s=character
-                elif(is_non_start(character)):
-                    s+=character
-                else:
-                    self.tokens.append(s)
-                    s = character
-
-        #print(result)
-        if(len(s)!=0):
-            self.tokens.append(s)
-        return self.tokens
 
 def load_data(title:str):
     title = str(title)
@@ -175,18 +118,3 @@ def extract_headers(result:dict, title:str):
                     length=len(line)
                 links.writelines(line)
     links.close()
-
-
-if __name__ == "__main__":
-    #print(find_image_suffix("Hello.jpg"))
-    line = input()
-    font = ImageFont.truetype("msyh.ttc", 40, encoding="utf-8") 
-    wrapper=Wrapper(font)
-    strin  = wrapper.wrap_string(line, width= 600)
-    print(wrapper.tokens)
-    print(strin)
-    #print(load_data(108639))
-    print(font.getsize_multiline("Hello"))
-    print(font.getsize_multiline("Hello\nHello\nHello"))
-    print(extract_bilibili_video_id("https://www.bilibili.com/video/av48185229?from=search&seid=15830345666680669730"))
-    print(convert_to_string("http://www.wikiwand.com/zh-sg/%E5%B8%9D%E5%9C%8B%E9%98%B2%E8%A1%9B%E8%BB%8D_(%E6%88%B0%E9%8E%9A40000)#/%E8%B6%85%E9%87%8D%E5%9E%8B%E5%9D%A6%E5%85%8B"))
