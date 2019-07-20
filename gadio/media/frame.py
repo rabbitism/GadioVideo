@@ -9,13 +9,16 @@ from PIL import Image, ImageDraw, ImageFont
 from gadio.configs.config import config
 from gadio.models.radio import Radio
 from gadio.text.wrapper import Wrapper
+from gadio.models.page import Page
 
 
 class Frame():
     width = config['width']
     height = config['height']
-    title_font = ImageFont.truetype(config['title_font'], config['title_font_size'], encoding="utf-8")
-    content_font = ImageFont.truetype(config['content_font'], config['content_font_size'], encoding="utf-8")
+    title_font = ImageFont.truetype(
+        config['title_font'], config['title_font_size'], encoding="utf-8")
+    content_font = ImageFont.truetype(
+        config['content_font'], config['content_font_size'], encoding="utf-8")
     title_wrapper = Wrapper(title_font)
     content_wrapper = Wrapper(content_font)
 
@@ -23,16 +26,162 @@ class Frame():
         return super().__init__(*args, **kwargs)
 
     @staticmethod
-    def create_cover(radio:Radio):
-        cover_dir = os.sep.join(['cache', str(radio.radio_id), radio.cover.local_name])
+    def create_cover(radio: Radio):
+        """create a cover page for start of video. No text pasted on this page.
+        
+        Arguments:
+            radio {Radio} -- Radio
+        
+        Returns:
+            image -- a cv2 frame.
+        """
+        cover_dir = os.sep.join(
+            ['cache', str(radio.radio_id), radio.cover.local_name])
         print(cover_dir)
         image = cv2.imread(cover_dir)
-        image = Frame.shrink_frame(image, Frame.width, Frame.height)
-        print(image)
-        #raise NotImplementedError
+        image = Frame.expand_frame(image, Frame.width, Frame.height)
+        return image
+
+    @staticmethod
+    def create_page(page: Page, radio=Radio):
+        image_suffix = page.image.suffix
+        if (image_suffix.lower() == '.gif'):
+            image_dir = os.sep.join(['cache', str(radio.radio_id), radio.cover.local_name])
+        else:
+            image_dir = os.sep.join(['cache', str(radio.radio_id), page.image.local_name])
+        image = cv2.imread(image_dir)
+        image_suffix = page.image.suffix
+        background_image = Frame.expand_frame(image, Frame.width, Frame.height)
+        background_image = cv2.GaussianBlur(background_image, (255, 255), 255)
+        content_image = Frame.shrink_frame(image, 550, 550)
+
+        # Convert to PIL accepted RGB channel order
+        background_rgb = cv2.cvtColor(background_image, cv2.COLOR_BGR2RGB)
+        content_rgb = cv2.cvtColor(content_image, cv2.COLOR_BGR2RGB)
+
+        #Convert to RGBA for transparency rendering
+        frame = Image.fromarray(background_rgb).convert('RGBA')
+
+        mask = Image.new('RGBA', (Frame.width, Frame.height), color=(0, 0, 0, 128))
+        frame.paste(mask, (0, 0), mask=mask)
+
+        left_offset = int(round(245/1920 * Frame.width)) + int(round((550 - content_image.shape[1])/2))
+        top_offset = int(round(210/1080 * Frame.height)) + int(round((550 - content_image.shape[0])/2))
+        
+        content_frame = Image.fromarray(content_rgb)
+        content_image_mask = Image.new('RGBA', (content_image.shape[1], content_image.shape[0]), color=(0, 0, 0, 26))
+        if (image_suffix.lower() == '.gif'):
+            print("GIF will not be rendered in this page...")
+        else:
+            frame.paste(content_frame, (left_offset, top_offset))
+            frame.paste(content_image_mask, (left_offset, top_offset), mask = content_image_mask)
+
+        try:
+            logo_image = Image.open(config['gcores_logo_name']).convert('RGBA')
+            qr_image = Image.open(config['gcores_qr_name']).convert('RGBA')
+            logo_left_offset = int(round(120/1920 * Frame.width))
+            logo_top_offset = int(round(52/1080 * Frame.height))
+            qr_left_offset = logo_left_offset
+            qr_top_offset = int(round(917/1080 * Frame.height))
+            frame.paste(logo_image, (logo_left_offset, logo_top_offset), mask=logo_image)
+            frame.paste(qr_image, (qr_left_offset, qr_top_offset), mask=qr_image)
+        except:
+            print("Passing logo rendering due to file error")
+
+        draw = ImageDraw.Draw(frame)
+
+        text_width_limit = int(round(770 / 1920 * Frame.width))
+        
+        title_string = Frame.title_wrapper.wrap_string(page.title, text_width_limit)
+        raw_content = page.content
+        content_string = Frame.content_wrapper.wrap_string(raw_content, text_width_limit)
+        print(content_string)
+
+        # Dimensions for text layout
+        text_top_offset = int(round(260 / 1080 * Frame.height))
+        text_left_offset = int(round(920 / 1920 * Frame.width))
+        title_height = Frame.title_font.getsize_multiline(title_string)[1]
+        title_space_bottom = int(round(Frame.title_font.size * 0.9))
+        content_height_limit = int(round(574 / 1080 * Frame.height)) - title_height - title_space_bottom
+        
+        content_space = int(round(Frame.content_font.size * 0.8))
+        actual_content_height = Frame.content_font.getsize_multiline(content_string, spacing=content_space)[1]
+        while (actual_content_height > content_height_limit):
+            Frame.content_font = Frame.shrink_font(Frame.content_font, config['title_font'])
+            content_space = int(round(Frame.content_font.size * 0.8))
+            content_wrapper = Wrapper(Frame.content_font)
+            content_string = content_wrapper.wrap_string(raw_content, text_width_limit)
+            actual_content_height = Frame.content_font.getsize_multiline(content_string, spacing=content_space)[1]
+            print(actual_content_height)
+        
+        print("out")
+        draw.text((text_left_offset, text_top_offset), title_string, config['gcores_title_color'], font=Frame.title_font)
+        draw.text((text_left_offset, text_top_offset + title_height + title_space_bottom), content_string, config['gcores_content_color'], font=Frame.content_font, spacing=content_space)
+        
+        #Reset content_wrapper and content_font
+        Frame.content_font = ImageFont.truetype(config['content_font'], config['content_font_size'], encoding="utf-8")
+        Frame.content_wrapper = Wrapper(Frame.content_font)
+
+        cv2charimg = np.array(frame)
+        result = cv2.cvtColor(cv2charimg, cv2.COLOR_RGB2BGR)
+        #cv2.imwrite('test.jpg',result)
+        #cv2.waitKey()
+        return result
+
+    @staticmethod
+    def expand_frame(image, target_width, target_height):
+        """Expand a frame so it is larger than the rectangle 
+
+        Arguments:
+            image {Image} -- cv2 image
+            target_width {int} -- target width of rectangle
+            target_height {int} -- target width of rectangle
+
+        Raises:
+            NotImplementedError: [description]
+
+        Returns:
+            Image -- resized image
+        """
+        # shape[0]: height, shape[1]: width
+        width_ratio = image.shape[1] / target_width
+        height_ratio = image.shape[0] / target_height
+        ratio = min(width_ratio, height_ratio)
+        # in case width or height smaller than target after rounding.
+        actual_width = max(int(image.shape[1] / ratio), target_width)
+        actuai_height = max(int(image.shape[0] / ratio), target_height)
+        result = cv2.resize(image, (actual_width, actuai_height),
+                           interpolation=cv2.INTER_CUBIC)
+        left = int((result.shape[1] - target_width) / 2)
+        right = left + target_width
+        top = int((result.shape[0] - target_height) / 2)
+        bottom = top + target_height
+        return result[top:bottom, left:right]
 
     @staticmethod
     def shrink_frame(image, target_width, target_height):
-        image = cv2.resize(image, (int(image.shape[1] * 1.2), int(image.shape[0] * 1.2)), interpolation=cv2.INTER_CUBIC)
-        return image
-        #raise NotImplementedError
+        """Shrink a frame so it is smaller than the rectangle
+        
+        Arguments:
+            image {Image} -- np array
+            target_width {int} -- target width of rectangle
+            target_height {int} -- target height of rectangle
+        
+        Returns:
+            np.array -- resized image
+        """
+
+        # shape[0] : height, shape[1]: width
+        width_ratio = image.shape[1] / target_width
+        height_ratio = image.shape[0] / target_height
+        ratio = max(width_ratio, height_ratio)
+        actual_width = min(int(image.shape[1] / ratio), target_width)
+        actual_height = min(int(image.shape[0] / ratio), target_height)
+        result = cv2.resize(image, (actual_width, actual_height), interpolation=cv2.INTER_CUBIC)
+        return result
+
+    @staticmethod
+    def shrink_font(font, font_family):
+        result_font = ImageFont.truetype(font_family, font.size-2, encoding="utf-8")
+        print(result_font.size)
+        return result_font

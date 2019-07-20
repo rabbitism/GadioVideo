@@ -14,14 +14,12 @@ config = {
     'gcores_title_color': (255,255,255,246),
     'gcores_content_color': (255,255,255,205),
     'background_color':"#FFFFFF",
-    'title_font': './gadio/utils/PingFang-Heavy.ttf',
-    'content_font': './gadio/utils/PingFang-Medium.ttf',
-    'logo_name': 'logo.png',
-    'gcores_logo_name': 'gcores.png',
-    'gcores_qr_name': 'qr.png',
+    'title_font': os.sep.join([os.curdir, 'gadio', 'utils', 'PingFang-Heavy.ttf']),
+    'content_font': os.sep.join([os.curdir, 'gadio', 'utils', 'PingFang-Medium.ttf']),
+    'gcores_logo_name': os.sep.join([os.curdir, 'gadio', 'utils', 'gcores.png']),
+    'gcores_qr_name': os.sep.join([os.curdir, 'gadio', 'utils', 'qr.png']),
     'fade_duration':1,
     'test':False,
     'enable_logo':True,
-    'skip_gif':False,
     'open_offset':0
 }
