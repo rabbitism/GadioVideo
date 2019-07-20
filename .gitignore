@@ -3,5 +3,6 @@ __pycache__/*
 output/*
 *.mp3
 cache/*
-
+.DS_Store
+.vscode
 test.json
