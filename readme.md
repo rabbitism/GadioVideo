@@ -26,9 +26,12 @@ pip3 install -r requirements.txt
 如果想要生成视频可运行
 
 ```bash
-python gcores.py # 直接生成最新一期电台的视频
-python gcores.py 107884 # 生成id为107884的电台的视频
-python gcores.py 107884 -s # 跳过爬虫直接用已下载的图片生成107884的视频
+# 直接生成最新一期电台的视频
+python gcores.py
+# 生成id为107884的电台的视频
+python gcores.py 107884
+# 跳过爬虫直接用已下载的图片生成107884的视频
+python gcores.py 107884 -s
 
 ```
 
@@ -36,12 +39,13 @@ python gcores.py 107884 -s # 跳过爬虫直接用已下载的图片生成107884
 如果想单独爬取文本和图片不生成视频，可运行
 
 ```bash
-python crawler.py 107884 # 爬取id为107884的电台文本和图片
-python crawler.py 107884 -t #只爬取文本 不下载图片
+# 爬取id为107884的电台文本和图片
+python crawler.py 107884
+#只爬取文本 不下载图片
+python crawler.py 107884 -t
 ```
 
-图片暂存于`.\cache\107884\`中。图片的名称为图片在视频中最初出现的秒数。
-
+图片/音频等暂存于`.\cache\107884\`中。图片的名称为图片在视频中最初出现的秒数。
 
 生成的视频文件位于 `output` 文件夹内
 
