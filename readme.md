@@ -51,23 +51,19 @@ python crawler.py 107884 -t #只爬取文本 不下载图片
 
 |参数|含义|示例|注释|
 |:---:|:---|:---:|:---|
-|fps|帧率|3|
-|animation_fps|动画帧率|24|animated版本视频帧率|
+|fps|帧率|2|
 |width|视频宽度|1280|
 |height|视频高度|720|
-|margin|边界宽度|60|
-|picture_width|图片宽度|400|图片过高时会以高度为准|
 |title_font_size|标题字体大小|48|
 |content_font_size|正文字体大小|28|
-|title_color|标题字体颜色|#424242|
-|content_color|正文字体颜色|#424242|
+|gcores_title_color|标题字体颜色|#424242|
+|gcores_content_color|正文字体颜色|#424242|
 |background_color|背景颜色|#FFFFFF|
-|font|字体|./util/SourceHanSans-Regular.ttc|如果使用系统自带字体，直接写字体文件名|
-|logo_name|logo图片文件名|logo.png|logo文件应放在util文件夹下|
-|fade_duration|渐变时间|1|两张图片间转场的时间长度，单位为秒|
+|title_font|标题字体|./gadio/utils/SourceHanSans-Regular.ttc|如果使用系统自带字体，直接写字体文件名|
+|content_font|正文字体|./gadio/utils/SourceHanSans-Regular.ttc|如果使用系统自带字体，直接写字体文件名|
+|gcores_logo_name|logo图片|./gadio/utils/logo.png|logo文件应放在utils文件夹下|
 |test|测试模式|False|在测试模式下之生成前10段视频，最长不超过200秒|
-|enable_logo|是否增加logo|True|是否在视频左下角增加logo|
-|skip_gif|是否跳过gif|False|是否在animated版本中跳过插入gif图片|
+|start_offset|片头偏移量|5|最终的文字时间轴偏移量|
 
 尺寸和实例见下图
 
