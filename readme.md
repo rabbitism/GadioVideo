@@ -1,4 +1,6 @@
-# Gadio Video Generator
+# Gadio Video
+
+![sample](doc/gcores.png)
 
 |Platform|Test Result|
 |:---:|:---:|
