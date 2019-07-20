@@ -20,10 +20,13 @@ class Radio():
     def load_from_json(cls, parsed_json:str):
         #https://www.gcores.com/gapi/v1/radios/112068?include=category,media,djs,media.timelines
         radio = cls()
-        radio.radio_id = parsed_json['data']['id']
-        radio.title = parsed_json['data']['attributes']['title']
-        radio.duration = parsed_json['data']['attributes']['duration']
-        radio.cover = Image(parsed_json['data']['attributes']['thumb'], 'cover')
+        try:
+            radio.radio_id = parsed_json['data']['id']
+            radio.title = parsed_json['data']['attributes']['title']
+            radio.duration = parsed_json['data']['attributes']['duration']
+            radio.cover = Image(parsed_json['data']['attributes']['thumb'], 'cover')
+        except:
+            raise KeyError("Attributes not discovered in api. Please check")
 
         for item in parsed_json['included']:
 

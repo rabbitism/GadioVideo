@@ -37,7 +37,7 @@ class Frame():
         """
         cover_dir = os.sep.join(
             ['cache', str(radio.radio_id), radio.cover.local_name])
-        print(cover_dir)
+        print('Creating cover page')
         image = cv2.imread(cover_dir)
         image = Frame.expand_frame(image, Frame.width, Frame.height)
         return image
@@ -62,7 +62,8 @@ class Frame():
             np.array -- An numpy array representing cv2 image.
         """
         image_suffix = page.image.suffix
-        if (image_suffix=="" or image_suffix.lower() == '.gif'):
+        if (image_suffix == "" or image_suffix.lower() == '.gif'):
+            # If image is not found or image is gif, load cover as background
             image_dir = os.sep.join(['cache', str(radio.radio_id), radio.cover.local_name])
         else:
             image_dir = os.sep.join(['cache', str(radio.radio_id), page.image.local_name])
@@ -87,7 +88,8 @@ class Frame():
         
         content_frame = Image.fromarray(content_rgb)
         content_image_mask = Image.new('RGBA', (content_image.shape[1], content_image.shape[0]), color=(0, 0, 0, 26))
-        if (image_suffix=="" or image_suffix.lower() == '.gif'):
+        if (image_suffix == "" or image_suffix.lower() == '.gif'):
+            # if image is not properly downloaded or is gif, no content image should be added.
             print("GIF will not be rendered in this page...")
         else:
             frame.paste(content_frame, (left_offset, top_offset))
@@ -110,9 +112,10 @@ class Frame():
         text_width_limit = int(round(770 / 1920 * Frame.width))
         
         title_string = Frame.title_wrapper.wrap_string(page.title, text_width_limit)
+        print('Title:', title_string)
         raw_content = page.content
         content_string = Frame.content_wrapper.wrap_string(raw_content, text_width_limit)
-        print(content_string)
+        #print(content_string)
 
         # Dimensions for text layout
         text_top_offset = int(round(260 / 1080 * Frame.height))
@@ -129,9 +132,9 @@ class Frame():
             content_wrapper = Wrapper(Frame.content_font)
             content_string = content_wrapper.wrap_string(raw_content, text_width_limit)
             actual_content_height = Frame.content_font.getsize_multiline(content_string, spacing=content_space)[1]
-            print(actual_content_height)
+            #print(actual_content_height)
         
-        print("out")
+        print(content_string)
         draw.text((text_left_offset, text_top_offset), title_string, config['gcores_title_color'], font=Frame.title_font)
         draw.text((text_left_offset, text_top_offset + title_height + title_space_bottom), content_string, config['gcores_content_color'], font=Frame.content_font, spacing=content_space)
         
@@ -200,5 +203,4 @@ class Frame():
     @staticmethod
     def shrink_font(font, font_family):
         result_font = ImageFont.truetype(font_family, font.size-2, encoding="utf-8")
-        print(result_font.size)
         return result_font

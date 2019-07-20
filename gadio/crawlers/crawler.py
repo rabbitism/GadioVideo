@@ -42,7 +42,7 @@ class Crawler():
             print("Folder", cache_dir, 'does not exist. Creating...')
             os.makedirs(cache_dir)
         with open(cache_dir+os.sep+'data.json', 'w', encoding='utf-8') as outfile:
-            print(cache_dir)
+            #print(cache_dir)
             json.dump(parsed, outfile, ensure_ascii=False, indent=4)
         return parsed
         

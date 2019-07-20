@@ -26,7 +26,7 @@ class Video():
         clip_count = len(radio.timestamps) - 1
         for i in range(clip_count):
             if (radio.timestamps[i] not in radio.timeline.keys()):
-                print(radio.timeline.keys())
+                print(radio.timestamps[i], "has no corresponding image, load cover as backup")
                 frame = Frame.create_cover(radio)
             else:
                 frame = Frame.create_page(radio.timeline[radio.timestamps[i]], radio)
