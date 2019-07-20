@@ -103,10 +103,10 @@ python animated.py 107884 -s
 
 尺寸和实例见下图
 
-![sample](doc/Sample.jpg)
-![sample](doc/Fancy_Sample1.jpg)
-![sample](doc/Fancy_Sample2.jpg)
+![sample](doc/sample1.png)
+![sample](doc/sample2.png)
+![sample](doc/sample3.png)
 
 视频示例请参考
 
-[哔哩哔哩](https://www.bilibili.com/video/av49696893)
+[哔哩哔哩](https://www.bilibili.com/video/av59856563)

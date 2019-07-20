@@ -124,7 +124,7 @@ class Frame():
         content_space = int(round(Frame.content_font.size * 0.8))
         actual_content_height = Frame.content_font.getsize_multiline(content_string, spacing=content_space)[1]
         while (actual_content_height > content_height_limit):
-            Frame.content_font = Frame.shrink_font(Frame.content_font, config['title_font'])
+            Frame.content_font = Frame.shrink_font(Frame.content_font, config['content_font'])
             content_space = int(round(Frame.content_font.size * 0.8))
             content_wrapper = Wrapper(Frame.content_font)
             content_string = content_wrapper.wrap_string(raw_content, text_width_limit)

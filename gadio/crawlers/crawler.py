@@ -12,6 +12,7 @@ from gadio.models.radio import Radio
 from gadio.models.user import User
 from gadio.models.page import Page
 from gadio.configs.api import api
+from gadio.text.text import *
 
 #api = "https://www.gcores.com/gapi/v1/radios/112068?include=category,media,djs,media.timelines"
 
@@ -92,3 +93,25 @@ class Crawler():
         parsed = json.loads(content)
         id = parsed['data'][0]['id']
         return int(id)
+    
+    def get_headers(radio: Radio):
+        offset = config['start_offset']
+        headers = []
+        for i in radio.timestamps:
+            if (i not in radio.timeline.keys()):
+                continue
+            else:
+                seconds = i + 1 if i == 0 else i
+                time = seconds_to_time(str(seconds + offset))
+                headers.append(time + " " + radio.timeline[i].title)
+        with open(os.sep.join(['.', "output", radio.radio_id + "_headers.txt"]), 'w+', encoding='utf-8') as links:
+            length = 0
+            last = ""
+            for header in headers:
+                line= header+"⭐"
+                length+=len(line)
+                if(length>990): # Bilibili comment length 1000
+                    links.write("\n\n")
+                    length=len(line)
+                links.writelines(line)
+        links.close()

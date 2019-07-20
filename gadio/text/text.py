@@ -8,7 +8,7 @@ from gadio.configs.config import config
 
 
 def find_image_suffix(image_name: str):
-    print(image_name)
+    #print(image_name)
     try:
         file_suffix = re.match(".*(\..*)", image_name).group(1)
         return file_suffix

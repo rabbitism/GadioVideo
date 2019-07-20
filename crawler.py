@@ -1,134 +1,23 @@
-import json
-import os
-import re
+from gadio.crawlers.crawler import Crawler
+from gadio.models.radio import Radio
 import sys
-import urllib.request
+import os
 
-import requests
-from bs4 import BeautifulSoup
-
-import text_processing
-from config import config
-
-
-def crawler(number):
-    """Get timeline and corresponding contents from Gcores webiste.
-    
-    Arguments:
-        number {str} -- gadio number
-    
-    Returns:
-        dict, str -- a dictionary in this format: {10:{'header':'标题', 'content':'内容', 'image_url':'https://......123.jpg','image_suffix':'.jpg'}}
-    """
-
-    # Get source code
-    url = "https://www.gcores.com/radios/"+str(number)
-    content = requests.get(url).content
-    soup = BeautifulSoup(content, 'html.parser')
-    b = soup.findAll("div", {'class':['row']})
-    result = dict()
-    for line in b:
-        # Get lines with image information
-        image_div = line.find('div', {'class':'col-xs-5'})
-
-        if(image_div is not None):
-            image_line = image_div.find('img')
-
-        # Get lines with text information
-        header = line.find('div', {'class':'col-xs-7'})
-        if(header is not None):
-            header_line = header.find('h1').contents[0].strip()
-            content_line = header.find('p').contents[0].strip()
-            time = int(header.find('h1').contents[1]['data-at'])
-            try:
-                contents = header.find_all('p')
-                link = contents[1].find('a')['href']
-            except Exception as e:
-                #print(e)
-                link = ""
-            print(link)
-            image_suffix = text_processing.find_image_suffix(image_line['src'])
-            result[time] = {'header':header_line, 'content':content_line, 'image_url':image_line['src'], 'image_suffix':image_suffix, 'link':link}
-    try:
-        audio_line = soup.find("p", {'class': 'story_actions'}).contents[1]["href"]
-    except:
-        audio_line = ""
-    try:
-        area = soup.find("div", {'class':'swiper-wrapper'})
-        first_part = area.find_all('div')[0]
-        title_url = first_part.find('img')['src'].split('?')[0]
-        #print(title_url)
-    except:
-        print('Title image not found, use blank image or image at 00:00 for title scene...')
-        title_url=""
-    return result, audio_line, title_url
-
-def save_image(image_url, image_dir, image_name):
-    """Save image from image_url to image_dir with name as image_name
-    
-    Arguments:
-        image_url {string} -- image location from website
-        image_dir {str} -- image destination
-        image_name {str} -- name of image
-    
-    Returns:
-        None -- no return
-    """
-    try:
-        if not os.path.exists(image_dir):
-            print("Folder", image_dir, 'does not exist. Creating...')
-            os.makedirs(image_dir)
-        file_suffix = re.match(".*(\..*)", image_url).group(1)
-        print("Saving image to", image_name+file_suffix)
-        r = urllib.request.urlretrieve(image_url, image_dir+os.sep+image_name+file_suffix)
-        return 1
-    except Exception as e:
-        print("Error", e)
-        return 0
-
-def save_audio(audio_url, audio_dir, audio_name):
-    try:
-        if not os.path.exists(audio_dir):
-            print("Folder", audio_dir, "does not exist. Creating...")
-            os.makedirs(audio_dir)
-        print("Saving audio to", audio_name + ".mp3")
-        r = urllib.request.urlretrieve(audio_url, audio_dir + os.sep + audio_name + ".mp3")
-    except Exception as e:
-        print("Error", e)
-        print("Audio file not saved. Please consider manually add audio file to folder {}, rename it as {} for video editing...".format(audio_dir, audio_name+".mp3"))
-
-def main(title:str):
-    """
-    When excuting individually, this function will crawl all materials including pictures, audios, text, for specific gadio title. 
-    """
-    title = str(title)
-    result, audio_url, title_url = crawler(title)
-    test = config['test']
-    count = 0
-    for key in result.keys():
-        image_name = str(key)
-        image_url = result[key]['image_url']
-        image_dir = os.sep.join([".", "resource", title])
-        count+=save_image(image_url, image_dir, image_name)
-
-    """Extract reference links and write to file""" 
-    text_processing.extract_links(result, title)
-    text_processing.extract_headers(result, title)
-       
-    save_audio(audio_url, os.sep.join([".", "resource", title, "audio"]), title)
-    if len(title_url)>0:
-        save_image(title_url, os.sep.join([".", "resource", title]), 'title')
-    #print(result)
-    with open(os.sep.join([".", 'resource', title, 'data.json']), 'w', encoding='utf-8') as outfile:
-        json.dump(result, outfile, ensure_ascii=False, indent=4)
-    print("{} time tags extracted...".format(len(result.keys())))
-    print("{} pictures saved...".format(count))
-    
-    
 if __name__ == "__main__":
-    if(len(sys.argv)==1):
-        print("Must specify gadio number... ")
-        #update(str(108272))
+    parsed_json = object
+    if (len(sys.argv) == 1 or sys.argv[1]=='-t'):
+        print("----------")
+        print("Start to create the latest gadio video...")
+        id = Crawler.get_latest()
+        print(id)
+        parsed_json = Crawler.crawl(id)
     else:
-        title=str(sys.argv[1])
-        main(title)
+        radio_id = int(sys.argv[1])
+        parsed_json = Crawler.crawl(radio_id)
+    radio = Radio.load_from_json(parsed_json)
+    Crawler.get_headers(radio)
+    if (len(sys.argv) > 2):
+        if ('-t' in sys.argv):
+            {}
+        else:
+            Crawler.download_assets(radio, os.curdir+os.sep+'cache')

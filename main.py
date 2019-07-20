@@ -15,7 +15,7 @@ def main(id: int, skip_crawling: bool):
 
 if __name__ == "__main__":
     skip_crawling = False
-    if (len(sys.argv) == 1):
+    if (len(sys.argv) == 1 or sys.argv[1]=='-s'):
         print("----------")
         print("Start to create the latest gadio video...")
         id = Crawler.get_latest()

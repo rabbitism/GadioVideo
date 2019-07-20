@@ -14,5 +14,5 @@ config = {
     'gcores_logo_name': os.sep.join([os.curdir, 'gadio', 'utils', 'gcores.png']),
     'gcores_qr_name': os.sep.join([os.curdir, 'gadio', 'utils', 'qr.png']),
     'test':False,
-    'open_offset':0
+    'start_offset':0
 }
