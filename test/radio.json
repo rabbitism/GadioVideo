@@ -1,0 +1,1930 @@
+{
+    "data": {
+        "id": "112725",
+        "type": "radios",
+        "attributes": {
+            "title": "我们为何如此喜爱Metroidvania游戏",
+            "content": "{\"blocks\":[{\"key\":\"biod6\",\"text\":\"随着独立游戏的发展，传统的Metroidvania游戏似乎又换发了新的活力。同时也有越来越多的成功游戏，被认为其本质拥有Metroidvania的内核。那么，当我们沉迷于Metroidvania游戏时，当我们在谈论Metroidvania游戏时，那些令我们喜爱和吸引我们关注的特质究竟是什么呢？也许每个人的答案都不尽相同，但也不妨让我们来一起讨论一下。 \",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
+            "desc": "是一种形式，也是一种理念",
+            "is-verified": 1,
+            "created-at": "2019-07-18T23:33:50.000+08:00",
+            "duration": 4361,
+            "thumb": "dab2cc6b-893b-459b-9de7-88c595a526f7.jpg",
+            "app-cover": null,
+            "cover": "fb759d1d-e2df-4554-bcb7-9cb80ba4afa5.jpg",
+            "option-is-focus-showcase": false,
+            "option-is-official": false,
+            "is-published": 1,
+            "published-at": "2019-07-18T23:35:30.000+08:00",
+            "bookmarks-count": 200,
+            "is-comment-hidden": false,
+            "is-modified": false,
+            "is-official": true,
+            "vol": null,
+            "likes-count": 215,
+            "comments-count": 365,
+            "timelines-images-url": ""
+        },
+        "relationships": {
+            "user": {},
+            "category": {
+                "data": {
+                    "type": "categories",
+                    "id": "49"
+                }
+            },
+            "comments": {},
+            "labels": {},
+            "similarities": {},
+            "media": {
+                "data": {
+                    "type": "medias",
+                    "id": "1815"
+                }
+            },
+            "djs": {
+                "data": [
+                    {
+                        "type": "users",
+                        "id": "365"
+                    },
+                    {
+                        "type": "users",
+                        "id": "21327"
+                    },
+                    {
+                        "type": "users",
+                        "id": "12865"
+                    },
+                    {
+                        "type": "users",
+                        "id": "20803"
+                    }
+                ]
+            },
+            "entries": {},
+            "entities": {},
+            "tags": {},
+            "audit-draft": {},
+            "collections": {},
+            "latest-collection": {},
+            "albums": {},
+            "latest-album": {}
+        },
+        "meta": {
+            "vote-flag": null,
+            "vote-id": null,
+            "bookmark-id": null
+        }
+    },
+    "included": [
+        {
+            "id": "49",
+            "type": "categories",
+            "attributes": {
+                "name": "Gadio Early Access",
+                "desc": "所有不确定形式的试验品都在这了！",
+                "logo": "b8c4f0da-36e7-46fc-85bd-821c3beaa6d3.png",
+                "background": "9e56020c-6265-472f-b019-32b53cb0c97d.jpg",
+                "created-at": "2017-06-20T10:29:15.000+08:00",
+                "updated-at": "2017-06-20T10:29:15.000+08:00",
+                "subscriptions-count": 5714
+            },
+            "relationships": {
+                "originals": {},
+                "articles": {},
+                "videos": {},
+                "radios": {},
+                "latest-video": {}
+            },
+            "meta": {
+                "subscription-id": null
+            }
+        },
+        {
+            "id": "1815",
+            "type": "medias",
+            "attributes": {
+                "audio": "98683098-1642-411c-8f0f-f09f09ec09be.mp3",
+                "duration": 4361,
+                "title": "Metroidvania",
+                "original-src": ""
+            },
+            "relationships": {
+                "timelines": {
+                    "data": [
+                        {
+                            "type": "timelines",
+                            "id": "102865"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102866"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102867"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102868"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102869"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102870"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102871"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102872"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102873"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102874"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102875"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102876"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102877"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102878"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102879"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102880"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102881"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102882"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102883"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102884"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102885"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102886"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102887"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102888"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102889"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102890"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102891"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102892"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102893"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102894"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102895"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102896"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102897"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102898"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102899"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102900"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102901"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102902"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102903"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102904"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102905"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102906"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102907"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102908"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102909"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102910"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102911"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102912"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102913"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102914"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102915"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102916"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102917"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102918"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102919"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102920"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102921"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102922"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102923"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102924"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102925"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102926"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102927"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102928"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102929"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102930"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102931"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102932"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102933"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102934"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102935"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102936"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102937"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102938"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102940"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102943"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102946"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102948"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102949"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102951"
+                        },
+                        {
+                            "type": "timelines",
+                            "id": "102954"
+                        }
+                    ]
+                },
+                "originals": {}
+            }
+        },
+        {
+            "id": "102865",
+            "type": "timelines",
+            "attributes": {
+                "at": 0,
+                "title": "开场 BGM ",
+                "asset": "025dfef0-5d3f-47e0-b844-c2e2708598f9.png",
+                "content": "欢迎您收听本期电台节目。您现在听到的开场 BGM 是《恶魔城X：月下夜想曲》中的歌曲《夜曲》以及《悲境的贵公子》。",
+                "quote-href": "https://www.xiami.com/song/fE0pX3f075",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102866",
+            "type": "timelines",
+            "attributes": {
+                "at": 62,
+                "title": "本期主题",
+                "asset": "3fbf6411-e4e3-4e63-8ed2-b7518109c503.jpg",
+                "content": "在这一期电台节目中，我们将跟大家一起聊聊为什么大家会热爱“银河城类”游戏，这类游戏到底有什么样的魅力。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102867",
+            "type": "timelines",
+            "attributes": {
+                "at": 91,
+                "title": "一笔带过",
+                "asset": "d3e9a4b2-9e8b-4c73-b705-1d28c6657730.png",
+                "content": "龙马在《血污：夜之仪式》的推荐文章里写道：“要说明《血污：夜之仪式》的好，基本等同于要去说明Metroidvania的好。”但是龙马根本没有写清楚Metroidvania这一部分到底哪儿好了。\n有兴趣的朋友可以点击链接看看龙马写的推荐文章。",
+                "quote-href": "https://www.gcores.com/articles/111355",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102868",
+            "type": "timelines",
+            "attributes": {
+                "at": 168,
+                "title": "维基上的描述",
+                "asset": "493016d8-867a-47d7-b0fa-2844f4d0826f.jpg",
+                "content": "银河恶魔城游戏中通常有可供玩家探索的大型相连世界地图，但是进入地图某处的特定地点往往会有门或其他障碍物限制玩家，只有当玩家在游戏中获得特殊道具、工具、武器或能力后才能通过。这些新的提升还能帮助玩家击败更高难度的敌人并找到捷径和秘密区域，包括经常回顾已经探索过的地图区域。银河恶魔城游戏通过这样的设计使故事和关卡设计整合得更紧密，以精心设计的关卡和角色控制来鼓励玩家探索和实验，使之更投入自己的角色。",
+                "quote-href": "https://zh.wikipedia.org/wiki/%E7%B1%BB%E9%93%B6%E6%B2%B3%E6%88%98%E5%A3%AB%E6%81%B6%E9%AD%94%E5%9F%8E%E6%B8%B8%E6%88%8F",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102869",
+            "type": "timelines",
+            "attributes": {
+                "at": 276,
+                "title": "做起来难",
+                "asset": "13b0232e-ff1d-4e46-affc-e3691b7f5696.jpg",
+                "content": "尽管听起来“银河城”类游戏有一定的范式，制作者只需要按此制作就可以了。但是实际上游戏制作者必须在这类的范式上做出新意，体现出游戏具有的特色以及制作者想在游戏中表达的观念。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102870",
+            "type": "timelines",
+            "attributes": {
+                "at": 341,
+                "title": "西总的观点",
+                "asset": "8f8b8b98-f2e2-441d-85a3-cd27107a7af7.jpg",
+                "content": "西总认为开图是“银河城”类游戏的一个核心要素。地图本身贯穿整个游戏，玩家通过开图来获得新的乐趣。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102871",
+            "type": "timelines",
+            "attributes": {
+                "at": 384,
+                "title": "风格变换之作",
+                "asset": "163f0acd-24ac-441c-9cf4-a168db73b22e.jpg",
+                "content": "《恶魔城X：月下夜想曲》是《恶魔城》系列公认的最成功的作品。《月下夜想曲》一改以往作品纯动作的风格，加入大量RPG要素与地图探索元素，辅以精彩的剧情、精美的图像与动听的乐曲，因此广受好评。",
+                "quote-href": "https://baike.baidu.com/item/%E6%81%B6%E9%AD%94%E5%9F%8EX%EF%BC%9A%E6%9C%88%E4%B8%8B%E5%A4%9C%E6%83%B3%E6%9B%B2/10672657?fr=aladdin",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102872",
+            "type": "timelines",
+            "attributes": {
+                "at": 396,
+                "title": "故事起源",
+                "asset": "4c1914b8-e30c-492c-ab63-96bb1b5ba004.png",
+                "content": "公元1792年，沉睡百年的吸血鬼之王德古拉伯爵复活了，当时由最强的吸血鬼猎人家族末裔——里希达．贝尔蒙特出面，营救被伯爵抓去的少女们，并在决战中获胜。随着恶魔城倒塌，人间暂时恢复了安宁。\n四年之后，一个月圆之夜，里希达神秘失踪了。当年获救的少女之一，义妹（准确地说是恋人的妹妹）玛莉雅．雷纳德开始四处寻找里希达。找了整整一年，某一天她发现，本应该百年才能出现一次的恶魔城，居然已经解除封印矗立在她面前。她相信里希达应该就在城里，于是闯了进去。同时，正邪力量交替产生的巨震，使德古拉伯爵的儿子艾卡多由长眠中苏醒。当年他曾经与贝尔蒙特家的先祖拉尔夫．贝尔蒙特一起打倒了自己的父亲。此刻再次出发前往恶魔城。",
+                "quote-href": "https://zh.wikipedia.org/wiki/%E6%83%A1%E9%AD%94%E5%9F%8EX_%E6%9C%88%E4%B8%8B%E5%A4%9C%E6%83%B3%E6%9B%B2",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102873",
+            "type": "timelines",
+            "attributes": {
+                "at": 413,
+                "title": "销量情况",
+                "asset": "9ac10413-bd35-47ab-9e47-f1e4a8da2e2a.jpg",
+                "content": "《恶魔城X：月下夜想曲》在日本的销售情况并不好，PS版仅售出21万份，与北美的58万份与欧洲的40万份相去甚远。",
+                "quote-href": "https://baike.baidu.com/item/%E6%81%B6%E9%AD%94%E5%9F%8EX%EF%BC%9A%E6%9C%88%E4%B8%8B%E5%A4%9C%E6%83%B3%E6%9B%B2/10672657?fromtitle=%E6%81%B6%E9%AD%94%E5%9F%8E%E6%9C%88%E4%B8%8B%E5%A4%9C%E6%83%B3%E6%9B%B2&fromid=4667344&fr=aladdin#1",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102874",
+            "type": "timelines",
+            "attributes": {
+                "at": 443,
+                "title": "很华丽",
+                "asset": "c850726b-68be-4208-a2b0-db52b0fc456b.gif",
+                "content": "龙马认为：《恶魔城X：月下夜想曲》充分发挥了PS的技能，把人物的动作做得十分华丽，人物可以看到走动时的残影。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102875",
+            "type": "timelines",
+            "attributes": {
+                "at": 472,
+                "title": "人设转变",
+                "asset": "9834c6f2-4016-45b4-905e-3dcc03052ca2.jpg",
+                "content": "五十岚孝司除了让游戏玩法更加多样化，降低难度，从而吸引更多玩家以外，他还极力改造游戏中的人物形象，消除刻板化的“肌肉男”形象。本作的男主角吸血鬼贵公子艾卡多，成为恶魔城系列里人气最高的男主角。此后虽未再有以他为主角的恶魔城作品，但是有好几部作品里他都作为剧情角色出场。玩家们自编的同人作品里，也多有其身影。其背后的作者小岛文美有很大的功劳。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102876",
+            "type": "timelines",
+            "attributes": {
+                "at": 564,
+                "title": "炉火纯青",
+                "asset": "c19372e2-515c-4174-88dc-3597c58a8a59.jpg",
+                "content": "龙马认为：五十岚孝司就是把自己的理念做的非常精湛，把这一套玩的炉火纯青，做的游戏也就很舒服。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102877",
+            "type": "timelines",
+            "attributes": {
+                "at": 601,
+                "title": "地图的扩大",
+                "asset": "5391ca4c-6c6f-4191-b9a4-86ab76610028.jpg",
+                "content": "阿彬认为：首先从《恶魔城X：月下夜想曲》开始，地图的要素开始增加，逐渐向外扩展。这一点到了后面的作品也都继承下来。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102878",
+            "type": "timelines",
+            "attributes": {
+                "at": 621,
+                "title": "人设转变",
+                "asset": "80747efa-c905-4289-90ff-c787c07c0529.jpg",
+                "content": "其次，游戏的人设也开始了转变。以往的恶魔城以贝尔蒙特家族的人物为主角，而本作中不再以贝尔蒙特家族的人物为主角，是一个人类与德古拉诞生出的半吸血鬼王子。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102879",
+            "type": "timelines",
+            "attributes": {
+                "at": 665,
+                "title": "武器的多样化",
+                "asset": "ea744cbc-dd1f-46cc-bbde-37774a3a9080.png",
+                "content": "以往的恶魔城游戏武器只有鞭子和少数几种副武器，但这一作的武器也不再局限于鞭子，从拳脚到魔法，以及刀、剑、杖，盾牌，甚至消耗性的梭镖都有。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102880",
+            "type": "timelines",
+            "attributes": {
+                "at": 747,
+                "title": "采访文章",
+                "asset": "c0697dce-f2aa-4c5b-921c-54839d54daa7.jpg",
+                "content": "龙马曾经采访过五十岚孝司，有兴趣的朋友可以点击链接看看这篇采访文章。",
+                "quote-href": "https://www.gcores.com/articles/93990",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102881",
+            "type": "timelines",
+            "attributes": {
+                "at": 806,
+                "title": "硬核游戏",
+                "asset": "b1f44d33-b489-4371-b8dd-74029cd61688.jpg",
+                "content": "《银河战士》本身就是一款硬核游戏，许多玩家上手这款游戏还是比较困难的。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102882",
+            "type": "timelines",
+            "attributes": {
+                "at": 843,
+                "title": "是个年轻人",
+                "asset": "2c206520-ed5b-40a9-98b0-c46bac1c7e64.png",
+                "content": "四十二认真打的才是《血污》，所以相比于在座的几位还是比较年轻的。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102883",
+            "type": "timelines",
+            "attributes": {
+                "at": 892,
+                "title": "先理解词",
+                "asset": "05d6783e-ba79-4c74-8167-aeecf4f9d482.jpg",
+                "content": "四十二是先从Metroidvania 这个词开始了解这个游戏类型的，之后才开始去尝试这个类型的游戏。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102884",
+            "type": "timelines",
+            "attributes": {
+                "at": 978,
+                "title": "超越银河战士",
+                "asset": "77b806ae-d6e7-457c-bde3-2fa89da73640.jpg",
+                "content": "四十二认为：《恶魔城》打破了银河战士对于这个游戏类型的限制，让制作者有了更多的制作空间，而不是最后越做越像银河战士。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102885",
+            "type": "timelines",
+            "attributes": {
+                "at": 1050,
+                "title": "三连跳",
+                "asset": "e6b5503f-10f1-40d9-9521-6b56bbd0f867.png",
+                "content": "在《血污》里解锁两连跳之后，两次跳跃之后可以踢或者说踩一个可攻击的怪物或者物品，踩到之后就能够再次进行二段跳，理论上只要你踩到到，你就能跳到非常高的地方。",
+                "quote-href": "https://www.3dmgame.com/gl/3778303.html",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102886",
+            "type": "timelines",
+            "attributes": {
+                "at": 1019,
+                "title": "不按照套路走",
+                "asset": "ae2cf2e1-4540-4b55-bf6d-4243bb68e5fd.png",
+                "content": "在《银河战士》的一些速通方法中，玩家不用获取一些游戏流程的道具就可以通过一些技法快速通过，游戏允许玩家不按照游戏的流程走。\n链接是《银河战士》的速通视频，有兴趣的朋友可以点击链接查看。",
+                "quote-href": "https://www.bilibili.com/video/av18515443/",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102887",
+            "type": "timelines",
+            "attributes": {
+                "at": 1117,
+                "title": "用自己的方式玩",
+                "asset": "8b66135e-5fb6-4d6a-b24f-de37e061f77c.jpg",
+                "content": "五十岚孝司希望把游戏的方式多样化，让玩家能找到属于自己的游戏方式，都能玩的舒服一些。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102888",
+            "type": "timelines",
+            "attributes": {
+                "at": 1169,
+                "title": "难度极大",
+                "asset": "f862f747-bc37-43a2-89c1-a1dc1ffd47fc.jpg",
+                "content": "Metroidvania这种游戏类型要求游戏制作者具有良好的执行与设计能力，容错率要降得很低，整个游戏都要做的严丝合缝，考虑到方方面面。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102889",
+            "type": "timelines",
+            "attributes": {
+                "at": 1237,
+                "title": "玩着不舒服",
+                "asset": "a333087b-63aa-41eb-b45a-c9acae82d06d.jpg",
+                "content": "《空洞骑士》的设计就如同汽车的减速带，它在一些区域会刻意放慢玩家的游戏速度，这可能会让玩家玩起来不太舒服。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102890",
+            "type": "timelines",
+            "attributes": {
+                "at": 1310,
+                "title": "细节的把握",
+                "asset": "061eb496-4486-465b-aa4c-49f09d7ff79b.png",
+                "content": "在《血污》中可以看到五十岚孝司对于游戏细小细节的把握，对于每一个场景以及房间都会进行设计。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102891",
+            "type": "timelines",
+            "attributes": {
+                "at": 1354,
+                "title": "做好该做的",
+                "asset": "10c2258c-32a3-46c4-b1e0-0137f17f46db.jpg",
+                "content": "《空洞骑士》去掉了游戏中无法掌控的东西，把游戏中人物的成长与数值系统尽可能简化，专注于做好自己能做好的东西。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102892",
+            "type": "timelines",
+            "attributes": {
+                "at": 1472,
+                "title": "平台跳跃",
+                "asset": "ed3b3f13-8826-4837-a7a1-1ee5caaedb84.jpg",
+                "content": "Metroidvania 中也可以运用平台跳跃的设计来扩充游戏地图。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102893",
+            "type": "timelines",
+            "attributes": {
+                "at": 1496,
+                "title": "《奥日与黑暗森林》",
+                "asset": "af2542c8-3077-45e1-891d-fb5e4f3c4502.jpg",
+                "content": "《奥日与黑暗森林》是由月亮工作室开发、由微软工作室发行的平台游戏，支持Microsoft Windows和Xbox One。游戏以尼博尔山森林为背景，玩家操纵树精灵奥里在林中探索，使枯萎的树林回复生机，沿途面对各种障碍与敌人并逐渐成长。游戏耗时四年制作，参考了《狮子王》和《铁巨人》等作品、并被指是致《雷曼系列》和《银河战士系列》的情书。游戏于2014年E3游戏展中获出席者欢迎，发售后亦获一致好评，大多对剧情、图像、游玩方式、音乐、探索部分和环境设计予以赞扬。",
+                "quote-href": "https://zh.wikipedia.org/wiki/%E5%A5%A7%E9%87%8C%E8%88%87%E8%BF%B7%E5%A4%B1%E6%A3%AE%E6%9E%97",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102894",
+            "type": "timelines",
+            "attributes": {
+                "at": 1511,
+                "title": "解谜要素多",
+                "asset": "8e181b86-d08c-4a98-b763-3ce317c0d71b.jpg",
+                "content": "《奥日与黑暗森林》里有许多解密要素，相比之下战斗方面就少了很多。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102895",
+            "type": "timelines",
+            "attributes": {
+                "at": 1552,
+                "title": "穷尽感",
+                "asset": "0cbbafbd-0173-40fa-bb69-c2549fc71f3d.gif",
+                "content": "《恶魔城》的穷尽感也与《银河战士》的穷尽感相似，多也不是，少也不是。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102896",
+            "type": "timelines",
+            "attributes": {
+                "at": 1582,
+                "title": "强化解密",
+                "asset": "30ed1ec0-7472-4940-8299-ea88ade2df80.jpg",
+                "content": "打破这种穷尽感有很多方法，解密是一个不错的方法。不同的题材可以根据自己的需要进行设计，发挥出属于自己游戏的特点。这是《恶魔城》缺少的东西。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102897",
+            "type": "timelines",
+            "attributes": {
+                "at": 1641,
+                "title": "强化战斗",
+                "asset": "095d38c8-236d-4f5f-b0fa-9b9a3d0d4695.jpg",
+                "content": "战斗方面是另外一个值得注意的点。西总特别喜欢的《Guacamelee! 》系列就有着不俗的表现，能把墨西哥中的特色元素融合进游戏当中。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102898",
+            "type": "timelines",
+            "attributes": {
+                "at": 1672,
+                "title": "不够直观",
+                "asset": "4dc468bf-a8b1-4fb5-92c1-2eafbcbb65fd.gif",
+                "content": "对于四十二来说，《恶魔城》这样的横板2D动作游戏不够直观，人物的运动以及人物的攻击判定令他难受。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102899",
+            "type": "timelines",
+            "attributes": {
+                "at": 1737,
+                "title": "联系起来",
+                "asset": "8fddba0a-b41d-47db-850d-4be9aefb792d.jpg",
+                "content": "现在我们在谈论一些游戏拥有不错的设计的时候，往往也会联想到Metroidvania 这种类型。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102900",
+            "type": "timelines",
+            "attributes": {
+                "at": 1779,
+                "title": "《黑暗之魂》",
+                "asset": "066d2e29-ea4b-4121-8a1a-5d0329e6978a.jpg",
+                "content": "《黑暗之魂》是一款由日本电子游戏公司From Software制作的动作角色扮演游戏，于PlayStation 3和Xbox 360平台上发行，随后因请愿联署而发行Microsoft Windows版。亦是《恶魔之魂》的精神续作，魂系列的第一部作品。黑暗之魂的暂定名称源于制作公司的黑暗计划（Project Dark）。本作为万代南梦宫自费发行。《黑暗之魂》的故事发生在虚构的王国罗德兰（Lordran），玩家扮演一个被关押在北方不死院（Northern Undead Asylum）被诅咒的不死人，偶然被神秘人放出，踏上自己命运的冒险旅途。",
+                "quote-href": "https://zh.wikipedia.org/wiki/%E9%BB%91%E6%9A%97%E9%9D%88%E9%AD%82",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102901",
+            "type": "timelines",
+            "attributes": {
+                "at": 1819,
+                "title": "地图规整",
+                "asset": "2aebe384-04ca-48a9-8783-8842f4de8b02.jpg",
+                "content": "《恶魔城X：月下夜想曲》的地图设计的十分规整，房间与房间直接通过走廊进行连接架构，搭建出一个大的框架，产生逻辑关系。每一个房间都会有明确的位置以及进入的方法，玩家到达后就会有一个较为清晰的印象。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102902",
+            "type": "timelines",
+            "attributes": {
+                "at": 1895,
+                "title": "得有意义",
+                "asset": "92f088e0-e9ac-4ef3-8f2d-5791d2aa58f4.jpg",
+                "content": "玩家得知道来到这个场景能做什么，来到这里到底有什么意义。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102903",
+            "type": "timelines",
+            "attributes": {
+                "at": 1928,
+                "title": "制作人的不同",
+                "asset": "fb718a79-69f4-4935-977e-ab23aae152aa.jpg",
+                "content": "日本的制作人希望能与玩家建立起沟通，能够让玩家知道他们设计的灵感；欧美的制作者往往放弃了这一理念，让玩家进行自由的探索。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102904",
+            "type": "timelines",
+            "attributes": {
+                "at": 2001,
+                "title": "没那么简单",
+                "asset": "66a661a0-7b02-4534-958e-81151de9f669.gif",
+                "content": "把关卡设计成循环结构，控制玩家的进程并不一定会给玩家带来很好的体验。制作者如果要选择操控玩家进程，就应该对于这种情况负起责任。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102905",
+            "type": "timelines",
+            "attributes": {
+                "at": 2067,
+                "title": "时钟塔",
+                "asset": "9598cb14-bfdb-4172-a2b1-d48885631b82.png",
+                "content": "时钟塔位于整个游戏地图的中央位置，玩家从进入游戏后就沿着一条长廊前进，最终走到时钟塔，触发对话，拿去道具。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102906",
+            "type": "timelines",
+            "attributes": {
+                "at": 2156,
+                "title": "并不低级",
+                "asset": "afa4211c-c37d-4f8d-b73b-6fa3c8e30974.jpg",
+                "content": "制作人直接告诉玩家如何去做，看起来似乎有点低级，但其实能让玩家心领神会，让玩家知道自己该做什么了。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102907",
+            "type": "timelines",
+            "attributes": {
+                "at": 2186,
+                "title": "对话引导",
+                "asset": "e34715bc-94ef-4a20-8d9a-596a7bb3415a.jpg",
+                "content": "非常简单的引导方式就是与人物的对话，告诉玩家该去哪儿。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102908",
+            "type": "timelines",
+            "attributes": {
+                "at": 2202,
+                "title": "平台设计暗示",
+                "asset": "4adbda41-a6d2-48e6-8e11-daaaf0278807.jpg",
+                "content": "游戏中的区域存在许多跳跃平台或者空旷区域，这里就在暗示可能会有BOSS战，也可能是利用能力进行进一步探索。击败BOSS或者进行探索后就能获得能力。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102909",
+            "type": "timelines",
+            "attributes": {
+                "at": 2255,
+                "title": "实力差异",
+                "asset": "d8a0237f-30cb-44c5-b9bb-afbd494afd29.png",
+                "content": "玩家在一些地图中会遭遇到较为强大的敌人，以现有的装备或者血量无法通过，所以就会让玩家先去提升实力才来尝试。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102910",
+            "type": "timelines",
+            "attributes": {
+                "at": 2314,
+                "title": "重新回去",
+                "asset": "9c3c8c9c-8342-4325-bda6-f4865b2856b7.jpg",
+                "content": "现在跌落深渊当中不一定会导致死亡，这有可能会开辟一片新的区域。如果想要回到之前的地方就又会经历一大段的旅程。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102911",
+            "type": "timelines",
+            "attributes": {
+                "at": 2353,
+                "title": "变得好玩",
+                "asset": "cc474d27-2ece-4856-becb-e9f8533f2514.jpg",
+                "content": "新获得的能力在游戏设计好的情况下会变得十分有趣，在之前的区域中可以使用新能力完成之前做不到的事情。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102912",
+            "type": "timelines",
+            "attributes": {
+                "at": 2410,
+                "title": "组成部分",
+                "asset": "ff75dd57-d70c-4360-a34a-127153989969.jpg",
+                "content": "四十二认为装备驱动类游戏分为两个大部分：一方面是装备的获取，一方面就是认证装备是否适合自己。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102913",
+            "type": "timelines",
+            "attributes": {
+                "at": 2463,
+                "title": "进攻验证",
+                "asset": "812f7b42-5d0e-4eba-872f-f724aa28b756.gif",
+                "content": "自己获得新道具、新技能好不好用，直接就可以在下一场战斗中进行验证。这些技能道具的提升会使通过速度更快，击杀敌人更快。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102914",
+            "type": "timelines",
+            "attributes": {
+                "at": 2525,
+                "title": "再走一遍",
+                "asset": "90e23ba3-0eaf-4302-899f-ee1060b7f046.jpg",
+                "content": "快到游戏终盘的时候可以把整个地图再走一遍，利用新的能力或者装备能找到之前自己没找到的东西。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102915",
+            "type": "timelines",
+            "attributes": {
+                "at": 2575,
+                "title": "新的发现",
+                "asset": "7f568103-24e7-44bb-9b46-731f62e66479.jpg",
+                "content": "获得能力再回到原来的区域的时候，不会再一次重返之前走过的道路，有可能是会发现一篇全新的区域。如果再让玩家再跑一遍，难免会产生厌烦感。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102916",
+            "type": "timelines",
+            "attributes": {
+                "at": 2658,
+                "title": "掉率过高",
+                "asset": "f002b881-5844-4f1e-9f02-c22e385e9e8a.jpg",
+                "content": "阿彬觉得《血污》里的素材掉率有点过高了，升级太快，挑战的难度随之下降许多。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102917",
+            "type": "timelines",
+            "attributes": {
+                "at": 2727,
+                "title": "乐趣的来源",
+                "asset": "42924c04-90f1-456c-bf4d-532a9ebd0af1.jpg",
+                "content": "Metroidvania 这种类型的游戏希望玩家能够通过游戏的设计得到乐趣。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102918",
+            "type": "timelines",
+            "attributes": {
+                "at": 2758,
+                "title": "Roguelike",
+                "asset": "62fa330a-7e3a-4a3c-9cb6-7e3963823e9e.jpg",
+                "content": "Roguelike 游戏就非常强调游戏的可能性。这种游戏与之前提到的游戏设计形成对比，玩家获得的自由都是建立在可能性之上的，玩家从中获得的东西也不一样。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102919",
+            "type": "timelines",
+            "attributes": {
+                "at": 2829,
+                "title": "搭建好的",
+                "asset": "80001937-3ff4-45a9-a8cc-700777823565.jpg",
+                "content": "Metroidvania 这类游戏的世界是已经搭建好的，所以玩家得感受到精心的设计。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102920",
+            "type": "timelines",
+            "attributes": {
+                "at": 2900,
+                "title": "地标性设计",
+                "asset": "56ebbe28-9c18-4c77-857f-3301f0f885b4.jpg",
+                "content": "Metroidvania 这类游戏中会在游戏内设计一些标志性的空间或者标志物，从而告知玩家所在位置。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102921",
+            "type": "timelines",
+            "attributes": {
+                "at": 2991,
+                "title": "服务型过强",
+                "asset": "c915555e-bea6-4db1-8f29-e3fe6b9e5537.jpg",
+                "content": "龙马认为《血污》体现的服务性实在过于强烈，反而干扰了玩家的体验效果。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102922",
+            "type": "timelines",
+            "attributes": {
+                "at": 3040,
+                "title": "倒背如流",
+                "asset": "1291db54-d99b-4510-8d17-21638fe4b18d.jpg",
+                "content": "相信熟练玩过《黑魂1》的玩家应该对地图倒背如流。传送点较少不得不让玩家强化记忆，自己在地图中跑出捷径。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102923",
+            "type": "timelines",
+            "attributes": {
+                "at": 3114,
+                "title": "顺应趋势",
+                "asset": "3e017247-bafb-4046-9ab3-18ef253eab50.jpg",
+                "content": "服务性质的增强也是为了玩家而服务，不让游戏变得过难。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102924",
+            "type": "timelines",
+            "attributes": {
+                "at": 3142,
+                "title": "说话很酷",
+                "asset": "1ab41adf-97fd-43b4-b14d-d82063fa2773.jpg",
+                "content": "从《恶魔城X：月下夜想曲》开始，游戏拥有剧情，并且带有人物配音。虽然配音不多，但给人带来的感觉非常符合哥特氛围。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102925",
+            "type": "timelines",
+            "attributes": {
+                "at": 3170,
+                "title": "怕不理解",
+                "asset": "baf9a765-f498-4b4f-b4ea-953305ae5512.jpg",
+                "content": "《血污》可能是怕玩家不理解游戏的剧情，作为整个系列的第一作，语句就显得多一些。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102926",
+            "type": "timelines",
+            "attributes": {
+                "at": 3271,
+                "title": "焦虑感",
+                "asset": "36d9cc87-7085-4829-946c-a3136f51cb63.jpg",
+                "content": "《空洞骑士》的美术风格在长期观看后难免产生疲乏，人就会产生焦虑与厌烦感。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102927",
+            "type": "timelines",
+            "attributes": {
+                "at": 3358,
+                "title": "前后期不一样",
+                "asset": "11534031-1a87-4f70-a486-ed69d5bed764.jpg",
+                "content": "《空洞骑士》的一个问题是游戏的前期和后期平衡不太一样。前期太难，玩家的怀疑感会非常强；而获得了能力后进度就会飞速增长，知道遇到下一个瓶颈期。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102928",
+            "type": "timelines",
+            "attributes": {
+                "at": 3433,
+                "title": "留不下来",
+                "asset": "6b389fe1-a05b-4a1c-b82e-1a3ac4d766a2.jpg",
+                "content": "玩家只会记得游戏哪里哪里好，坏的地方就会忘掉。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102929",
+            "type": "timelines",
+            "attributes": {
+                "at": 3497,
+                "title": "文本精良",
+                "asset": "bcf86156-7b38-4b49-ac13-6f2b021c5ad6.jpg",
+                "content": "《空洞骑士》有一个很不错的文本以及故事，叙事的水平很高。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102930",
+            "type": "timelines",
+            "attributes": {
+                "at": 3537,
+                "title": "《黑暗献祭》",
+                "asset": "3b6c1c68-023f-49a4-991a-f3a4c69fa6a7.png",
+                "content": "《黑暗献祭》（Dark Devotion）是一款由法国工作室Hibernian Workshop开发的角色扮演‎游戏。中国区由Maple Whispering代理发行。《黑暗献祭》融合了多种市面受欢迎的横版动作游戏玩法机制，将它们结合在一起的同时也增加了一些独特的特色，同时配合2D像素画风、古典的游戏配乐，的确能够给许多热爱中世纪冷兵器风格、期盼硬核动作游戏的玩家不少的乐趣和“痛苦”。",
+                "quote-href": "https://baike.baidu.com/item/%E9%BB%91%E6%9A%97%E7%8C%AE%E7%A5%AD/23450781",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102931",
+            "type": "timelines",
+            "attributes": {
+                "at": 3580,
+                "title": "说出个道理来",
+                "asset": "da7a9d7c-c40c-4194-a28f-aecb867d02a9.jpg",
+                "content": "制作者还是得用设计来说服玩家，证明自己做的是合理的。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102932",
+            "type": "timelines",
+            "attributes": {
+                "at": 3601,
+                "title": "《死亡细胞》",
+                "asset": "daa909b1-e18b-4d81-903a-e93726dc08cc.jpg",
+                "content": "《死亡细胞》（英语：Dead Cells）是一款融合Roguelike与类银河战士恶魔城要素的游戏，由Motion Twin团队开发。游戏从2017年5月开始抢先体验阶段，2018年8月7日于Windows、MacOS、Linux、PlayStation 4、Xbox One、任天堂Switch等平台正式发售。游戏中玩家将扮演一个被不明细胞寄生的尸体，在地牢中探索并寻找出路。地牢中充满各种武器装备、道具等收集要素，但也要注意陷阱和死灵生物的威胁。玩家也需要收集“细胞”来换取角色能力与武器的升级。每次死亡便会失去身上全部的细胞与装备，并从最初的关卡重新开始，此外地图都是随机生成。开发团队Motion Twin表示本作受到《以撒的结合》不少的启发。",
+                "quote-href": "https://zh.wikipedia.org/wiki/%E6%AD%BB%E4%BA%A1%E7%B4%B0%E8%83%9E",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102933",
+            "type": "timelines",
+            "attributes": {
+                "at": 3629,
+                "title": "走向未知",
+                "asset": "790108d6-4f52-4cbf-91ef-c11f57c81143.jpg",
+                "content": "Roguelike 游戏面对的都是未知的世界，而探索是知道有什么东西在前面的。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102934",
+            "type": "timelines",
+            "attributes": {
+                "at": 3701,
+                "title": "设计理念",
+                "asset": "ca48d932-7ac3-4b0a-b537-1ce90bf2df44.jpg",
+                "content": "Metroidvania 代表着一种设计理念，今天谈到的要素其实只是理念中的一部分。这种理念在各种游戏中都得到了应用。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102935",
+            "type": "timelines",
+            "attributes": {
+                "at": 3815,
+                "title": "做好设计",
+                "asset": "70387471-3cbd-4010-b26e-35293430d465.jpg",
+                "content": "做好游戏中的设计不光能让玩家玩的痛快，也能让制作人的理念更好表达出来。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102936",
+            "type": "timelines",
+            "attributes": {
+                "at": 3865,
+                "title": "受到欢迎",
+                "asset": "09a8bfee-5e23-490b-8d7a-4ac6f93e42d9.jpg",
+                "content": "现如今《战神》、《生化危机2：重制版》等游戏都运用了Metroidvania 这种设计理念，都取得了不错的效果。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102937",
+            "type": "timelines",
+            "attributes": {
+                "at": 3929,
+                "title": "大制作少",
+                "asset": "f5789f3b-885c-4001-a4cf-1208edb5ef15.jpg",
+                "content": "现在专精于制作2D横板的Metroidvania 游戏的制作团队以独立团队居多，他们的制作不可避免的会出现一些问题。但是大团队制作相对较少，这还是比较惋惜的。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102938",
+            "type": "timelines",
+            "attributes": {
+                "at": 3962,
+                "title": "盈利问题",
+                "asset": "a3341ee6-942f-491a-a9f7-d079acdeed10.png",
+                "content": "大厂商希望追求持续的盈利，而开发很长时间，实际游玩时间只有二三十个小时的游戏显然不太划算。大厂商更愿意去做可持续发展的游戏。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102940",
+            "type": "timelines",
+            "attributes": {
+                "at": 4012,
+                "title": "还是有人玩",
+                "asset": "091e045e-9909-49da-aab1-cc22e2d2a8f9.jpg",
+                "content": "只要有人愿意玩这样的游戏，制作者也会继续制作下去。《血污》的众筹成功就很好的说明了这一点。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102943",
+            "type": "timelines",
+            "attributes": {
+                "at": 4100,
+                "title": "设计与对话",
+                "asset": "c5c4cc6a-c810-42c2-930c-f37751923691.jpg",
+                "content": "在今天节目中反复提及的就是设计与对话，这是Metroidvania 绕不开的两个重要部分。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102946",
+            "type": "timelines",
+            "attributes": {
+                "at": 4141,
+                "title": "不断发展",
+                "asset": "8e37a57a-f970-44a1-8ae2-6e6ef59835bb.jpg",
+                "content": "Metroidvania 的理念会渐渐的加入到更多的游戏当中，也会有越来越多元、越来越精湛的游戏出现在大家面前。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102948",
+            "type": "timelines",
+            "attributes": {
+                "at": 4202,
+                "title": "多样性发展",
+                "asset": "d21ec186-19a5-43fa-973c-ebce9733787f.jpg",
+                "content": "游戏产业也应该多样性发展，有不同的类型游戏来满足玩家的需求，带来更好的作品。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102949",
+            "type": "timelines",
+            "attributes": {
+                "at": 4232,
+                "title": "《奥日与精灵意志》",
+                "asset": "8b16e6f9-49c7-42a9-bd91-2c540ce963ec.jpg",
+                "content": "《奥日与精灵意志》是一款月亮工作室开发并由微软工作室发行在Xbox One以及Windows上的银河恶魔城式平台冒险游戏。本作是2015年发售的《奥日与迷失森林》的续作。游戏于2017年的微软E3游戏展前发布会上公布。游戏将支持4K分辨率输出、Xbox One X的机能加强功能以及Xbox Play Anywhere的跨平台计划。",
+                "quote-href": "https://zh.wikipedia.org/wiki/%E5%A5%A5%E6%97%A5%E4%B8%8E%E7%B2%BE%E7%81%B5%E6%84%8F%E5%BF%97",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102951",
+            "type": "timelines",
+            "attributes": {
+                "at": 4267,
+                "title": "欢迎分享",
+                "asset": "37acdd3f-a499-4b0a-8ccb-170dd4d32d0a.jpg",
+                "content": "欢迎大家在评论区一同讨论分享你的观点，聊聊你认为什么是Metroidvania，你喜欢的点是什么，推荐推荐相关的游戏。",
+                "quote-href": "",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "102954",
+            "type": "timelines",
+            "attributes": {
+                "at": 4303,
+                "title": "结尾 BGM",
+                "asset": "95f3cff6-0de4-4cf4-8e2f-0c4c9126fce6.png",
+                "content": "您现在听到的结尾BGM 是《恶魔城X： 月下夜想曲》的结尾曲。《I am the wind》再次感谢您收听本期EA 圆桌节目，我们下期节目再见！",
+                "quote-href": "https://y.qq.com/n/yqq/song/0012aBke2g2J8z.html",
+                "comments-count": 0
+            },
+            "relationships": {
+                "media": {},
+                "comments": {}
+            }
+        },
+        {
+            "id": "365",
+            "type": "users",
+            "attributes": {
+                "nickname": "xizongbu",
+                "thumb": "75588e6b-8aa4-4559-995d-2c9c69bcfe7a.gif",
+                "location": "北京",
+                "is-fresh": false,
+                "intro": "天天搅基有木有！",
+                "sex": 0,
+                "followers-count": 620,
+                "followees-count": 8,
+                "created-at": "2010-05-28T06:15:00.000+08:00",
+                "psn-id": "et008et-us",
+                "live-id": "et008et",
+                "nintendo-friendcode": "",
+                "steam-id": "xizongbu"
+            },
+            "relationships": {
+                "talks": {},
+                "notifications": {},
+                "latest-articles": {},
+                "latest-videos": {},
+                "latest-radios": {},
+                "latest-talks": {},
+                "subscribed-entries": {},
+                "subscribed-entities": {},
+                "subscribed-games": {},
+                "subscribed-tags": {},
+                "subscribed-categories": {},
+                "subscribed-albums": {},
+                "subscribed-collections": {},
+                "originals": {},
+                "articles": {},
+                "radios": {},
+                "videos": {},
+                "followers": {},
+                "followees": {},
+                "preference": {},
+                "bookmarks": {},
+                "subscriptions": {}
+            },
+            "meta": {
+                "followship-id": null,
+                "inverse-followship-id": null
+            }
+        },
+        {
+            "id": "21327",
+            "type": "users",
+            "attributes": {
+                "nickname": "Ryoma",
+                "thumb": "aa080c8b-0b93-4370-96af-1e06afef697d.png",
+                "location": "北京",
+                "is-fresh": false,
+                "intro": null,
+                "sex": null,
+                "followers-count": 2287,
+                "followees-count": 0,
+                "created-at": "2015-06-17T15:05:50.000+08:00",
+                "psn-id": "cino_ryu",
+                "live-id": "",
+                "nintendo-friendcode": "",
+                "steam-id": ""
+            },
+            "relationships": {
+                "talks": {},
+                "notifications": {},
+                "latest-articles": {},
+                "latest-videos": {},
+                "latest-radios": {},
+                "latest-talks": {},
+                "subscribed-entries": {},
+                "subscribed-entities": {},
+                "subscribed-games": {},
+                "subscribed-tags": {},
+                "subscribed-categories": {},
+                "subscribed-albums": {},
+                "subscribed-collections": {},
+                "originals": {},
+                "articles": {},
+                "radios": {},
+                "videos": {},
+                "followers": {},
+                "followees": {},
+                "preference": {},
+                "bookmarks": {},
+                "subscriptions": {}
+            },
+            "meta": {
+                "followship-id": null,
+                "inverse-followship-id": null
+            }
+        },
+        {
+            "id": "12865",
+            "type": "users",
+            "attributes": {
+                "nickname": "NJBK",
+                "thumb": "d5900cb9-36c2-4f01-bc30-13b934096270.jpg",
+                "location": "江苏",
+                "is-fresh": false,
+                "intro": "",
+                "sex": 0,
+                "followers-count": 550,
+                "followees-count": 0,
+                "created-at": "2013-05-02T19:23:52.000+08:00",
+                "psn-id": "BIN_NJBK",
+                "live-id": "",
+                "nintendo-friendcode": "0233-1516-6314",
+                "steam-id": "njbk123"
+            },
+            "relationships": {
+                "talks": {},
+                "notifications": {},
+                "latest-articles": {},
+                "latest-videos": {},
+                "latest-radios": {},
+                "latest-talks": {},
+                "subscribed-entries": {},
+                "subscribed-entities": {},
+                "subscribed-games": {},
+                "subscribed-tags": {},
+                "subscribed-categories": {},
+                "subscribed-albums": {},
+                "subscribed-collections": {},
+                "originals": {},
+                "articles": {},
+                "radios": {},
+                "videos": {},
+                "followers": {},
+                "followees": {},
+                "preference": {},
+                "bookmarks": {},
+                "subscriptions": {}
+            },
+            "meta": {
+                "followship-id": null,
+                "inverse-followship-id": null
+            }
+        },
+        {
+            "id": "20803",
+            "type": "users",
+            "attributes": {
+                "nickname": "四十二",
+                "thumb": "542a42df-4d1c-4685-8591-7fc1d800e794.jpg",
+                "location": "北京",
+                "is-fresh": false,
+                "intro": null,
+                "sex": 0,
+                "followers-count": 3018,
+                "followees-count": 0,
+                "created-at": "2015-06-15T18:29:33.000+08:00",
+                "psn-id": "",
+                "live-id": "",
+                "nintendo-friendcode": "",
+                "steam-id": ""
+            },
+            "relationships": {
+                "talks": {},
+                "notifications": {},
+                "latest-articles": {},
+                "latest-videos": {},
+                "latest-radios": {},
+                "latest-talks": {},
+                "subscribed-entries": {},
+                "subscribed-entities": {},
+                "subscribed-games": {},
+                "subscribed-tags": {},
+                "subscribed-categories": {},
+                "subscribed-albums": {},
+                "subscribed-collections": {},
+                "originals": {},
+                "articles": {},
+                "radios": {},
+                "videos": {},
+                "followers": {},
+                "followees": {},
+                "preference": {},
+                "bookmarks": {},
+                "subscriptions": {}
+            },
+            "meta": {
+                "followship-id": null,
+                "inverse-followship-id": null
+            }
+        }
+    ]
+}
