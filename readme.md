@@ -13,23 +13,6 @@ python 3.5, 3.6, 3.7
 
 ## 使用说明
 
-本脚本可以生成三种不同规格的视频
-
-||Simple|Complex|Animated|
-|:---|:---:|:---:|:---:|
-|时间校对|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|文本|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|图片|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
-|亚克力背景|:x:|:heavy_check_mark:|:heavy_check_mark:|
-|logo/水印|:x:|:heavy_check_mark:|:heavy_check_mark:|
-|声音|:x:|:heavy_check_mark:|:heavy_check_mark:|
-|转场动画|:x:|:x:|:heavy_check_mark:|
-|GIF动画|:x:|:x:|:heavy_check_mark:|
-|建议帧数|0-5 fps|0-5 fps|20-39 fps|
-|常规用时|3 min|15 min|150 min|
-
-具体使用方法请参考各自章节
-
 ### 安装依赖
 
 ```bash
@@ -40,40 +23,25 @@ pip3 install -r requirements.txt
 
 以 `https://www.gcores.com/radios/107884` 中的电台为例：
 
-1. 如果想要生成Simple样式版本的视频可运行
+如果想要生成视频可运行
 
 ```bash
-python simple.py 107884
-```
+python gcores.py # 直接生成最新一期电台的视频
+python gcores.py 107884 # 生成id为107884的电台的视频
+python gcores.py 107884 -s # 跳过爬虫直接用已下载的图片生成107884的视频
 
-2. 如果想要生成Complex样式版本的视频可运行
-
-```bash
-python complex.py 107884
-```
-
-3. 如果想要生成Animated样式版本的视频可运行
-
-```bash
-python animated.py 107884
 ```
 
 此外
-如果想单独爬去文本和图片不生成视频，可运行
+如果想单独爬取文本和图片不生成视频，可运行
 
 ```bash
-python crawler.py 107884
+python crawler.py 107884 # 爬取id为107884的电台文本和图片
+python crawler.py 107884 -t #只爬取文本 不下载图片
 ```
 
-图片暂存于`.\resource\107884\`中。图片的名称为图片在视频中最初出现的秒数。
+图片暂存于`.\cache\107884\`中。图片的名称为图片在视频中最初出现的秒数。
 
-想跳过爬虫直接用已经爬好的图片和文字生成视频，可在上面生成视频的命令后加-s:
-
-```bash
-python simple.py 107884 -s
-python complex.py 107884 -s
-python animated.py 107884 -s
-```
 
 生成的视频文件位于 `output` 文件夹内
 
