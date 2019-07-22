@@ -58,16 +58,16 @@ python crawler.py 107884 -t
 |参数|含义|示例|注释|
 |:---:|:---|:---:|:---|
 |fps|帧率|2|
-|width|视频宽度|1280|
-|height|视频高度|720|
-|title_font_size|标题字体大小|48|
-|content_font_size|正文字体大小|28|
-|gcores_title_color|标题字体颜色|#424242|
-|gcores_content_color|正文字体颜色|#424242|
+|width|视频宽度|1920|
+|height|视频高度|1080|
+|title_font_size|标题字体大小|53|
+|content_font_size|正文字体大小|36|
+|gcores_title_color|标题字体颜色|(255,255,255,246)|
+|gcores_content_color|正文字体颜色|(255,255,255,205)|
 |background_color|背景颜色|#FFFFFF|
-|title_font|标题字体|./gadio/utils/SourceHanSans-Regular.ttc|如果使用系统自带字体，直接写字体文件名|
-|content_font|正文字体|./gadio/utils/SourceHanSans-Regular.ttc|如果使用系统自带字体，直接写字体文件名|
-|gcores_logo_name|logo图片|./gadio/utils/logo.png|logo文件应放在utils文件夹下|
+|title_font|标题字体|./gadio/utils/PingFang-Heavy.ttf|如果使用系统自带字体，直接写字体文件名|
+|content_font|正文字体|./gadio/utils/PingFang-Medium.ttf|如果使用系统自带字体，直接写字体文件名|
+|gcores_logo_name|logo图片|./gadio/utils/gcores.png|logo文件应放在utils文件夹下|
 |test|测试模式|False|在测试模式下之生成前10段视频，最长不超过200秒|
 |start_offset|片头偏移量|5|最终的文字时间轴偏移量|
 
