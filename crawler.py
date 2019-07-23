@@ -17,7 +17,7 @@ if __name__ == "__main__":
         parsed_json = Crawler.crawl(radio_id)
     radio = Radio.load_from_json(parsed_json)
     Crawler.get_headers(radio)
-    if (len(sys.argv) > 2):
+    if (len(sys.argv) >= 2):
         if ('-t' in sys.argv):
             {}
         else:
