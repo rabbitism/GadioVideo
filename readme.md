@@ -1,6 +1,6 @@
 # Gadio Video
 
-![sample](doc/gcores.png)
+![sample](https://static.gcores.com/assets/25c9a8fc027ac16ba3e7fe996551f828.png)
 
 |Platform|Test Result|
 |:---:|:---:|
