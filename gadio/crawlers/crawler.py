@@ -89,11 +89,13 @@ class Crawler():
     def get_latest():
         url = api['radio_list_api_template']
         print("Getting the latest gadio id...")
+        print(url)
         content = requests.get(url).content
         parsed = json.loads(content)
         id = parsed['data'][0]['id']
         return int(id)
     
+    @staticmethod
     def get_headers(radio: Radio):
         offset = config['start_offset']
         headers = []
