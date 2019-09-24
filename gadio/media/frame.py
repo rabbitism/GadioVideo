@@ -28,10 +28,10 @@ class Frame():
     @staticmethod
     def create_cover(radio: Radio):
         """create a cover page for start of video. No text pasted on this page.
-        
+
         Arguments:
             radio {Radio} -- Radio
-        
+
         Returns:
             image -- a cv2 frame.
         """
@@ -43,21 +43,21 @@ class Frame():
         return image
 
     @staticmethod
-    def create_page(page: Page, radio:Radio):
+    def create_page(page: Page, radio: Radio):
         """Create a gadio page frame.
-        Pipeline: 
+        Pipeline:
         1. Load image with opencv, use opencv to resize and blur.
         2. Convert opencv image to Pillow image
         3. Draw text on Pillow image
         4. Convert back to opencv image for opencv VideoWriter
 
-        Beware that Pillow image and opencv channel orders are different. 
+        Beware that Pillow image and opencv channel orders are different.
         Arguments:
             page {Page} -- Gadio page
-        
+
         Keyword Arguments:
             radio {Radio} -- radio
-        
+
         Returns:
             np.array -- An numpy array representing cv2 image.
         """
@@ -67,6 +67,8 @@ class Frame():
             image_dir = os.sep.join(['cache', str(radio.radio_id), radio.cover.local_name])
         else:
             image_dir = os.sep.join(['cache', str(radio.radio_id), page.image.local_name])
+        qr_dir = os.sep.join(['cache', str(radio.radio_id), 'qr_quotes', page.image.local_name.split('.')[0] + ".png"])
+
         image = cv2.imread(image_dir)
         image_suffix = page.image.suffix
         background_image = Frame.expand_frame(image, Frame.width, Frame.height)
@@ -77,7 +79,7 @@ class Frame():
         background_rgb = cv2.cvtColor(background_image, cv2.COLOR_BGR2RGB)
         content_rgb = cv2.cvtColor(content_image, cv2.COLOR_BGR2RGB)
 
-        #Convert to RGBA for transparency rendering
+        # Convert to RGBA for transparency rendering
         frame = Image.fromarray(background_rgb).convert('RGBA')
 
         mask = Image.new('RGBA', (Frame.width, Frame.height), color=(0, 0, 0, 128))
@@ -85,7 +87,7 @@ class Frame():
 
         left_offset = int(round(245/1920 * Frame.width)) + int(round((550 - content_image.shape[1])/2))
         top_offset = int(round(210/1080 * Frame.height)) + int(round((550 - content_image.shape[0])/2))
-        
+
         content_frame = Image.fromarray(content_rgb)
         content_image_mask = Image.new('RGBA', (content_image.shape[1], content_image.shape[0]), color=(0, 0, 0, 26))
         if (image_suffix == "" or image_suffix.lower() == '.gif'):
@@ -104,13 +106,18 @@ class Frame():
             qr_top_offset = int(round(917/1080 * Frame.height))
             frame.paste(logo_image, (logo_left_offset, logo_top_offset), mask=logo_image)
             frame.paste(qr_image, (qr_left_offset, qr_top_offset), mask=qr_image)
+            if os.path.exists(qr_dir):
+                qr_right_offset = int(round(1700/1920 * Frame.width))
+                page_qr_image = Image.open(qr_dir).convert('RGBA')
+                page_qr_image = page_qr_image.resize((86, 86))
+                frame.paste(page_qr_image, (qr_right_offset, qr_top_offset), mask=page_qr_image)
         except:
             print("Passing logo rendering due to file error")
 
         draw = ImageDraw.Draw(frame)
 
         text_width_limit = int(round(770 / 1920 * Frame.width))
-        
+
         title_string = Frame.title_wrapper.wrap_string(page.title, text_width_limit)
         print('Title:', title_string)
         raw_content = page.content
@@ -123,7 +130,7 @@ class Frame():
         title_height = Frame.title_font.getsize_multiline(title_string)[1]
         title_space_bottom = int(round(Frame.title_font.size * 0.9))
         content_height_limit = int(round(574 / 1080 * Frame.height)) - title_height - title_space_bottom
-        
+
         content_space = int(round(Frame.content_font.size * 0.8))
         actual_content_height = Frame.content_font.getsize_multiline(content_string, spacing=content_space)[1]
         while (actual_content_height > content_height_limit):
@@ -132,25 +139,25 @@ class Frame():
             content_wrapper = Wrapper(Frame.content_font)
             content_string = content_wrapper.wrap_string(raw_content, text_width_limit)
             actual_content_height = Frame.content_font.getsize_multiline(content_string, spacing=content_space)[1]
-            #print(actual_content_height)
-        
+            # print(actual_content_height)
+
         print(content_string)
         draw.text((text_left_offset, text_top_offset), title_string, config['gcores_title_color'], font=Frame.title_font)
         draw.text((text_left_offset, text_top_offset + title_height + title_space_bottom), content_string, config['gcores_content_color'], font=Frame.content_font, spacing=content_space)
-        
-        #Reset content_wrapper and content_font
+
+        # Reset content_wrapper and content_font
         Frame.content_font = ImageFont.truetype(config['content_font'], config['content_font_size'], encoding="utf-8")
         Frame.content_wrapper = Wrapper(Frame.content_font)
 
         cv2charimg = np.array(frame)
         result = cv2.cvtColor(cv2charimg, cv2.COLOR_RGB2BGR)
-        #cv2.imwrite('test.jpg',result)
-        #cv2.waitKey()
+        # cv2.imwrite('test.jpg',result)
+        # cv2.waitKey()
         return result
 
     @staticmethod
     def expand_frame(image, target_width, target_height):
-        """Expand a frame so it is larger than the rectangle 
+        """Expand a frame so it is larger than the rectangle
 
         Arguments:
             image {Image} -- cv2 image
@@ -171,7 +178,7 @@ class Frame():
         actual_width = max(int(image.shape[1] / ratio), target_width)
         actuai_height = max(int(image.shape[0] / ratio), target_height)
         result = cv2.resize(image, (actual_width, actuai_height),
-                           interpolation=cv2.INTER_CUBIC)
+                            interpolation=cv2.INTER_CUBIC)
         left = int((result.shape[1] - target_width) / 2)
         right = left + target_width
         top = int((result.shape[0] - target_height) / 2)
@@ -181,12 +188,12 @@ class Frame():
     @staticmethod
     def shrink_frame(image, target_width, target_height):
         """Shrink a frame so it is smaller than the rectangle
-        
+
         Arguments:
             image {Image} -- np array
             target_width {int} -- target width of rectangle
             target_height {int} -- target height of rectangle
-        
+
         Returns:
             np.array -- resized image
         """

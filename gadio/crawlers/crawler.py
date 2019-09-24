@@ -5,6 +5,7 @@ import sys
 import urllib.request
 
 import requests
+from MyQR import myqr
 
 from gadio.configs.config import config
 from gadio.models.asset import Image, Audio
@@ -21,9 +22,9 @@ class Crawler():
     @staticmethod
     def crawl(gadio_id: int):
         """Get timeline and corresponding contents from Gcores website
-        
+
         Arguments:
-            gadio_id {int} -- gadio id in gcores websites. 
+            gadio_id {int} -- gadio id in gcores websites.
         """
         url = api['radio_api_template'].format(radio_id=gadio_id)
         print("Extracting information from ", gadio_id)
@@ -45,7 +46,7 @@ class Crawler():
             #print(cache_dir)
             json.dump(parsed, outfile, ensure_ascii=False, indent=4)
         return parsed
-        
+
     @staticmethod
     def download_image(image: Image, file_dir: str):
         try:
@@ -81,9 +82,10 @@ class Crawler():
         Crawler.download_audio(radio.audio, file_dir + os.sep + 'audio')
         for user in radio.users:
             Crawler.download_image(user.portrait, file_dir + os.sep + 'users')
-            
+
         for page in radio.timeline.values():
             Crawler.download_image(page.image, file_dir)
+            Crawler.make_quote_qr_image(page.quote_href, page.image.local_name, file_dir + os.sep + "qr_quotes")
 
     @staticmethod
     def get_latest():
@@ -94,7 +96,7 @@ class Crawler():
         parsed = json.loads(content)
         id = parsed['data'][0]['id']
         return int(id)
-    
+
     @staticmethod
     def get_headers(radio: Radio):
         offset = config['start_offset']
@@ -117,3 +119,22 @@ class Crawler():
                     length=len(line)
                 links.writelines(line)
         links.close()
+
+    @staticmethod
+    def make_quote_qr_image(text, name, file_dir):
+        if not os.path.exists(file_dir):
+            print("Folder", file_dir, 'does not exist. Creating...')
+            os.makedirs(file_dir)
+        print("Saving qr_quotes", name)
+        if text:
+            name = name.split('.')[0] + ".png"
+            myqr.run(
+                text,
+                version=2,
+                level="H",
+                picture=None,
+                colorized=False,
+                contrast=1.0,
+                save_name=name,
+                save_dir=file_dir,
+            )
