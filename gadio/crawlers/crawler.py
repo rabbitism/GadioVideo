@@ -75,7 +75,7 @@ class Crawler():
         return
 
     @staticmethod
-    def download_assets(radio: Radio, file_dir: str):
+    def download_assets(radio: Radio, file_dir: str, with_quote: bool):
         id = str(radio.radio_id)
         file_dir = file_dir + os.sep + id
         Crawler.download_image(radio.cover, file_dir)
@@ -85,7 +85,8 @@ class Crawler():
 
         for page in radio.timeline.values():
             Crawler.download_image(page.image, file_dir)
-            Crawler.make_quote_qr_image(page.quote_href, page.image.local_name, file_dir + os.sep + "qr_quotes")
+            if with_quote:
+                Crawler.make_quote_qr_image(page.quote_href, page.image.local_name, file_dir + os.sep + "qr_quotes")
 
     @staticmethod
     def get_latest():
@@ -128,13 +129,16 @@ class Crawler():
         print("Saving qr_quotes", name)
         if text:
             name = name.split('.')[0] + ".png"
-            myqr.run(
-                text,
-                version=2,
-                level="H",
-                picture=None,
-                colorized=False,
-                contrast=1.0,
-                save_name=name,
-                save_dir=file_dir,
-            )
+            try:
+                myqr.run(
+                    text,
+                    version=2,
+                    level="H",
+                    picture=None,
+                    colorized=False,
+                    contrast=1.0,
+                    save_name=name,
+                    save_dir=file_dir,
+                )
+            except:
+                print("wrong qr code")
