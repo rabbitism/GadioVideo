@@ -43,4 +43,4 @@ class Video():
             video_clip = video_clip.subclip(0, min(200, video_clip.duration))
         video_clip.write_videofile(Video.output_dir +os.sep+ str(radio.radio_id)+" "+radio.title +".mp4", fps=Video.fps)
         print("{} finished!".format(radio.title))
-        os.remove(Video.output_dir+os.sep+str(radio.radio_id)+'_temp.mp4')
+        # os.remove(Video.output_dir+os.sep+str(radio.radio_id)+'_temp.mp4')

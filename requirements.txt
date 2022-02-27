@@ -1,6 +1,6 @@
-﻿opencv-python==4.0.1.24
-Pillow==6.2.0
-urllib3==1.25
+﻿opencv-python==4.5.5.62
+Pillow==9.0.0
+urllib3==1.26.5
 moviepy==1.0.0
-requests==2.22.0
+requests==2.27.1
 myqr==2.3.1
