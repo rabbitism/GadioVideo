@@ -1,5 +1,5 @@
 ﻿opencv-python==4.5.5.62
-Pillow==9.0.0
+Pillow==9.3.0
 urllib3==1.26.5
 moviepy==1.0.0
 requests==2.27.1
