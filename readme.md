@@ -11,7 +11,7 @@
 
 ## 运行环境
 
-python 3.5, 3.6, 3.7
+python 3.5, 3.6, 3.7, 3.8, 3.9
 
 ## 使用说明
 
@@ -19,7 +19,9 @@ python 3.5, 3.6, 3.7
 
 ```bash
 pip3 install -r requirements.txt
+ffdl install --add-path
 ```
+ffdl(ffmpeg-downloader) 会自动安装最新的ffmpeg, Linux仅需输入 `ffdl install` , 它会自动添加链接, Windows和macOS则需额外输入 `--add-path` 来添加环境, 或请自行下载ffmpeg和添加环境
 
 ### 运行示例
 
