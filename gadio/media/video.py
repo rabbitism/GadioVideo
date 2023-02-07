@@ -1,6 +1,9 @@
 from cv2 import VideoWriter, VideoWriter_fourcc
 from moviepy.editor import *
 
+import ffmpeg_downloader as ffdl
+import subprocess as sp
+
 from gadio.configs.config import config
 from gadio.media.frame import Frame
 from gadio.models.radio import Radio
@@ -35,12 +38,13 @@ class Video():
                 video.write(frame)
         video.release()
 
-        video_clip = VideoFileClip(Video.output_dir + os.sep + str(radio.radio_id) + '_temp.mp4')
-        print(video_clip.duration)
-        audio_clip = AudioFileClip(os.sep.join(['.', 'cache', str(radio.radio_id), 'audio', radio.audio.local_name]))
-        video_clip.audio = audio_clip
+        video_clip = Video.output_dir + os.sep + str(radio.radio_id) + '_temp.mp4'
+        audio_clip = os.sep.join(['.', 'cache', str(radio.radio_id), 'audio', radio.audio.local_name])
         if config['test']:
+            video_clip = VideoFileClip(Video.output_dir + os.sep + str(radio.radio_id) + '_temp.mp4')
             video_clip = video_clip.subclip(0, min(200, video_clip.duration))
-        video_clip.write_videofile(Video.output_dir +os.sep+ str(radio.radio_id)+" "+radio.title +".mp4", fps=Video.fps)
+        mux_output = Video.output_dir +os.sep+ str(radio.radio_id)+' '+radio.title +'.mp4'
+        print("mux_output: ", mux_output)
+        sp.run([ffdl.ffmpeg_path, '-i', video_clip, '-i', audio_clip, '-c:v', 'libx264', '-c:a', 'aac', '-pix_fmt', 'yuv420p', '-crf', '24', mux_output])
         print("{} finished!".format(radio.title))
         # os.remove(Video.output_dir+os.sep+str(radio.radio_id)+'_temp.mp4')
