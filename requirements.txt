@@ -4,3 +4,4 @@ urllib3==1.26.5
 moviepy==1.0.0
 requests==2.27.1
 myqr==2.3.1
+ffmpeg-downloader==0.2.0
