@@ -43,8 +43,17 @@ class Video():
         if config['test']:
             video_clip = VideoFileClip(Video.output_dir + os.sep + str(radio.radio_id) + '_temp.mp4')
             video_clip = video_clip.subclip(0, min(200, video_clip.duration))
-        mux_output = Video.output_dir +os.sep+ str(radio.radio_id)+' '+radio.title +'.mp4'
-        print("mux_output: ", mux_output)
-        sp.run([ffdl.ffmpeg_path, '-i', video_clip, '-i', audio_clip, '-c:v', 'libx264', '-c:a', 'aac', '-pix_fmt', 'yuv420p', '-crf', '24', mux_output])
+        mux_output = Video.output_dir + os.sep + str(radio.radio_id) + ' ' + radio.title + '.mp4'
+        
+        sp.run([
+            ffdl.ffmpeg_path, 
+            '-i', video_clip, 
+            '-i', audio_clip, 
+            '-c:v', 'libx264', 
+            '-c:a', 'aac', 
+            '-pix_fmt', 'yuv420p', 
+            '-crf', '24', 
+            mux_output])
+        
         print("{} finished!".format(radio.title))
         # os.remove(Video.output_dir+os.sep+str(radio.radio_id)+'_temp.mp4')
