@@ -22,18 +22,14 @@ class Video():
     @staticmethod
     def create_video(radio: Radio):
         images_loc = os.path.join(os.curdir, 'cache', str(radio.radio_id), 'images')
-        if not os.path.exists(images_loc):
-            os.makedirs(images_loc)
+        os.makedirs(images_loc, exist_ok=True)
         vclips_loc = os.path.join(os.curdir, 'cache', str(radio.radio_id), 'videos')
-        if not os.path.exists(vclips_loc):
-            os.makedirs(vclips_loc)
-        textlist = vclips_loc + os.sep + 'list.txt'
+        os.makedirs(vclips_loc, exist_ok=True)
+        textlist = os.path.join(vclips_loc, 'list.txt')
         if os.path.exists(textlist):
             os.remove(textlist)
             
-        if not os.path.exists(Video.output_dir):
-            print("Folder", Video.output_dir, 'does not exist. Creating...')
-            os.makedirs(Video.output_dir)
+        os.makedirs(Video.output_dir, exist_ok=True)
         clip_count = len(radio.timestamps) - 1
         
         for i in range(clip_count):
@@ -46,16 +42,16 @@ class Video():
             sequence = '%05d' % i
             frame_time = str(radio.timestamps[i + 1] - radio.timestamps[i])
             
-            Image.fromarray(frame).save(images_loc + os.sep + sequence + '.png')
+            Image.fromarray(frame).save(os.path.join(images_loc, sequence + '.png'))
             sp.run([ffdl.ffmpeg_path, 
                     '-r', str(Video.fps), 
                     '-loop', '1', 
-                    '-i', images_loc + os.sep + sequence + '.png', 
+                    '-i', os.path.join(images_loc, sequence + '.png'), 
                     '-c:v', 'libx264', 
                     '-pix_fmt', 'yuv420p', 
                     '-crf', '24', 
                     '-t', frame_time, 
-                    vclips_loc + os.sep + sequence + '.mp4'])
+                    os.path.join(vclips_loc, sequence + '.mp4')])
             
             with open(textlist, 'a+') as f:
                 f.write("file '{}'\n".format(sequence + '.mp4'))
@@ -69,7 +65,7 @@ class Video():
                 '-i', audio_clip, 
                 '-c:v', 'copy', 
                 '-c:a', 'aac', 
-                Video.output_dir + os.sep + radio.title + '.mp4'])
+                os.path.join(Video.output_dir, radio.title + '.mp4')])
         
         print("{} finished!".format(radio.title))
         # rmtree(os.path.join(os.curdir, 'cache', str(radio.radio_id), 'images'))
