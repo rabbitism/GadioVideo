@@ -1,11 +1,7 @@
-
 import os
 
-import cv2
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import numpy as np
-from cv2 import VideoWriter_fourcc
-from PIL import Image, ImageDraw, ImageFont
-
 from gadio.configs.config import config
 from gadio.models.radio import Radio
 from gadio.text.wrapper import Wrapper
@@ -28,17 +24,15 @@ class Frame():
     @staticmethod
     def create_cover(radio: Radio):
         """create a cover page for start of video. No text pasted on this page.
-
         Arguments:
             radio {Radio} -- Radio
-
         Returns:
             image -- a cv2 frame.
         """
         cover_dir = os.sep.join(
             ['cache', str(radio.radio_id), radio.cover.local_name])
         print('Creating cover page')
-        image = cv2.imread(cover_dir)
+        image = Image.open(cover_dir)
         image = Frame.expand_frame(image, Frame.width, Frame.height)
         return image
 
@@ -50,46 +44,45 @@ class Frame():
         2. Convert opencv image to Pillow image
         3. Draw text on Pillow image
         4. Convert back to opencv image for opencv VideoWriter
-
         Beware that Pillow image and opencv channel orders are different.
         Arguments:
             page {Page} -- Gadio page
-
         Keyword Arguments:
             radio {Radio} -- radio
-
         Returns:
             np.array -- An numpy array representing cv2 image.
         """
         image_suffix = page.image.suffix
-        if (image_suffix == "" or image_suffix.lower() == '.gif'):
+        if (image_suffix == ""):
             # If image is not found or image is gif, load cover as background
             image_dir = os.sep.join(['cache', str(radio.radio_id), radio.cover.local_name])
+        elif (image_suffix.lower() == '.gif'):
+            image_dir = os.sep.join(['cache', str(radio.radio_id), radio.cover.local_name])
+            gif_image = Image.open(image_dir)
+            gif_image.seek(0)
+            image = gif_image.convert('RGB')
         else:
             image_dir = os.sep.join(['cache', str(radio.radio_id), page.image.local_name])
         qr_dir = os.sep.join(['cache', str(radio.radio_id), 'qr_quotes', page.image.local_name.split('.')[0] + ".png"])
 
-        image = cv2.imread(image_dir)
+        image = Image.open(image_dir)
         image_suffix = page.image.suffix
         background_image = Frame.expand_frame(image, Frame.width, Frame.height)
-        background_image = cv2.GaussianBlur(background_image, (255, 255), 255)
+        background_image = background_image.filter(ImageFilter.GaussianBlur(radius=255))
         content_image = Frame.shrink_frame(image, 550, 550)
 
         # Convert to PIL accepted RGB channel order
-        background_rgb = cv2.cvtColor(background_image, cv2.COLOR_BGR2RGB)
-        content_rgb = cv2.cvtColor(content_image, cv2.COLOR_BGR2RGB)
+        background_rgb = background_image.convert('RGBA')
+        content_rgb = content_image.convert('RGB')
 
         # Convert to RGBA for transparency rendering
-        frame = Image.fromarray(background_rgb).convert('RGBA')
+        frame = Image.alpha_composite(background_rgb, Image.new('RGBA', background_rgb.size, (0, 0, 0, 128)))
 
-        mask = Image.new('RGBA', (Frame.width, Frame.height), color=(0, 0, 0, 128))
-        frame.paste(mask, (0, 0), mask=mask)
+        left_offset = int(round(245/1920 * Frame.width)) + int(round((550 - content_image.size[0])/2))
+        top_offset = int(round(210/1080 * Frame.height)) + int(round((550 - content_image.size[1])/2))
 
-        left_offset = int(round(245/1920 * Frame.width)) + int(round((550 - content_image.shape[1])/2))
-        top_offset = int(round(210/1080 * Frame.height)) + int(round((550 - content_image.shape[0])/2))
-
-        content_frame = Image.fromarray(content_rgb)
-        content_image_mask = Image.new('RGBA', (content_image.shape[1], content_image.shape[0]), color=(0, 0, 0, 26))
+        content_frame = content_rgb
+        content_image_mask = Image.new('RGBA', content_image.size, color=(0, 0, 0, 26))
         if (image_suffix == "" or image_suffix.lower() == '.gif'):
             # if image is not properly downloaded or is gif, no content image should be added.
             print("GIF will not be rendered in this page...")
@@ -149,8 +142,7 @@ class Frame():
         Frame.content_font = ImageFont.truetype(config['content_font'], config['content_font_size'], encoding="utf-8")
         Frame.content_wrapper = Wrapper(Frame.content_font)
 
-        cv2charimg = np.array(frame)
-        result = cv2.cvtColor(cv2charimg, cv2.COLOR_RGB2BGR)
+        result = np.array(frame)
         # cv2.imwrite('test.jpg',result)
         # cv2.waitKey()
         return result
@@ -158,53 +150,48 @@ class Frame():
     @staticmethod
     def expand_frame(image, target_width, target_height):
         """Expand a frame so it is larger than the rectangle
-
         Arguments:
             image {Image} -- cv2 image
             target_width {int} -- target width of rectangle
             target_height {int} -- target width of rectangle
-
         Raises:
             NotImplementedError: [description]
-
         Returns:
             Image -- resized image
         """
         # shape[0]: height, shape[1]: width
-        width_ratio = image.shape[1] / target_width
-        height_ratio = image.shape[0] / target_height
+        width_ratio = image.size[0] / target_width
+        height_ratio = image.size[1] / target_height
         ratio = min(width_ratio, height_ratio)
         # in case width or height smaller than target after rounding.
-        actual_width = max(int(image.shape[1] / ratio), target_width)
-        actuai_height = max(int(image.shape[0] / ratio), target_height)
-        result = cv2.resize(image, (actual_width, actuai_height),
-                            interpolation=cv2.INTER_CUBIC)
-        left = int((result.shape[1] - target_width) / 2)
+        actual_width = max(int(image.size[0] / ratio), target_width)
+        actuai_height = max(int(image.size[1] / ratio), target_height)
+        result = image.resize((actual_width, actuai_height), Image.ANTIALIAS)
+        left = int((result.size[0] - target_width) / 2)
         right = left + target_width
-        top = int((result.shape[0] - target_height) / 2)
+        top = int((result.size[1] - target_height) / 2)
         bottom = top + target_height
-        return result[top:bottom, left:right]
+        return result.crop((left, top, right, bottom))
+
 
     @staticmethod
     def shrink_frame(image, target_width, target_height):
         """Shrink a frame so it is smaller than the rectangle
-
         Arguments:
             image {Image} -- np array
             target_width {int} -- target width of rectangle
             target_height {int} -- target height of rectangle
-
         Returns:
             np.array -- resized image
         """
-
+    
         # shape[0] : height, shape[1]: width
-        width_ratio = image.shape[1] / target_width
-        height_ratio = image.shape[0] / target_height
+        width_ratio = image.size[0] / target_width
+        height_ratio = image.size[1] / target_height
         ratio = max(width_ratio, height_ratio)
-        actual_width = min(int(image.shape[1] / ratio), target_width)
-        actual_height = min(int(image.shape[0] / ratio), target_height)
-        result = cv2.resize(image, (actual_width, actual_height), interpolation=cv2.INTER_CUBIC)
+        actual_width = min(int(image.size[0] / ratio), target_width)
+        actual_height = min(int(image.size[1] / ratio), target_height)
+        result = image.resize((actual_width, actual_height), Image.ANTIALIAS)
         return result
 
     @staticmethod
