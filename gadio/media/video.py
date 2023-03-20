@@ -1,8 +1,8 @@
-from cv2 import VideoWriter, VideoWriter_fourcc
-from moviepy.editor import *
-
-import ffmpeg_downloader as ffdl
+from PIL import Image
 import subprocess as sp
+import os
+# from shutil import rmtree
+import ffmpeg_downloader as ffdl
 
 from gadio.configs.config import config
 from gadio.media.frame import Frame
@@ -11,49 +11,66 @@ from gadio.models.radio import Radio
 
 class Video():
 
-    fourcc = VideoWriter_fourcc(*'mp4v')
     fps = config['fps']
     width = config['width']
     height = config['height']
-    output_dir = os.sep.join(['.', 'output'])
+    output_dir = os.path.join('.', 'output')
 
-    def __init__(self, *args, **kwargs):
-        return super().__init__(*args, **kwargs)
+    def __init__(self, config, *args, **kwargs):
+        return super().__init__(config, *args, **kwargs)
 
     @staticmethod
     def create_video(radio: Radio):
+        images_loc = os.path.join(os.curdir, 'cache', str(radio.radio_id), 'images')
+        if not os.path.exists(images_loc):
+            os.makedirs(images_loc)
+        vclips_loc = os.path.join(os.curdir, 'cache', str(radio.radio_id), 'videos')
+        if not os.path.exists(vclips_loc):
+            os.makedirs(vclips_loc)
+        textlist = vclips_loc + os.sep + 'list.txt'
+        if os.path.exists(textlist):
+            os.remove(textlist)
+            
         if not os.path.exists(Video.output_dir):
             print("Folder", Video.output_dir, 'does not exist. Creating...')
             os.makedirs(Video.output_dir)
-        video = VideoWriter(Video.output_dir + os.sep + str(radio.radio_id) + '_temp.mp4', Video.fourcc, Video.fps, (Video.width, Video.height))
         clip_count = len(radio.timestamps) - 1
+        
         for i in range(clip_count):
             if (radio.timestamps[i] not in radio.timeline.keys()):
                 print(radio.timestamps[i], "has no corresponding image, load cover as backup")
                 frame = Frame.create_cover(radio)
             else:
                 frame = Frame.create_page(radio.timeline[radio.timestamps[i]], radio)
-            frame_count = (radio.timestamps[i + 1] - radio.timestamps[i]) * Video.fps
-            for j in range(frame_count):
-                video.write(frame)
-        video.release()
+                
+            sequence = '%05d' % i
+            frame_time = str(radio.timestamps[i + 1] - radio.timestamps[i])
+            
+            Image.fromarray(frame).save(images_loc + os.sep + sequence + '.png')
+            sp.run([ffdl.ffmpeg_path, 
+                    '-r', str(Video.fps), 
+                    '-loop', '1', 
+                    '-i', images_loc + os.sep + sequence + '.png', 
+                    '-c:v', 'libx264', 
+                    '-pix_fmt', 'yuv420p', 
+                    '-crf', '24', 
+                    '-t', frame_time, 
+                    vclips_loc + os.sep + sequence + '.mp4'])
+            
+            with open(textlist, 'a+') as f:
+                f.write("file '{}'\n".format(str(radio.radio_id) + '_' + sequence + '.mp4'))
+        f.close()
 
-        video_clip = Video.output_dir + os.sep + str(radio.radio_id) + '_temp.mp4'
-        audio_clip = os.sep.join(['.', 'cache', str(radio.radio_id), 'audio', radio.audio.local_name])
-        if config['test']:
-            video_clip = VideoFileClip(Video.output_dir + os.sep + str(radio.radio_id) + '_temp.mp4')
-            video_clip = video_clip.subclip(0, min(200, video_clip.duration))
-        mux_output = Video.output_dir + os.sep + str(radio.radio_id) + ' ' + radio.title + '.mp4'
-        
-        sp.run([
-            ffdl.ffmpeg_path, 
-            '-i', video_clip, 
-            '-i', audio_clip, 
-            '-c:v', 'libx264', 
-            '-c:a', 'aac', 
-            '-pix_fmt', 'yuv420p', 
-            '-crf', '24', 
-            mux_output])
+        audio_clip = os.path.join('.', 'cache', str(radio.radio_id), 'audio', radio.audio.local_name)
+        sp.run([ffdl.ffmpeg_path, 
+                '-f', 'concat', 
+                '-safe', '0', 
+                '-i', textlist, 
+                '-i', audio_clip, 
+                '-c:v', 'copy', 
+                '-c:a', 'aac', 
+                Video.output_dir + os.sep + radio.title + '.mp4'])
         
         print("{} finished!".format(radio.title))
-        # os.remove(Video.output_dir+os.sep+str(radio.radio_id)+'_temp.mp4')
+        # rmtree(os.path.join(os.curdir, 'cache', str(radio.radio_id), 'images'))
+        # rmtree(os.path.join(os.curdir, 'cache', str(radio.radio_id), 'videos'))
