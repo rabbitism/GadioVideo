@@ -58,7 +58,7 @@ class Video():
                     vclips_loc + os.sep + sequence + '.mp4'])
             
             with open(textlist, 'a+') as f:
-                f.write("file '{}'\n".format(str(radio.radio_id) + '_' + sequence + '.mp4'))
+                f.write("file '{}'\n".format(sequence + '.mp4'))
         f.close()
 
         audio_clip = os.path.join('.', 'cache', str(radio.radio_id), 'audio', radio.audio.local_name)
