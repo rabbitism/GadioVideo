@@ -54,22 +54,23 @@ class Frame():
         """
         image_suffix = page.image.suffix
         if (image_suffix == ""):
-            # If image is not found or image is gif, load cover as background
             image_dir = os.sep.join(['cache', str(radio.radio_id), radio.cover.local_name])
+            image = Image.open(image_dir)
         elif (image_suffix.lower() == '.gif'):
-            image_dir = os.sep.join(['cache', str(radio.radio_id), radio.cover.local_name])
+            image_dir = os.sep.join(['cache', str(radio.radio_id), page.image.local_name])
             gif_image = Image.open(image_dir)
             gif_image.seek(0)
             image = gif_image.convert('RGB')
         else:
             image_dir = os.sep.join(['cache', str(radio.radio_id), page.image.local_name])
+            image = Image.open(image_dir)
         qr_dir = os.sep.join(['cache', str(radio.radio_id), 'qr_quotes', page.image.local_name.split('.')[0] + ".png"])
 
-        image = Image.open(image_dir)
-        image_suffix = page.image.suffix
+        
+        #image_suffix = page.image.suffix
         background_image = Frame.expand_frame(image, Frame.width, Frame.height)
         background_image = background_image.filter(ImageFilter.GaussianBlur(radius=255))
-        content_image = Frame.shrink_frame(image, 550, 550)
+        content_image = Frame.shrink_frame(image, int(round(550/1920 * Frame.width)), int(round(550/1080 * Frame.height)))
 
         # Convert to PIL accepted RGB channel order
         background_rgb = background_image.convert('RGBA')
@@ -83,12 +84,9 @@ class Frame():
 
         content_frame = content_rgb
         content_image_mask = Image.new('RGBA', content_image.size, color=(0, 0, 0, 26))
-        if (image_suffix == "" or image_suffix.lower() == '.gif'):
-            # if image is not properly downloaded or is gif, no content image should be added.
-            print("GIF will not be rendered in this page...")
-        else:
-            frame.paste(content_frame, (left_offset, top_offset))
-            frame.paste(content_image_mask, (left_offset, top_offset), mask = content_image_mask)
+
+        frame.paste(content_frame, (left_offset, top_offset))
+        frame.paste(content_image_mask, (left_offset, top_offset), mask = content_image_mask)
 
         try:
             logo_image = Image.open(config['gcores_logo_name']).convert('RGBA')
