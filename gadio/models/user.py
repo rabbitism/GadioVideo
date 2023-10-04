@@ -1,7 +1,7 @@
 from gadio.models.asset import Image
 
 
-class User():
+class User:
 
     def __init__(self, user_id, nickname, image_id):
         """Initialize a gadio dj as user
@@ -30,17 +30,17 @@ class User():
             User -- a instance initialized with json attributes
         """
         try:
-            json_type = parsed_json['type']
+            parsed_json['type']
         except:
             raise LookupError('Incorrect json passed to user')
 
-        if (parsed_json['type'] != "users"):
+        if parsed_json['type'] != "users":
             raise AttributeError('Json passed to user is not for user')
 
         try:
             instance = cls(user_id=parsed_json['id'],
-                        nickname=parsed_json['attributes']['nickname'],
-                        image_id=parsed_json['attributes']['thumb'])
+                           nickname=parsed_json['attributes']['nickname'],
+                           image_id=parsed_json['attributes']['thumb'])
             return instance
         except:
             raise KeyError('Json does not include necessary user attributes')

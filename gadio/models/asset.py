@@ -2,7 +2,7 @@ from gadio.configs.api import api
 from gadio.text import text as text
 
 
-class Image():
+class Image:
 
     def __init__(self, image_id, local_name):
         self.image_id = image_id
@@ -18,7 +18,7 @@ class Image():
         return instance
 
 
-class Audio():
+class Audio:
     def __init__(self, audio_id, local_name):
         self.audio_id = audio_id
         self.audio_url = api['audio_url_template'].format(asset=self.audio_id)

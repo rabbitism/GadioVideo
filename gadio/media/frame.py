@@ -1,9 +1,7 @@
-
 import os
 
 import cv2
 import numpy as np
-from cv2 import VideoWriter_fourcc
 from PIL import Image, ImageDraw, ImageFont
 
 from gadio.configs.config import config
@@ -12,7 +10,7 @@ from gadio.text.wrapper import Wrapper
 from gadio.models.page import Page
 
 
-class Frame():
+class Frame:
     width = config['width']
     height = config['height']
     title_font = ImageFont.truetype(
@@ -23,7 +21,7 @@ class Frame():
     content_wrapper = Wrapper(content_font)
 
     def __init__(self, *args, **kwargs):
-        return super().__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     @staticmethod
     def create_cover(radio: Radio):
@@ -62,7 +60,7 @@ class Frame():
             np.array -- An numpy array representing cv2 image.
         """
         image_suffix = page.image.suffix
-        if (image_suffix == "" or image_suffix.lower() == '.gif'):
+        if image_suffix == "" or image_suffix.lower() == '.gif':
             # If image is not found or image is gif, load cover as background
             image_dir = os.sep.join(['cache', str(radio.radio_id), radio.cover.local_name])
         else:
@@ -85,29 +83,29 @@ class Frame():
         mask = Image.new('RGBA', (Frame.width, Frame.height), color=(0, 0, 0, 128))
         frame.paste(mask, (0, 0), mask=mask)
 
-        left_offset = int(round(245/1920 * Frame.width)) + int(round((550 - content_image.shape[1])/2))
-        top_offset = int(round(210/1080 * Frame.height)) + int(round((550 - content_image.shape[0])/2))
+        left_offset = int(round(245 / 1920 * Frame.width)) + int(round((550 - content_image.shape[1]) / 2))
+        top_offset = int(round(210 / 1080 * Frame.height)) + int(round((550 - content_image.shape[0]) / 2))
 
         content_frame = Image.fromarray(content_rgb)
         content_image_mask = Image.new('RGBA', (content_image.shape[1], content_image.shape[0]), color=(0, 0, 0, 26))
-        if (image_suffix == "" or image_suffix.lower() == '.gif'):
+        if image_suffix == "" or image_suffix.lower() == '.gif':
             # if image is not properly downloaded or is gif, no content image should be added.
             print("GIF will not be rendered in this page...")
         else:
             frame.paste(content_frame, (left_offset, top_offset))
-            frame.paste(content_image_mask, (left_offset, top_offset), mask = content_image_mask)
+            frame.paste(content_image_mask, (left_offset, top_offset), mask=content_image_mask)
 
         try:
             logo_image = Image.open(config['gcores_logo_name']).convert('RGBA')
             qr_image = Image.open(config['gcores_qr_name']).convert('RGBA')
-            logo_left_offset = int(round(120/1920 * Frame.width))
-            logo_top_offset = int(round(52/1080 * Frame.height))
+            logo_left_offset = int(round(120 / 1920 * Frame.width))
+            logo_top_offset = int(round(52 / 1080 * Frame.height))
             qr_left_offset = logo_left_offset
-            qr_top_offset = int(round(917/1080 * Frame.height))
+            qr_top_offset = int(round(917 / 1080 * Frame.height))
             frame.paste(logo_image, (logo_left_offset, logo_top_offset), mask=logo_image)
             frame.paste(qr_image, (qr_left_offset, qr_top_offset), mask=qr_image)
             if os.path.exists(qr_dir):
-                qr_right_offset = int(round(1700/1920 * Frame.width))
+                qr_right_offset = int(round(1700 / 1920 * Frame.width))
                 page_qr_image = Image.open(qr_dir).convert('RGBA')
                 page_qr_image = page_qr_image.resize((86, 86))
                 frame.paste(page_qr_image, (qr_right_offset, qr_top_offset), mask=page_qr_image)
@@ -122,28 +120,36 @@ class Frame():
         print('Title:', title_string)
         raw_content = page.content
         content_string = Frame.content_wrapper.wrap_string(raw_content, text_width_limit)
-        #print(content_string)
+        # print(content_string)
 
         # Dimensions for text layout
         text_top_offset = int(round(260 / 1080 * Frame.height))
         text_left_offset = int(round(920 / 1920 * Frame.width))
-        title_height = Frame.title_font.getsize_multiline(title_string)[1]
+        title_left, title_top, title_right, title_bottom = Frame.title_font.getbbox(title_string)
+        title_height = title_bottom - title_top
+        # title_height = Frame.title_font.getsize_multiline(title_string)[1]
         title_space_bottom = int(round(Frame.title_font.size * 0.9))
         content_height_limit = int(round(574 / 1080 * Frame.height)) - title_height - title_space_bottom
 
         content_space = int(round(Frame.content_font.size * 0.8))
-        actual_content_height = Frame.content_font.getsize_multiline(content_string, spacing=content_space)[1]
-        while (actual_content_height > content_height_limit):
+        content_left, content_top, content_right, content_bottom = Frame.title_font.getbbox(content_string)
+        actual_content_height = content_bottom - content_top
+        # actual_content_height = Frame.content_font.getsize_multiline(content_string, spacing=content_space)[1]
+        while actual_content_height > content_height_limit:
             Frame.content_font = Frame.shrink_font(Frame.content_font, config['content_font'])
             content_space = int(round(Frame.content_font.size * 0.8))
             content_wrapper = Wrapper(Frame.content_font)
             content_string = content_wrapper.wrap_string(raw_content, text_width_limit)
-            actual_content_height = Frame.content_font.getsize_multiline(content_string, spacing=content_space)[1]
+            content_left, content_top, content_right, content_bottom = Frame.title_font.getbbox(content_string)
+            actual_content_height = content_bottom - content_top
+            # actual_content_height = Frame.content_font.getsize_multiline(content_string, spacing=content_space)[1]
             # print(actual_content_height)
 
         print(content_string)
-        draw.text((text_left_offset, text_top_offset), title_string, config['gcores_title_color'], font=Frame.title_font)
-        draw.text((text_left_offset, text_top_offset + title_height + title_space_bottom), content_string, config['gcores_content_color'], font=Frame.content_font, spacing=content_space)
+        draw.text((text_left_offset, text_top_offset), title_string, config['gcores_title_color'],
+                  font=Frame.title_font)
+        draw.text((text_left_offset, text_top_offset + title_height + title_space_bottom), content_string,
+                  config['gcores_content_color'], font=Frame.content_font, spacing=content_space)
 
         # Reset content_wrapper and content_font
         Frame.content_font = ImageFont.truetype(config['content_font'], config['content_font_size'], encoding="utf-8")
@@ -151,8 +157,7 @@ class Frame():
 
         cv2charimg = np.array(frame)
         result = cv2.cvtColor(cv2charimg, cv2.COLOR_RGB2BGR)
-        # cv2.imwrite('test.jpg',result)
-        # cv2.waitKey()
+
         return result
 
     @staticmethod
@@ -176,8 +181,8 @@ class Frame():
         ratio = min(width_ratio, height_ratio)
         # in case width or height smaller than target after rounding.
         actual_width = max(int(image.shape[1] / ratio), target_width)
-        actuai_height = max(int(image.shape[0] / ratio), target_height)
-        result = cv2.resize(image, (actual_width, actuai_height),
+        actual_height = max(int(image.shape[0] / ratio), target_height)
+        result = cv2.resize(image, (actual_width, actual_height),
                             interpolation=cv2.INTER_CUBIC)
         left = int((result.shape[1] - target_width) / 2)
         right = left + target_width
@@ -209,5 +214,5 @@ class Frame():
 
     @staticmethod
     def shrink_font(font, font_family):
-        result_font = ImageFont.truetype(font_family, font.size-2, encoding="utf-8")
+        result_font = ImageFont.truetype(font_family, font.size - 2, encoding="utf-8")
         return result_font

@@ -6,7 +6,7 @@ import os
 
 if __name__ == "__main__":
     parsed_json = object
-    if (len(sys.argv) == 1 or sys.argv[1]=='-t'):
+    if len(sys.argv) == 1 or sys.argv[1] == '-t':
         print("----------")
         print("Start to create the latest gadio video...")
         id = Crawler.get_latest()
@@ -17,8 +17,6 @@ if __name__ == "__main__":
         parsed_json = Crawler.crawl(radio_id)
     radio = Radio.load_from_json(parsed_json)
     Crawler.get_headers(radio)
-    if (len(sys.argv) >= 2):
-        if ('-t' in sys.argv):
-            {}
-        else:
-            Crawler.download_assets(radio, os.curdir+os.sep+'cache')
+    if len(sys.argv) >= 2:
+        if '-t' not in sys.argv:
+            Crawler.download_assets(radio, os.curdir + os.sep + 'cache')
