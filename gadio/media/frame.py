@@ -2,6 +2,7 @@ import os
 
 import cv2
 import numpy as np
+import pillow_avif
 from PIL import Image, ImageDraw, ImageFont
 
 from gadio.configs.config import config
@@ -68,6 +69,12 @@ class Frame:
         qr_dir = os.sep.join(['cache', str(radio.radio_id), 'qr_quotes', page.image.local_name.split('.')[0] + ".png"])
 
         image = cv2.imread(image_dir)
+        if image is None:
+            match image_suffix:
+                case '.avif':
+                    pil_image = Image.open(image_dir)
+                    image = cv2.cvtColor(np.array(pil_image), cv2.COLOR_RGB2BGR)
+            # print(image_dir)
         image_suffix = page.image.suffix
         background_image = Frame.expand_frame(image, Frame.width, Frame.height)
         background_image = cv2.GaussianBlur(background_image, (255, 255), 255)

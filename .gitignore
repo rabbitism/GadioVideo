@@ -7,3 +7,6 @@ cache/*
 .vscode
 test.json
 *.pyc
+/list.txt
+/venv/
+/.idea

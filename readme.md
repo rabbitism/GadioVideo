@@ -34,7 +34,8 @@ python gcores.py
 python gcores.py 107884
 # 跳过爬虫直接用已下载的图片生成107884的视频
 python gcores.py 107884 -s
-
+# 提供id列表自动批量生成
+python gcores.py list.txt
 ```
 
 此外

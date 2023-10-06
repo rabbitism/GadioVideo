@@ -4,7 +4,7 @@ from moviepy.editor import *
 from gadio.configs.config import config
 from gadio.media.frame import Frame
 from gadio.models.radio import Radio
-
+import re
 
 class Video:
     fourcc = VideoWriter.fourcc(*'mp4v')
@@ -35,13 +35,18 @@ class Video:
                 video.write(frame)
         video.release()
 
+        cache_dir = os.sep.join(['.', 'cache', str(radio.radio_id)])
         video_clip = VideoFileClip(Video.output_dir + os.sep + str(radio.radio_id) + '_temp.mp4')
         print(video_clip.duration)
         audio_clip = AudioFileClip(os.sep.join(['.', 'cache', str(radio.radio_id), 'audio', radio.audio.local_name]))
         video_clip.audio = audio_clip
         if config['test']:
             video_clip = video_clip.subclip(0, min(200, video_clip.duration))
-        video_clip.write_videofile(Video.output_dir + os.sep + str(radio.radio_id) + " " + radio.title + ".mp4",
-                                   fps=Video.fps)
+
+        # 删除字符串中的特殊字符
+        valid_title = re.sub(r'[\\/*?:"<>|]', '', radio.title.replace('|', '丨'))
+        file_name = '{} {}.mp4'.format(str(radio.radio_id), valid_title)
+        file_path = os.sep.join([Video.output_dir, file_name])
+        video_clip.write_videofile(file_path, fps=Video.fps)
         print("{} finished!".format(radio.title))
-        # os.remove(Video.output_dir+os.sep+str(radio.radio_id)+'_temp.mp4')
+        os.remove(Video.output_dir+os.sep+str(radio.radio_id)+'_temp.mp4')
