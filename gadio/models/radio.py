@@ -3,8 +3,8 @@ from gadio.models.page import Page
 from gadio.models.user import User
 
 
-class Radio():
-    
+class Radio:
+
     def __init__(self):
         self.users = list()
         self.title = ""
@@ -17,8 +17,8 @@ class Radio():
         self.timestamps = list()
 
     @classmethod
-    def load_from_json(cls, parsed_json:str):
-        #https://www.gcores.com/gapi/v1/radios/112068?include=category,media,djs,media.timelines
+    def load_from_json(cls, parsed_json: str):
+        # https://www.gcores.com/gapi/v1/radios/112068?include=category,media,djs,media.timelines
         radio = cls()
         try:
             radio.radio_id = parsed_json['data']['id']
@@ -31,28 +31,28 @@ class Radio():
         for item in parsed_json['included']:
 
             # Set radio category
-            if (item['type'] == "categories"):
+            if item['type'] == "categories":
                 radio.category = item['attributes']['name']
 
             # Set radio audio
-            elif (item['type'] == 'medias'):
+            elif item['type'] == 'medias':
                 radio.audio = Audio(item['attributes']['audio'], radio.radio_id)
 
             # append radio pages
-            elif (item['type'] == 'timelines'):
+            elif item['type'] == 'timelines':
                 page = Page.load_from_json(item['attributes'])
                 radio.timeline[page.start_time] = page
-                radio.timestamps.append((int)(page.start_time))
+                radio.timestamps.append(int(page.start_time))
 
             # append radio users
-            elif (item['type'] == 'users'):
+            elif item['type'] == 'users':
                 user = User.load_from_json(item)
                 radio.users.append(user)
-            
+
             else:
                 continue
-        
-        if (0 not in radio.timeline.keys()):
+
+        if 0 not in radio.timeline.keys():
             radio.timestamps.append(0)
         radio.timestamps.append(radio.duration)
         list.sort(radio.timestamps)

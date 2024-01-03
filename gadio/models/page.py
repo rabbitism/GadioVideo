@@ -1,9 +1,7 @@
-from gadio.configs.api import api
-from gadio.text import text as text
 from gadio.models.asset import Image
 
 
-class Page():
+class Page:
 
     def __init__(self, start_time, image_id, title, content, quote_href):
         """Initialize a page with attributes
@@ -25,7 +23,7 @@ class Page():
         self.title = title
         self.content = content
         self.quote_href = quote_href
-        self.image = Image(image_id=image_id, local_name = self.start_time)
+        self.image = Image(image_id=image_id, local_name=self.start_time)
 
     @classmethod
     def load_from_json(cls, attributes: dict):
